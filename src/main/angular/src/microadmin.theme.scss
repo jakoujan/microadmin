@@ -1,0 +1,120 @@
+@import "~@angular/material/theming";
+@import url("https://fonts.googleapis.com/css?family=Muli:300,400,700,800&display=swap");
+
+$custom-typography: mat-typography-config(
+  $font-family: '"Muli", sans-serif;',
+);
+@include mat-core($custom-typography);
+
+$color-microadmin: (
+  50: #e0e4e7,
+  100: #b3bbc3,
+  200: #808e9b,
+  300: #4d6172,
+  400: #263f54,
+  500: #001d36,
+  600: #001a30,
+  700: #001529,
+  800: #001122,
+  900: #000a16,
+  A100: #5684ff,
+  A200: #235fff,
+  A400: #0041ef,
+  A700: #003ad5,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$color-microadmin-accent: (
+  50: #fee3e3,
+  100: #fcb9b9,
+  200: #fa8b8b,
+  300: #f75c5c,
+  400: #f63939,
+  500: #f41616,
+  600: #f31313,
+  700: #f11010,
+  800: #ef0c0c,
+  900: #ec0606,
+  A100: #ffffff,
+  A200: #ffe1e1,
+  A400: #ffaeae,
+  A700: #ff9494,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$color-microadmin-warning: (
+  50: #f2f7ff,
+  100: #deeaff,
+  200: #c8ddff,
+  300: #b2cfff,
+  400: #a2c4ff,
+  500: #91baff,
+  600: #89b3ff,
+  700: #7eabff,
+  800: #74a3ff,
+  900: #6294ff,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ebf1ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$microadmin-app-primary: mat-palette($color-microadmin);
+$microadmin-app-accent: mat-palette($color-microadmin-accent);
+
+// The warn palette is optional (defaults to red).
+$microadmin-app-warn: mat-palette($color-microadmin-warning);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$microadmin-app-theme: mat-light-theme($microadmin-app-primary, $microadmin-app-accent, $microadmin-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($microadmin-app-theme);

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Datos de sección</h2>
+<mat-dialog-content class="sep-bottom-20">
+    <form [formGroup]="form" novalidate>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Sección" formControlName="section" required>
+                    <mat-error>
+                        <custom-mat-error [control]="form.controls.section"></custom-mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Descripción" formControlName="description" required>
+                    <mat-error>
+                        <custom-mat-error [control]="form.controls.description"></custom-mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button class="sep-right-10" (click)="close()">Cancelar</button>
+    <button mat-flat-button color="accent" [disabled]="form.invalid" (click)="save()">Guardar</button>
+</mat-dialog-actions>

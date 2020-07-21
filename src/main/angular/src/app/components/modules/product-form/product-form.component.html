@@ -1,0 +1,161 @@
+<h2 mat-dialog-title>Datos de producto</h2>
+<mat-dialog-content class="sep-bottom-20">
+    <form [formGroup]="form" novalidate>
+        <mat-tab-group dynamicHeight color="accent">
+            <mat-tab label="Generales">
+                <div class="tab">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Codigo de barras" formControlName="barcode" required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.barcode"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Descripción" formControlName="description" required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.description"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Descripción larga" formControlName="longDescription"
+                                    required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.longDescription"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Marca" formControlName="brand"
+                                    [compareWith]="compare" required>
+                                    <mat-optgroup label="Marcas">
+                                        <mat-option *ngFor="let brand of brands" [value]="brand">{{ brand.brand }}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.brand"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Sección" formControlName="section"
+                                    [compareWith]="compare" required>
+                                    <mat-optgroup label="Secciones">
+                                        <mat-option *ngFor="let section of sections" [value]="section">
+                                            {{ section.description }}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.brand"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Tipo de impuesto" formControlName="taxType"
+                                    [compareWith]="compare" required>
+                                    <mat-optgroup label="Tipos de impuesto">
+                                        <mat-option *ngFor="let taxType of taxTypes" [value]="taxType">
+                                            {{ taxType.taxtTypeDescription }} - {{ taxType.taxtType }}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.taxType"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Unidad de medida" formControlName="unit"
+                                    [compareWith]="compare" required>
+                                    <mat-optgroup label="Unidades de medida">
+                                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.description }}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.unit"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Precios">
+                <div class="tab">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Precio general" formControlName="retailPrice" required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.retailPrice"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Precio de proveedor" formControlName="supplierPrice"
+                                    required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.supplierPrice"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Precio en promoción" formControlName="promoPrice" required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.promoPrice"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-checkbox formControlName="promotion">Producto en promoción</mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Miscelaneos">
+                <div class="tab">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <input matInput placeholder="Minímo en inventario" formControlName="minimumStock"
+                                    required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.minimumStock"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button class="sep-right-10" (click)="close()">Cancelar</button>
+    <button mat-flat-button color="accent" [disabled]="form.invalid" (click)="save()">Guardar</button>
+</mat-dialog-actions>
