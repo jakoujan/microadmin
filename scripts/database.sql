@@ -11,8 +11,26 @@ CREATE TABLE IF NOT EXISTS `user` (
     `password` VARCHAR(45) NULL,
     `name` VARCHAR(120) NOT NULL,
     `active` INTEGER NOT NULL DEFAULT 1,
-    `modules` TEXT NOT NULL
+    `modules` TEXT NOT NULL,
+    `role` INTEGER NOT NULL DEFAULT 1,
+CONSTRAINT `fk_user_role`
+    FOREIGN KEY (`role`)
+    REFERENCES `role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
+
+CREATE TABLE IF NOT EXISTS `role` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR (40) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS `table` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR (40) NOT NULL,
+    `places` INT
+);
+
 
 CREATE TABLE `country` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -135,9 +153,15 @@ CREATE TABLE product (
   `promotion` BOOLEAN NOT NULL,
   `minimum_stock` DECIMAL(8,2) NOT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
+  `flavor` INTEGER NOT NULL,
   CONSTRAINT `brand_product_fk`
     FOREIGN KEY (`BRAND`)
     REFERENCES `BRAND` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `flavor_product_fk`
+    FOREIGN KEY (`flavor`)
+    REFERENCES `Flavor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
    CONSTRAINT `tax_type_product_fk`
@@ -156,6 +180,69 @@ CREATE TABLE product (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+CREATE TABLE IF NOT EXISTS `Flavor` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR (40) NOT NULL
+);
+
+CREATE TABLE `order` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `responsible` VARCHAR NOT NULL,
+  `waiter` INTEGER NOT NULL,
+  `cashier` INTEGER NOT NULL,
+  `table` INTEGER NOT NULL,
+  `pay_method` INTEGER NOT NULL,
+  `status` INTEGER NOT NULL,
+  `total_amount` DECIMAL(10,2) NOT NULL,
+  CONSTRAINT `waiter_order_fk`
+    FOREIGN KEY (`waiter`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `cashier_order_fk`
+    FOREIGN KEY (`cashier`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `table_order_fk`
+    FOREIGN KEY (`table`)
+    REFERENCES `table` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `pay_method_order_fk`
+    FOREIGN KEY (`pay_method`)
+    REFERENCES `payment_method` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `status_order_fk`
+    FOREIGN KEY (`status`)
+    REFERENCES `status_order` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS `status_order` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR (40) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `orders_products` (
+    `order` INTEGER NOT NULL,
+    `product` INTEGER NOT NULL,
+    `quantity` INTEGER NOT NULL,
+    CONSTRAINT `order_fk`
+        FOREIGN KEY (`order`)
+        REFERENCES `order` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `product_fk`
+        FOREIGN KEY (`product`)
+        REFERENCES `product` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
 
 CREATE UNIQUE INDEX `bar_code_idx`
  ON `PRODUCT`
