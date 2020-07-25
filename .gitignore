@@ -1,3 +1,4 @@
 /target/
 /src/main/angular/node_modules/
 /src/main/angular/dist/
+/data/db.mv.db
