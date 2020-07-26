@@ -58,6 +58,7 @@ import { WorkstationsComponent } from './modules/workstations/workstations.compo
 import { WorkstationFormComponent } from './modules/workstation-form/workstation-form.component';
 import { StockComponent } from './operation/stock/stock.component';
 import { InitialStockComponent } from './operation/initial-stock/initial-stock.component';
+import { CheckoutComponent } from './operation/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { InitialStockComponent } from './operation/initial-stock/initial-stock.c
     WorkstationsComponent,
     WorkstationFormComponent,
     StockComponent,
-    InitialStockComponent
+    InitialStockComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,

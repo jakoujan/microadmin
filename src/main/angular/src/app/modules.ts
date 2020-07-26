@@ -35,33 +35,17 @@ export const MODULES: Array<Module> = [
     id: 'operation',
     submodules: [
       {
-        name: 'Punto de venta',
-        id: 'pos',
-        uri: '/modules/pos',
+        name: 'Caja',
+        id: 'checkout',
+        uri: '/modules/checkout',
         icon: '',
         default: true,
         active: false
       },
       {
-        name: 'Corte de caja',
+        name: 'Comandas',
         id: 'cash-balance',
         uri: '/modules/cash-balance',
-        icon: '',
-        default: true,
-        active: false
-      },
-      {
-        name: 'Inventario',
-        id: 'stock',
-        uri: '/modules/stock',
-        icon: '',
-        default: true,
-        active: false
-      },
-      {
-        name: 'Mermas',
-        id: 'shrinkage',
-        uri: '/modules/shrinkage',
         icon: '',
         default: true,
         active: false

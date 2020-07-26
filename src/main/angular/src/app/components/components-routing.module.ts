@@ -15,6 +15,7 @@ import { ProductsComponent } from './modules/products/products.component';
 import { StoresComponent } from './modules/stores/stores.component';
 import { WorkstationsComponent } from './modules/workstations/workstations.component';
 import { StockComponent } from './operation/stock/stock.component';
+import { CheckoutComponent } from './operation/checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
       { path: 'suppliers', component: SuppliersComponent, data: { validate: true, module: 'administration', id: 'suppliers' }, canActivate: [SessionGuard] },
       { path: 'products', component: ProductsComponent, data: { validate: true, module: 'administration', id: 'products' }, canActivate: [SessionGuard] },
       { path: 'configuration', component: ConfigurationComponent, data: { validate: true, module: 'administration', id: 'configuration' }, canActivate: [SessionGuard] },
-      { path: 'stock', component: StockComponent, data: { validate: true, module: 'operation', id: 'stock' }, canActivate: [SessionGuard] },
+      { path: 'checkout', component: CheckoutComponent, data: { validate: true, module: 'operation', id: 'checkout' }, canActivate: [SessionGuard] },
     ]
   }
 ];
