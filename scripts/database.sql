@@ -144,9 +144,15 @@ CREATE TABLE product (
   `minimum_stock` DECIMAL(8,2) NOT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
   `flavor` INTEGER NOT NULL,
-  CONSTRAINT `brand_product_fk`
+  `type` INTEGER NOT NULL,
+CONSTRAINT `brand_product_fk`
     FOREIGN KEY (`BRAND`)
     REFERENCES `BRAND` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `type_product_fk`
+    FOREIGN KEY (`type`)
+    REFERENCES `type_product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 CONSTRAINT `flavor_product_fk`
@@ -169,6 +175,11 @@ CONSTRAINT `flavor_product_fk`
     REFERENCES `UNIT` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS `type_product` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR (40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `flavor` (
@@ -208,12 +219,74 @@ CREATE TABLE `order` (
     ON UPDATE NO ACTION,
   CONSTRAINT `status_order_fk`
     FOREIGN KEY (`status`)
+    REFERENCES `status_sale` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
+CREATE TABLE `retail` (
+  `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `retail_date` TIMESTAMP NOT NULL,
+  `cashier` INTEGER NOT NULL,
+  `payment_method` INTEGER NOT NULL,
+  `status` INTEGER NOT NULL,
+  `total_amount` DECIMAL(10,2) NOT NULL,
+  CONSTRAINT `cashier_order_fk`
+    FOREIGN KEY (`cashier`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `pay_method_order_fk`
+    FOREIGN KEY (`pay_method`)
+    REFERENCES `payment_method` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `status_order_fk`
+    FOREIGN KEY (`status`)
     REFERENCES `status_order` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS `status_order` (
+CREATE TABLE IF NOT EXISTS `sales` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `sale_date` TIMESTAMP NOT NULL,
+    `total_amount` DECIMAL(10,2) NOT NULL,
+    `quantity` INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `order_sale` (
+    `order` INTEGER NOT NULL,
+    `sale` INTEGER NOT NULL,
+    CONSTRAINT `order_fk`
+        FOREIGN KEY (`order`)
+        REFERENCES `order` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `sale_fk`
+        FOREIGN KEY (`sale`)
+        REFERENCES `sales` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
+
+CREATE TABLE IF NOT EXISTS `retail_sale` (
+    `retail` INTEGER NOT NULL,
+    `sale` INTEGER NOT NULL,
+    CONSTRAINT `retail_fk`
+        FOREIGN KEY (`retail`)
+        REFERENCES `retail` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `sale_fk`
+        FOREIGN KEY (`sale`)
+        REFERENCES `sales` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS `status_sale` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL
 );
