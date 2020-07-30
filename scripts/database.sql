@@ -150,9 +150,9 @@ CONSTRAINT `brand_product_fk`
     REFERENCES `BRAND` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-CONSTRAINT `type_product_fk`
+CONSTRAINT `product_type_fk`
     FOREIGN KEY (`type`)
-    REFERENCES `type_product` (`id`)
+    REFERENCES `product_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
 CONSTRAINT `flavor_product_fk`
@@ -160,7 +160,7 @@ CONSTRAINT `flavor_product_fk`
     REFERENCES `Flavor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-   CONSTRAINT `tax_type_product_fk`
+   CONSTRAINT `tax_product_type_fk`
     FOREIGN KEY (`tax_type`)
     REFERENCES TAX_TYPE (`id`)
     ON DELETE NO ACTION
@@ -177,7 +177,7 @@ CONSTRAINT `flavor_product_fk`
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS `type_product` (
+CREATE TABLE IF NOT EXISTS `product_type` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL
 );

@@ -31,13 +31,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CustomersComponent } from './modules/customers/customers.component';
 import { CustomerFormComponent } from './modules/customer-form/customer-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { CustomerPipe } from '../pipes/customer.pipe';
 import { ModulesPanelMenuComponent } from './common/modules-panel-menu/modules-panel-menu.component';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ConfigurationComponent } from './modules/configuration/configuration.component';
 import { DirectivesModule } from '../directives/directives.module';
-import { CustomerTypePipe } from '../pipes/customer-type.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SuppliersComponent } from './modules/suppliers/suppliers.component';
 import { SupplierFormComponent } from './modules/supplier-form/supplier-form.component';
@@ -59,6 +57,7 @@ import { WorkstationFormComponent } from './modules/workstation-form/workstation
 import { StockComponent } from './operation/stock/stock.component';
 import { InitialStockComponent } from './operation/initial-stock/initial-stock.component';
 import { CheckoutComponent } from './operation/checkout/checkout.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -71,10 +70,8 @@ import { CheckoutComponent } from './operation/checkout/checkout.component';
     CustomerFormComponent,
     SuppliersComponent,
     SupplierFormComponent,
-    CustomerPipe,
     ModulesPanelMenuComponent,
     ConfigurationComponent,
-    CustomerTypePipe,
     BrandsComponent,
     BrandFormComponent,
     SectionsComponent,
@@ -125,6 +122,7 @@ import { CheckoutComponent } from './operation/checkout/checkout.component';
     MatDialogModule,
     DirectivesModule,
     MatTabsModule,
+    PipesModule
   ]
 })
 export class ComponentsModule { }
