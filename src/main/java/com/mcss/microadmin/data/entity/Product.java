@@ -35,11 +35,13 @@ public class Product implements Serializable {
     private boolean promotion;
     private BigDecimal minimumStock;
     private boolean active;
+    private ProductType type;
+    private Flavor flavor;
 
     public Product() {
     }
 
-    public Product(String barcode, Brand brand, Unit unit, String description, String longDescription, Section section, TaxType taxType, BigDecimal retailPrice, BigDecimal supplierPrice, BigDecimal promoPrice, boolean promotion, BigDecimal minimumStock, boolean active) {
+    public Product(String barcode, Brand brand, Unit unit, String description, String longDescription, Section section, TaxType taxType, BigDecimal retailPrice, BigDecimal supplierPrice, BigDecimal promoPrice, boolean promotion, BigDecimal minimumStock, boolean active, ProductType type, Flavor flavor) {
         this.barcode = barcode;
         this.brand = brand;
         this.unit = unit;
@@ -53,7 +55,11 @@ public class Product implements Serializable {
         this.promotion = promotion;
         this.minimumStock = minimumStock;
         this.active = active;
+        this.type = type;
+        this.flavor = flavor;
     }
+
+    
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -186,5 +192,29 @@ public class Product implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+    
+    @JoinColumn(name = "TYPE", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
+    }
+
+    @JoinColumn(name = "FLAVOR", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    public Flavor getFlavor() {
+        return flavor;
+    }
+
+    public void setFlavor(Flavor flavor) {
+        this.flavor = flavor;
+    }
+    
+    
+    
+    
 
 }
