@@ -177,17 +177,39 @@ CONSTRAINT `flavor_product_fk`
     ON UPDATE NO ACTION
 );
 
+ALTER TABLE `product` add column `flavor` INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE `product` add column `type` INTEGER NOT NULL DEFAULT 1;
+
+ALTER TABLE `product` add CONSTRAINT `product_type_fk`
+    FOREIGN KEY (`type`)
+    REFERENCES `product_type` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+ALTER TABLE `product` add CONSTRAINT `flavor_product_fk`
+    FOREIGN KEY (`flavor`)
+    REFERENCES `Flavor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
 CREATE TABLE IF NOT EXISTS `product_type` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR (40) NOT NULL
+    `name` VARCHAR (40) NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+ALTER TABLE `product_type` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
+
 
 CREATE TABLE IF NOT EXISTS `flavor` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR (40) NOT NULL
+    `name` VARCHAR (40) NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-CREATE TABLE `order` (
+ALTER TABLE `flavor` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
+
+CREATE TABLE IF NOT EXISTS `order` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `order_date` TIMESTAMP NOT NULL,
   `responsible` VARCHAR NOT NULL,
@@ -213,13 +235,13 @@ CREATE TABLE `order` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `pay_method_order_fk`
-    FOREIGN KEY (`pay_method`)
+    FOREIGN KEY (`payment_method`)
     REFERENCES `payment_method` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `status_order_fk`
     FOREIGN KEY (`status`)
-    REFERENCES `status_sale` (`id`)
+    REFERENCES `sale_status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
@@ -231,19 +253,19 @@ CREATE TABLE `retail` (
   `payment_method` INTEGER NOT NULL,
   `status` INTEGER NOT NULL,
   `total_amount` DECIMAL(10,2) NOT NULL,
-  CONSTRAINT `cashier_order_fk`
+  CONSTRAINT `cashier_retail_fk`
     FOREIGN KEY (`cashier`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `pay_method_order_fk`
-    FOREIGN KEY (`pay_method`)
+  CONSTRAINT `pay_method_retail_fk`
+    FOREIGN KEY (`payment_method`)
     REFERENCES `payment_method` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `status_order_fk`
+  CONSTRAINT `status_retail_fk`
     FOREIGN KEY (`status`)
-    REFERENCES `status_order` (`id`)
+    REFERENCES `sale_status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
@@ -252,8 +274,10 @@ CREATE TABLE IF NOT EXISTS `sales` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `sale_date` TIMESTAMP NOT NULL,
     `total_amount` DECIMAL(10,2) NOT NULL,
-    `quantity` INT NOT NULL
+    `quantity` DECIMAL(10,2) NOT NULL
 );
+
+ALTER TABLE `sales` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
 
 CREATE TABLE IF NOT EXISTS `order_sale` (
     `order` INTEGER NOT NULL,
@@ -279,14 +303,14 @@ CREATE TABLE IF NOT EXISTS `retail_sale` (
         REFERENCES `retail` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
-    CONSTRAINT `sale_fk`
+    CONSTRAINT `sale_retail_sale_fk`
         FOREIGN KEY (`sale`)
         REFERENCES `sales` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS `status_sale` (
+CREATE TABLE IF NOT EXISTS `sale_status` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL
 );
@@ -295,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `product_order` (
     `order` INTEGER NOT NULL,
     `product` INTEGER NOT NULL,
     `quantity` INTEGER NOT NULL,
-    CONSTRAINT `order_fk`
+    CONSTRAINT `order_product_order_fk`
         FOREIGN KEY (`order`)
         REFERENCES `order` (`id`)
         ON DELETE NO ACTION
@@ -306,6 +330,8 @@ CREATE TABLE IF NOT EXISTS `product_order` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
+
+ALTER TABLE `product_order` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
 
 
 CREATE UNIQUE INDEX `bar_code_idx`
