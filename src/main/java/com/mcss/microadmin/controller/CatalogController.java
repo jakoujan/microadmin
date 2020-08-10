@@ -11,6 +11,7 @@ import com.mcss.microadmin.data.entity.PaymentMethod;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
+import com.mcss.microadmin.data.entity.Supplier;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
 import com.mcss.microadmin.model.CatalogModel;
@@ -70,6 +71,11 @@ public class CatalogController {
     @GetMapping(value = "stores")
     public Iterable<Store> strores() {
         return this.catalogModel.stores();
+    }
+    
+    @GetMapping(value = "suppliers")
+    public Iterable<Supplier> suppliers() {
+        return this.catalogModel.suppliers();
     }
 
 }

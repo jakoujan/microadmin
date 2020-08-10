@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -21,6 +22,8 @@ import javax.persistence.Temporal;
  *
  * @author oscardanielrangelmartinez
  */
+@Entity
+@javax.persistence.Table(name = "BRAND", schema = "PUBLIC", catalog = "DB")
 public class Order implements Serializable {
  
     private Integer id;

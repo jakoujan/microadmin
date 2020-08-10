@@ -11,6 +11,7 @@ import com.mcss.microadmin.data.entity.PaymentMethod;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
+import com.mcss.microadmin.data.entity.Supplier;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
 import java.util.List;
@@ -38,5 +39,7 @@ public interface CatalogModel {
     public Iterable<Unit> units();
 
     public Iterable<Store> stores();
+
+    public Iterable<Supplier> suppliers();
 
 }
