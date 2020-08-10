@@ -23,6 +23,7 @@ public class Flavor implements Serializable {
     
     private Integer id;
     private String name;
+    private Boolean active;
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -43,6 +44,17 @@ public class Flavor implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
+    @Column(name = "ACTIVE", length = 1)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+    
+    
     
     
     
