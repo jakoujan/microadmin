@@ -43,7 +43,7 @@ public class OrderSale implements Serializable {
         this.id = id;
     }
 
-    @JoinColumn(name = "ORDER", nullable = false)
+    @JoinColumn(name = "ORDER", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Order getOrder() {
         return order;
@@ -53,7 +53,7 @@ public class OrderSale implements Serializable {
         this.order = order;
     }
 
-    @JoinColumn(name = "SALE", nullable = false)
+    @JoinColumn(name = "SALE", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Sale getSale() {
         return sale;
