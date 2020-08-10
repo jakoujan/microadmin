@@ -23,7 +23,7 @@ import javax.persistence.Temporal;
  * @author oscardanielrangelmartinez
  */
 @Entity
-@javax.persistence.Table(name = "BRAND", schema = "PUBLIC", catalog = "DB")
+@javax.persistence.Table(name = "ORDER", schema = "PUBLIC", catalog = "DB")
 public class Order implements Serializable {
  
     private Integer id;

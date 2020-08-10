@@ -21,12 +21,12 @@ public class OrderSale implements Serializable {
 
     private OrderSaleId id;
     private Order order;
-    private Sales sale;
+    private Sale sale;
 
     public OrderSale() {
     }
 
-    public OrderSale(Order order, Sales sale) {
+    public OrderSale(Order order, Sale sale) {
         this.order = order;
         this.sale = sale;
     }
@@ -55,11 +55,11 @@ public class OrderSale implements Serializable {
 
     @JoinColumn(name = "SALE", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    public Sales getSale() {
+    public Sale getSale() {
         return sale;
     }
 
-    public void setSale(Sales sale) {
+    public void setSale(Sale sale) {
         this.sale = sale;
     }
 

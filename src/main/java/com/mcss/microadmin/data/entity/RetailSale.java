@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 public class RetailSale implements Serializable {
     
     private Retail retail;
-    private Sales sale;
+    private Sale sale;
     
     @JoinColumn(name = "RETAIL", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,11 +31,11 @@ public class RetailSale implements Serializable {
     
     @JoinColumn(name = "SALE", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    public Sales getSale() {
+    public Sale getSale() {
         return sale;
     }
 
-    public void setSale(Sales sale) {
+    public void setSale(Sale sale) {
         this.sale = sale;
     }
     

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
@@ -18,14 +19,16 @@ import javax.persistence.Temporal;
  *
  * @author oscardanielrangelmartinez
  */
-public class Sales implements Serializable{
+@Entity
+@javax.persistence.Table(name = "SALE", schema = "PUBLIC", catalog = "DB")
+public class Sale implements Serializable{
    
     private Integer id;
     private Date sale_date;
     private BigDecimal total_amount;
     private BigDecimal quantity;
 
-    public Sales(Date sale_date, BigDecimal total_amount, BigDecimal quantity) {
+    public Sale(Date sale_date, BigDecimal total_amount, BigDecimal quantity) {
         this.sale_date = sale_date;
         this.total_amount = total_amount;
         this.quantity = quantity;

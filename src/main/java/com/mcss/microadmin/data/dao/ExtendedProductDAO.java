@@ -12,7 +12,7 @@ import com.mcss.microadmin.data.view.ProductView;
  *
  * @author edgar
  */
-interface ExtendedProductDAO {
+public interface ExtendedProductDAO {
 
     public Iterable<ProductView> findByFilter(ProductViewFilter filter);
 

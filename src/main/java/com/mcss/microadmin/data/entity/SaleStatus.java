@@ -7,6 +7,7 @@ package com.mcss.microadmin.data.entity;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
  *
  * @author oscardanielrangelmartinez
  */
+@Entity
+@javax.persistence.Table(name = "SALE_STATUS", schema = "PUBLIC", catalog = "DB")
 public class SaleStatus implements Serializable{
     
        private Integer id;
