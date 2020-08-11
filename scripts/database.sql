@@ -15,10 +15,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `table` (
+CREATE TABLE IF NOT EXISTS `table_chair` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
-    `places` INT
+    `places` INT NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 
@@ -215,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `responsible` VARCHAR NOT NULL,
   `waiter` INTEGER NOT NULL,
   `cashier` INTEGER NOT NULL,
-  `table` INTEGER NOT NULL,
+  `table_chair` INTEGER NOT NULL,
   `payment_method` INTEGER NOT NULL,
   `status` INTEGER NOT NULL,
   `total_amount` DECIMAL(10,2) NOT NULL,
@@ -230,8 +231,8 @@ CREATE TABLE IF NOT EXISTS `order` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `table_order_fk`
-    FOREIGN KEY (`table`)
-    REFERENCES `table` (`id`)
+    FOREIGN KEY (`table_chair`)
+    REFERENCES `table_chair` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `pay_method_order_fk`
@@ -245,6 +246,17 @@ CREATE TABLE IF NOT EXISTS `order` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+ALTER TABLE `order` DROP COLUMN `table`;
+
+ALTER TABLE `order` add column `table_chair` INTEGER NOT NULL DEFAULT 1;    
+ALTER TABLE `order` add CONSTRAINT `table_order_fk`
+    FOREIGN KEY (`table_chair`)
+    REFERENCES `table_chair` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
+
 
 CREATE TABLE `retail` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

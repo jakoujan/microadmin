@@ -17,17 +17,21 @@ import javax.persistence.Id;
  * @author oscardanielrangelmartinez
  */
 @Entity
-@javax.persistence.Table(name = "TABLE", schema = "PUBLIC", catalog = "DB")
+@javax.persistence.Table(name = "TABLE_CHAIR", schema = "PUBLIC", catalog = "DB")
 public class Table implements Serializable {
     
     private Integer id;
     private String name;
     private Integer places;
+    private Boolean active;
 
-    public Table(String name, Integer places) {
+    public Table(String name, Integer places, Boolean active) {
         this.name = name;
         this.places = places;
+        this.active = active;
     }
+
+    
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -57,6 +61,17 @@ public class Table implements Serializable {
     public void setPlaces(Integer places) {
         this.places = places;
     }
+    
+    @Column(name = "ACTIVE", length = 1)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+    
+    
     
     
     
