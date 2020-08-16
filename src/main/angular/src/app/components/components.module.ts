@@ -58,6 +58,7 @@ import { StockComponent } from './operation/stock/stock.component';
 import { InitialStockComponent } from './operation/initial-stock/initial-stock.component';
 import { CheckoutComponent } from './operation/checkout/checkout.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { FlavorsComponent } from './modules/flavors/flavors.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { PipesModule } from '../pipes/pipes.module';
     WorkstationFormComponent,
     StockComponent,
     InitialStockComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    FlavorsComponent
   ],
   imports: [
     CommonModule,
