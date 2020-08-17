@@ -6,7 +6,6 @@
 package com.mcss.microadmin.data.dao;
 
 import com.mcss.microadmin.data.entity.ProductType;
-import com.mcss.microadmin.data.filter.ProductTypeFilter;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
@@ -15,5 +14,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ProductTypeDAO extends PagingAndSortingRepository<ProductType, Integer>, ExtendedProductTypeDAO{
 
-    public void findByActive(boolean active);    
+    public Iterable<ProductType> findByActive(boolean active);    
 }

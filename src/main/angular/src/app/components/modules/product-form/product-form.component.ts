@@ -8,6 +8,7 @@ import { IUnit } from 'src/app/interfaces/unit';
 import { ITaxType } from 'src/app/interfaces/tax-type';
 import { ISupplier } from 'src/app/interfaces/supplier';
 import { CatalogsService } from 'src/app/services/catalogs.service';
+import { IProductType } from 'src/app/interfaces/product-type';
 
 @Component({
   selector: 'app-product-form',
@@ -23,6 +24,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   units: Array<IUnit> = [];
   taxTypes: Array<ITaxType> = [];
   suppliers: Array<ISupplier> = [];
+  productTypes: Array<IProductType> = [];
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ProductFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private catalogService: CatalogsService) { }
@@ -33,6 +35,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     this.catalogService.getSections().then(sections => this.sections = sections);
     this.catalogService.getTaxTypes().then(taxTypes => this.taxTypes = taxTypes);
     this.catalogService.getUnits().then(units => this.units = units);
+    this.catalogService.getProductTypes().then(productTypes => this.productTypes = productTypes);
 
     this.form = this.fb.group({
       barcode: [this.data.entity.barcode, Validators.required],
@@ -47,6 +50,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       promoPrice: [this.data.entity.promoPrice, Validators.required],
       promotion: [this.data.entity.promotion],
       minimumStock: [this.data.entity.minimumStock, Validators.required],
+      type: [this.data.entity.type, Validators.required]
     });
   }
 
@@ -68,6 +72,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     this.data.entity.promoPrice = this.form.controls.promoPrice.value;
     this.data.entity.promotion = this.form.controls.promotion.value;
     this.data.entity.minimumStock = this.form.controls.minimumStock.value;
+    this.data.entity.type = this.form.controls.type.value;
     this.dialogRef.close(this.data);
   }
 

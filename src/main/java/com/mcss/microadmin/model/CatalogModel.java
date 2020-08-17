@@ -8,6 +8,7 @@ package com.mcss.microadmin.model;
 import com.mcss.microadmin.data.entity.Brand;
 import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
+import com.mcss.microadmin.data.entity.ProductType;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
@@ -41,5 +42,7 @@ public interface CatalogModel {
     public Iterable<Store> stores();
 
     public Iterable<Supplier> suppliers();
+
+    public Iterable<ProductType> productTypes();
 
 }

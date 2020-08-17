@@ -17,6 +17,7 @@ export class CatalogsService extends Service {
   private static TAX_TYPE_LIST = 'api/catalogs/tax/types';
   private static SECTION_LIST = 'api/catalogs/sections';
   private static STORE_LIST = 'api/catalogs/stores';
+  private static PRODUCT_TYPE_LIST = 'api/catalogs/product/types';
   private static PRINTER_LIST = 'api/catalogs/printers';
 
   constructor(protected http: HttpClient, protected spinner: SpinnerService, protected ps: SessionStorageService) {
@@ -55,6 +56,10 @@ export class CatalogsService extends Service {
 
   public getStores(): Promise<any> {
     return this.prepareGet(CatalogsService.STORE_LIST);
+  }
+
+  public getProductTypes(): Promise<any> {
+    return this.prepareGet(CatalogsService.PRODUCT_TYPE_LIST);
   }
 
 

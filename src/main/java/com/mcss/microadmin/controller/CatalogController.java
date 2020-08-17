@@ -8,6 +8,7 @@ package com.mcss.microadmin.controller;
 import com.mcss.microadmin.data.entity.Brand;
 import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
+import com.mcss.microadmin.data.entity.ProductType;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
@@ -76,6 +77,11 @@ public class CatalogController {
     @GetMapping(value = "suppliers")
     public Iterable<Supplier> suppliers() {
         return this.catalogModel.suppliers();
+    }
+    
+    @GetMapping(value = "product/types")
+    public Iterable<ProductType> productTypes() {
+        return this.catalogModel.productTypes();
     }
 
 }

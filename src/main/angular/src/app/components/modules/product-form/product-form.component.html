@@ -85,7 +85,7 @@
                                 <mat-select matNativeControl placeholder="Unidad de medida" formControlName="unit"
                                     [compareWith]="compare" required>
                                     <mat-optgroup label="Unidades de medida">
-                                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.description }}
+                                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.unit }}
                                         </mat-option>
                                     </mat-optgroup>
                                 </mat-select>
@@ -146,6 +146,20 @@
                                     required>
                                 <mat-error>
                                     <custom-mat-error [control]="form.controls.minimumStock"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Tipo de producto" formControlName="type"
+                                    [compareWith]="compare" required>
+                                    <mat-option *ngFor="let type of productTypes" [value]="type">{{ type.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.type"></custom-mat-error>
                                 </mat-error>
                             </mat-form-field>
                         </div>
