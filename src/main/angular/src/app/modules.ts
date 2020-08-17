@@ -123,6 +123,14 @@ export const MODULES: Array<Module> = [
         active: false
       },
       {
+        name: 'Tipos de producto',
+        id: 'product-types',
+        uri: '/modules/product/types',
+        icon: '',
+        default: true,
+        active: false
+      },
+      {
         name: 'Productos',
         id: 'products',
         uri: '/modules/products',

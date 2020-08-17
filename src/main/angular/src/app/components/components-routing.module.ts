@@ -16,6 +16,7 @@ import { StoresComponent } from './modules/stores/stores.component';
 import { WorkstationsComponent } from './modules/workstations/workstations.component';
 import { StockComponent } from './operation/stock/stock.component';
 import { CheckoutComponent } from './operation/checkout/checkout.component';
+import { ProductTypesComponent } from './modules/product-types/product-types.component';
 
 
 const routes: Routes = [
@@ -32,9 +33,11 @@ const routes: Routes = [
       { path: 'units', component: UnitsComponent, data: { validate: true, module: 'administration', id: 'units' }, canActivate: [SessionGuard] },
       { path: 'customers', component: CustomersComponent, data: { validate: true, module: 'administration', id: 'customers' }, canActivate: [SessionGuard] },
       { path: 'suppliers', component: SuppliersComponent, data: { validate: true, module: 'administration', id: 'suppliers' }, canActivate: [SessionGuard] },
+      { path: 'product/types', component: ProductTypesComponent, data: { validate: true, module: 'administration', id: 'product-types' }, canActivate: [SessionGuard] },
       { path: 'products', component: ProductsComponent, data: { validate: true, module: 'administration', id: 'products' }, canActivate: [SessionGuard] },
       { path: 'configuration', component: ConfigurationComponent, data: { validate: true, module: 'administration', id: 'configuration' }, canActivate: [SessionGuard] },
       { path: 'checkout', component: CheckoutComponent, data: { validate: true, module: 'operation', id: 'checkout' }, canActivate: [SessionGuard] },
+      
     ]
   }
 ];

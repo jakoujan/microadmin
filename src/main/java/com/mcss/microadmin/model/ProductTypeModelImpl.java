@@ -25,6 +25,11 @@ public class ProductTypeModelImpl implements ProductTypeModel {
     @Transactional
     public Response save(ProductType productType) {
         Response response = Response.getInstance();
+        
+        if(productType.getId() == null) {
+            productType.setActive(Boolean.TRUE);
+        }
+        
         this.productTypeDAO.save(productType);
         response.setMessage("El tipo de producto se ha guardado con exito");
         response.addField(Constants.ENTITY, productType);
