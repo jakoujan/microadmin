@@ -178,6 +178,21 @@ CONSTRAINT `flavor_product_fk`
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS `product_kit` (
+    `kit` INT NOT NULL,
+    `product` INT NOT NULL,
+    CONSTRAINT `product_product_kit_fk`
+            FOREIGN KEY (`kit`)
+            REFERENCES `product` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `product_kit_product_fk`
+            FOREIGN KEY (`product`)
+            REFERENCES `product` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+);
+
 ALTER TABLE `product` add column `flavor` INTEGER NOT NULL DEFAULT 1;
 ALTER TABLE `product` add column `type` INTEGER NOT NULL DEFAULT 1;
 
