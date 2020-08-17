@@ -350,6 +350,23 @@ CREATE UNIQUE INDEX `bar_code_idx`
  ON `PRODUCT`
  ( `barcode` ASC );
 
+CREATE TABLE IF NOT EXISTS `product_kit` (
+    `kit` INT NOT NULL,
+    `product` INT NOT NULL,
+    `quantity` DECIMAL(8,2) NOT NULL,
+    PRIMARY KEY(kit, product),
+    CONSTRAINT `product_product_kit_fk`
+            FOREIGN KEY (`kit`)
+            REFERENCES `product` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION,
+    CONSTRAINT `product_kit_product_fk`
+            FOREIGN KEY (`product`)
+            REFERENCES `product` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+);
+
 CREATE TABLE product_supplier (
     product INT NOT NULL,
     supplier INT NOT NULL,

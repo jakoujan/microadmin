@@ -7,6 +7,8 @@ package com.mcss.microadmin.data.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +40,8 @@ public class Product implements Serializable {
     private boolean active;
     private ProductType type;
     private Flavor flavor;
+    private Set<ProductKit> kits;
+    private Set<ProductKit> kitProducts;
 
     public Product() {
     }
@@ -58,8 +63,6 @@ public class Product implements Serializable {
         this.type = type;
         this.flavor = flavor;
     }
-
-    
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -192,7 +195,7 @@ public class Product implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
+
     @JoinColumn(name = "TYPE", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public ProductType getType() {
@@ -212,9 +215,23 @@ public class Product implements Serializable {
     public void setFlavor(Flavor flavor) {
         this.flavor = flavor;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "kit", orphanRemoval = true)
+    public Set<ProductKit> getKits() {
+        return kits;
+    }
+
+    public void setKits(Set<ProductKit> kits) {
+        this.kits = kits;
+    }
     
-    
-    
-    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
+    public Set<ProductKit> getKitProducts() {
+        return kitProducts;
+    }
+
+    public void setKitProducts(Set<ProductKit> kitProducts) {
+        this.kitProducts = kitProducts;
+    }
 
 }
