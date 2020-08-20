@@ -8,7 +8,9 @@ package com.mcss.microadmin.model;
 import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.Constants;
 import com.mcss.microadmin.data.dao.OrderDAO;
+import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.entity.Order;
+import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,17 @@ public class OrderModelImpl implements OrderModel {
 
     @Autowired
     OrderDAO orderDAO;
+    
+    @Autowired
+    ProductDAO productDAO;
 
     @Override
     @Transactional
     public Response save(Order order) {
         Response response = Response.getInstance();
-        order.getProducts().forEach(product->{
+        order.getProducts().forEach((ProductOrder product)->{
             product.setOrder(order);
+            product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
         });
         this.orderDAO.save(order);
         response.setMessage("La orden se ha generado con exito");
