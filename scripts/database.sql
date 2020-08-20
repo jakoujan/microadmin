@@ -337,12 +337,12 @@ CREATE TABLE IF NOT EXISTS `sale_status` (
 );
 
 CREATE TABLE IF NOT EXISTS `product_order` (
-    `order_command` INTEGER NOT NULL,
+    `order_comand` INTEGER NOT NULL,
     `product` INTEGER NOT NULL,
     `quantity` INTEGER NOT NULL,
     PRIMARY KEY(order_comand, product),
     CONSTRAINT `order_comand_product_order_fk`
-        FOREIGN KEY (`order`)
+        FOREIGN KEY (`order_comand`)
         REFERENCES `order_comand` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,

@@ -11,12 +11,15 @@ import com.mcss.microadmin.data.dao.OrderDAO;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderModelImpl implements OrderModel {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderModelImpl.class);
+    
     @Autowired
     OrderDAO orderDAO;
 
@@ -25,6 +28,7 @@ public class OrderModelImpl implements OrderModel {
     public Response save(Order order) {
         Response response = Response.getInstance();
         order.getProducts().forEach(product->{
+            LOGGER.info("PRODUCTID: "+product.getProduct().getId());
             product.setOrder(order);
         });
         this.orderDAO.save(order);

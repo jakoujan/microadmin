@@ -9,6 +9,7 @@ import { ITaxType } from 'src/app/interfaces/tax-type';
 import { ISupplier } from 'src/app/interfaces/supplier';
 import { CatalogsService } from 'src/app/services/catalogs.service';
 import { IProductType } from 'src/app/interfaces/product-type';
+import { IProduct } from 'src/app/interfaces/product';
 
 @Component({
   selector: 'app-product-form',
@@ -25,6 +26,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   taxTypes: Array<ITaxType> = [];
   suppliers: Array<ISupplier> = [];
   productTypes: Array<IProductType> = [];
+  products: Array<IProduct> = [];
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ProductFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private catalogService: CatalogsService) { }
@@ -86,5 +88,15 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
 
   public addBrand() {
     console.log('Se agrega')
+  }
+
+  public productTypeChange(type: IProductType) {
+    if (type.name === 'Combo/Kit') {
+      this.catalogService.getProducts().then(products => { this.products = products });
+    }
+  }
+
+  public addComboProduct() {
+
   }
 }
