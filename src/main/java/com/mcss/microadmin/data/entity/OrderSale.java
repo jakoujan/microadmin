@@ -33,7 +33,7 @@ public class OrderSale implements Serializable {
 
     @EmbeddedId
     @AttributeOverrides({
-        @AttributeOverride(name = "order", column = @Column(name = "ORDER", nullable = false)),
+        @AttributeOverride(name = "order", column = @Column(name = "ORDER_COMAND", nullable = false)),
         @AttributeOverride(name = "sale", column = @Column(name = "SALE", nullable = false))})
     public OrderSaleId getId() {
         return id;
@@ -43,7 +43,7 @@ public class OrderSale implements Serializable {
         this.id = id;
     }
 
-    @JoinColumn(name = "ORDER", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "ORDER_COMAND", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Order getOrder() {
         return order;

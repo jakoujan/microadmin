@@ -18,16 +18,17 @@ import javax.persistence.Id;
  */
 @Entity
 @javax.persistence.Table(name = "SALE_STATUS", schema = "PUBLIC", catalog = "DB")
-public class SaleStatus implements Serializable{
-    
-       private Integer id;
-       private String name;
+public class SaleStatus implements Serializable {
+
+    private Integer id;
+    private String name;
+
+    public SaleStatus() {
+    }
 
     public SaleStatus(String name) {
         this.name = name;
     }
-       
-       
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -39,7 +40,7 @@ public class SaleStatus implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     @Column(name = "NAME", length = 120)
     public String getName() {
         return name;
@@ -48,8 +49,5 @@ public class SaleStatus implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-       
-       
-    
-    
+
 }

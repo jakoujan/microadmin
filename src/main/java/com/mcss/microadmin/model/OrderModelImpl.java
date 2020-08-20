@@ -24,6 +24,9 @@ public class OrderModelImpl implements OrderModel {
     @Transactional
     public Response save(Order order) {
         Response response = Response.getInstance();
+        order.getProducts().forEach(product->{
+            product.setOrder(order);
+        });
         this.orderDAO.save(order);
         response.setMessage("La orden se ha generado con exito");
         response.addField(Constants.ENTITY, order);

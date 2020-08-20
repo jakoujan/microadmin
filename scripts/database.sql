@@ -178,21 +178,6 @@ CONSTRAINT `flavor_product_fk`
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS `product_kit` (
-    `kit` INT NOT NULL,
-    `product` INT NOT NULL,
-    CONSTRAINT `product_product_kit_fk`
-            FOREIGN KEY (`kit`)
-            REFERENCES `product` (`id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT `product_kit_product_fk`
-            FOREIGN KEY (`product`)
-            REFERENCES `product` (`id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
-);
-
 ALTER TABLE `product` add column `flavor` INTEGER NOT NULL DEFAULT 1;
 ALTER TABLE `product` add column `type` INTEGER NOT NULL DEFAULT 1;
 
@@ -225,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `flavor` (
 
 ALTER TABLE `flavor` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
 
-CREATE TABLE IF NOT EXISTS `order` (
+CREATE TABLE IF NOT EXISTS `order_comand` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `order_date` TIMESTAMP NOT NULL,
   `responsible` VARCHAR NOT NULL,
@@ -307,11 +292,11 @@ CREATE TABLE IF NOT EXISTS `sales` (
 ALTER TABLE `sales` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
 
 CREATE TABLE IF NOT EXISTS `order_sale` (
-    `order` INTEGER NOT NULL,
+    `order_comand` INTEGER NOT NULL,
     `sale` INTEGER NOT NULL,
     CONSTRAINT `order_fk`
-        FOREIGN KEY (`order`)
-        REFERENCES `order` (`id`)
+        FOREIGN KEY (`order_comand`)
+        REFERENCES `order_comand` (`id`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
     CONSTRAINT `sale_fk`
@@ -320,6 +305,15 @@ CREATE TABLE IF NOT EXISTS `order_sale` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
+
+ALTER TABLE `order_sale` DROP CONSTRAINT `order_fk`;
+
+ALTER TABLE `order_sale` add column `order_comand` INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE `order_sale` add CONSTRAINT `order_fk`
+    FOREIGN KEY (`order_comand`)
+    REFERENCES `order_comand` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
 
 
 CREATE TABLE IF NOT EXISTS `retail_sale` (
@@ -346,7 +340,8 @@ CREATE TABLE IF NOT EXISTS `product_order` (
     `order` INTEGER NOT NULL,
     `product` INTEGER NOT NULL,
     `quantity` INTEGER NOT NULL,
-    CONSTRAINT `order_product_order_fk`
+    PRIMARY KEY(order, product),
+    CONSTRAINT `order_comand_product_order_fk`
         FOREIGN KEY (`order`)
         REFERENCES `order` (`id`)
         ON DELETE NO ACTION
@@ -357,6 +352,16 @@ CREATE TABLE IF NOT EXISTS `product_order` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
+
+ALTER TABLE `product_order` DROP CONSTRAINT `order_product_order_fk`;
+
+ALTER TABLE `product_order` add column `order_comand` INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE `product_order` add CONSTRAINT `order_comand_product_order_fk`
+    FOREIGN KEY (`order_comand`)
+    REFERENCES `order_comand` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
 
 ALTER TABLE `product_order` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
 

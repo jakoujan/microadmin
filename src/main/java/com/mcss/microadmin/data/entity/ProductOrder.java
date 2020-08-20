@@ -8,23 +8,42 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author oscardanielrangelmartinez
  */
+@Entity
+@Table(name = "PRODUCT_ORDER", catalog = "DB", schema = "PUBLIC")
 public class ProductOrder implements Serializable {
     
+    protected ProductOrderPK productOrderPK;
     private Order order;
     private Product product;
     private BigDecimal quantity;
+
+    public ProductOrder() {
+        this.productOrderPK = new ProductOrderPK();
+    }
     
-    @JoinColumn(name = "ORDER", nullable = false)
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @EmbeddedId
+    public ProductOrderPK getProductOrderPK() {
+        return productOrderPK;
+    }
+
+    public void setProductOrderPK(ProductOrderPK productOrderPK) {
+        this.productOrderPK = productOrderPK;
+    }
+    
+    @JoinColumn(name = "ORDER_COMAND", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     public Order getOrder() {
         return order;
     }
@@ -33,8 +52,8 @@ public class ProductOrder implements Serializable {
         this.order = order;
     }
     
-    @JoinColumn(name = "PRODUCT", nullable = false)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PRODUCT", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     public Product getProduct() {
         return product;
     }

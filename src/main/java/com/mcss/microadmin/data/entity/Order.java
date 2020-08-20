@@ -8,6 +8,9 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -23,7 +27,7 @@ import javax.persistence.Temporal;
  * @author oscardanielrangelmartinez
  */
 @Entity
-@javax.persistence.Table(name = "ORDER", schema = "PUBLIC", catalog = "DB")
+@javax.persistence.Table(name = "ORDER_COMAND", schema = "PUBLIC", catalog = "DB")
 public class Order implements Serializable {
  
     private Integer id;
@@ -35,6 +39,7 @@ public class Order implements Serializable {
     private PaymentMethod payment_method;
     private SaleStatus status;
     private BigDecimal total_amount;
+    private Set<ProductOrder> products = new HashSet<>();
 
     public Order(Date order_date, String responsible, User waiter, User cashier, Table table, PaymentMethod payment_method, SaleStatus status, BigDecimal total_amount) {
         this.order_date = order_date;
@@ -99,7 +104,7 @@ public class Order implements Serializable {
         this.cashier = cashier;
     }
     
-    @JoinColumn(name = "TABLE", nullable = false)
+    @JoinColumn(name = "TABLE_CHAIR", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Table getTable() {
         return table;
@@ -137,6 +142,18 @@ public class Order implements Serializable {
     public void setTotal_amount(BigDecimal total_amount) {
         this.total_amount = total_amount;
     }
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
+    public Set<ProductOrder> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductOrder> products) {
+        this.products = products;
+    }
+    
+    
+    
     
     
     
