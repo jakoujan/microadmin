@@ -8,9 +8,11 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,26 +24,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUCT_ORDER", catalog = "DB", schema = "PUBLIC")
 public class ProductOrder implements Serializable {
-    
-    protected ProductOrderPK productOrderPK;
+
+    private Integer id;
     private Order order;
     private Product product;
     private BigDecimal quantity;
 
     public ProductOrder() {
-        this.productOrderPK = new ProductOrderPK();
-    }
-    
-    
-    @EmbeddedId
-    public ProductOrderPK getProductOrderPK() {
-        return productOrderPK;
+
     }
 
-    public void setProductOrderPK(ProductOrderPK productOrderPK) {
-        this.productOrderPK = productOrderPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
+    public Integer getId() {
+        return id;
     }
-    
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @JoinColumn(name = "ORDER_COMAND", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Order getOrder() {
@@ -51,7 +54,7 @@ public class ProductOrder implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
-    
+
     @JoinColumn(name = "PRODUCT", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Product getProduct() {
@@ -61,7 +64,7 @@ public class ProductOrder implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
+
     @Column(name = "QUANTITY", length = 8, precision = 2)
     public BigDecimal getQuantity() {
         return quantity;
@@ -70,7 +73,5 @@ public class ProductOrder implements Serializable {
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
-    
-    
-    
+
 }
