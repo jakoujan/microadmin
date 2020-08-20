@@ -5,6 +5,7 @@
  */
 package com.mcss.microadmin.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -44,8 +45,9 @@ public class ProductOrder implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    @JoinColumn(name = "ORDER_COMAND", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    
+    @JsonIgnore
+    @JoinColumn(name = "ORDER_COMAND", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Order getOrder() {
         return order;
@@ -55,7 +57,7 @@ public class ProductOrder implements Serializable {
         this.order = order;
     }
 
-    @JoinColumn(name = "PRODUCT", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "PRODUCT", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Product getProduct() {
         return product;
