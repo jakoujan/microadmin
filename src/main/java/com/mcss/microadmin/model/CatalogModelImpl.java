@@ -9,6 +9,7 @@ import com.mcss.microadmin.data.Status;
 import com.mcss.microadmin.data.dao.BrandDAO;
 import com.mcss.microadmin.data.dao.CountryDAO;
 import com.mcss.microadmin.data.dao.PaymentMethodDAO;
+import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.dao.ProductTypeDAO;
 import com.mcss.microadmin.data.dao.SectionDAO;
 import com.mcss.microadmin.data.dao.StateDAO;
@@ -19,6 +20,7 @@ import com.mcss.microadmin.data.dao.UnitDAO;
 import com.mcss.microadmin.data.entity.Brand;
 import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
+import com.mcss.microadmin.data.entity.Product;
 import com.mcss.microadmin.data.entity.ProductType;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
@@ -62,9 +64,12 @@ public class CatalogModelImpl implements CatalogModel {
 
     @Autowired
     SupplierDAO supplierDAO;
-    
+
     @Autowired
     ProductTypeDAO productTypeDAO;
+
+    @Autowired
+    ProductDAO productDAO;
 
     @Override
     public Iterable<Country> countries() {
@@ -124,5 +129,10 @@ public class CatalogModelImpl implements CatalogModel {
     @Override
     public Iterable<ProductType> productTypes() {
         return this.productTypeDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<Product> products() {
+        return this.productDAO.findByActive(Boolean.TRUE);
     }
 }

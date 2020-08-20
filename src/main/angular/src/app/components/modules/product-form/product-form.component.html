@@ -154,7 +154,8 @@
                         <div class="col">
                             <mat-form-field class="input-full-width">
                                 <mat-select matNativeControl placeholder="Tipo de producto" formControlName="type"
-                                    [compareWith]="compare" required>
+                                    [compareWith]="compare" required
+                                    (change)="productTypeChange(form.controls.type.value)">
                                     <mat-option *ngFor="let type of productTypes" [value]="type">{{ type.name }}
                                     </mat-option>
                                 </mat-select>
@@ -165,6 +166,19 @@
                         </div>
                     </div>
                 </div>
+                <mat-tab label="Combo/kit" [disabled]="form.controls.type.value.name !== 'Combo/Kit'">
+                    <div class="list-header">
+                        <div class="header">Productos</div>
+                        <span class="filler"></span>
+                        <button mat-icon-button (click)="addComboProduct()"><mat-icon>add</mat-icon></button>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <mat-list>
+                        <mat-list-item>
+
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
             </mat-tab>
         </mat-tab-group>
     </form>

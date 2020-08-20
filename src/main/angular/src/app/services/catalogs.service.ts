@@ -8,6 +8,7 @@ import { SessionStorageService } from 'ngx-webstorage';
   providedIn: 'root'
 })
 export class CatalogsService extends Service {
+  
 
   private static COUNTRY_LIST = 'api/catalogs/countries';
   private static STATE_LIST = 'api/catalogs/states';
@@ -18,6 +19,7 @@ export class CatalogsService extends Service {
   private static SECTION_LIST = 'api/catalogs/sections';
   private static STORE_LIST = 'api/catalogs/stores';
   private static PRODUCT_TYPE_LIST = 'api/catalogs/product/types';
+  private static PRODUCT_LIST = 'api/catalogs/products';
   private static PRINTER_LIST = 'api/catalogs/printers';
 
   constructor(protected http: HttpClient, protected spinner: SpinnerService, protected ps: SessionStorageService) {
@@ -62,5 +64,8 @@ export class CatalogsService extends Service {
     return this.prepareGet(CatalogsService.PRODUCT_TYPE_LIST);
   }
 
+  public getProducts(): Promise<any> {
+    return this.prepareGet(CatalogsService.PRODUCT_LIST);
+  }
 
 }

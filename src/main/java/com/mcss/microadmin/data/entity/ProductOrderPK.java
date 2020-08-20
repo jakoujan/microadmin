@@ -29,7 +29,7 @@ public class ProductOrderPK implements Serializable {
     }
 
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "ORDER_COMAND", nullable = false)
     public int getOrder() {
         return order;
     }
