@@ -5,7 +5,6 @@
  */
 package com.mcss.microadmin.model;
 
-import com.mcss.microadmin.data.Status;
 import com.mcss.microadmin.data.dao.BrandDAO;
 import com.mcss.microadmin.data.dao.CountryDAO;
 import com.mcss.microadmin.data.dao.PaymentMethodDAO;
@@ -13,6 +12,7 @@ import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.dao.ProductTypeDAO;
 import com.mcss.microadmin.data.dao.SectionDAO;
 import com.mcss.microadmin.data.dao.StateDAO;
+import com.mcss.microadmin.data.dao.StatusDAO;
 import com.mcss.microadmin.data.dao.StoreDAO;
 import com.mcss.microadmin.data.dao.SupplierDAO;
 import com.mcss.microadmin.data.dao.TaxTypeDAO;
@@ -22,6 +22,7 @@ import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
 import com.mcss.microadmin.data.entity.Product;
 import com.mcss.microadmin.data.entity.ProductType;
+import com.mcss.microadmin.data.entity.Status;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
@@ -70,6 +71,9 @@ public class CatalogModelImpl implements CatalogModel {
 
     @Autowired
     ProductDAO productDAO;
+    
+    @Autowired
+    StatusDAO statusDAO;
 
     @Override
     public Iterable<Country> countries() {
@@ -83,7 +87,7 @@ public class CatalogModelImpl implements CatalogModel {
 
     @Override
     public Iterable<Brand> brands() {
-        return this.brandDAO.findByActive(Status.ACTIVE);
+        return this.brandDAO.findByActive(com.mcss.microadmin.data.Status.ACTIVE);
     }
 
     @Override
@@ -134,5 +138,10 @@ public class CatalogModelImpl implements CatalogModel {
     @Override
     public Iterable<Product> products() {
         return this.productDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<Status> status() {
+        return this.statusDAO.findAll();
     }
 }

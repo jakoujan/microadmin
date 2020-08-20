@@ -37,11 +37,11 @@ public class Order implements Serializable {
     private User cashier;
     private Table table;
     private PaymentMethod payment_method;
-    private SaleStatus status;
+    private Status status;
     private BigDecimal total_amount;
     private Set<ProductOrder> products = new HashSet<>();
 
-    public Order(Date order_date, String responsible, User waiter, User cashier, Table table, PaymentMethod payment_method, SaleStatus status, BigDecimal total_amount) {
+    public Order(Date order_date, String responsible, User waiter, User cashier, Table table, PaymentMethod payment_method, Status status, BigDecimal total_amount) {
         this.order_date = order_date;
         this.responsible = responsible;
         this.waiter = waiter;
@@ -126,11 +126,11 @@ public class Order implements Serializable {
     
     @JoinColumn(name = "STATUS", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    public SaleStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(SaleStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
     

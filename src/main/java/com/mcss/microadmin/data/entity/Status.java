@@ -18,15 +18,15 @@ import javax.persistence.Id;
  */
 @Entity
 @javax.persistence.Table(name = "SALE_STATUS", schema = "PUBLIC", catalog = "DB")
-public class SaleStatus implements Serializable {
+public class Status implements Serializable {
 
     private Integer id;
     private String name;
 
-    public SaleStatus() {
+    public Status() {
     }
 
-    public SaleStatus(String name) {
+    public Status(String name) {
         this.name = name;
     }
 

@@ -27,10 +27,10 @@ public class Retail implements Serializable {
     private Date retail_date;
     private User cashier;
     private PaymentMethod payment_method;
-    private SaleStatus status;
+    private Status status;
     private BigDecimal total_amount;
 
-    public Retail(Date retail_date, User cashier, PaymentMethod payment_method, SaleStatus status, BigDecimal total_amount) {
+    public Retail(Date retail_date, User cashier, PaymentMethod payment_method, Status status, BigDecimal total_amount) {
         this.retail_date = retail_date;
         this.cashier = cashier;
         this.payment_method = payment_method;
@@ -79,13 +79,13 @@ public class Retail implements Serializable {
         this.payment_method = payment_method;
     }
 
-    public SaleStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
     
     @JoinColumn(name = "STATUS", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    public void setStatus(SaleStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
     

@@ -10,7 +10,7 @@ import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
 import com.mcss.microadmin.data.entity.Product;
 import com.mcss.microadmin.data.entity.ProductType;
-import com.mcss.microadmin.data.entity.SaleStatus;
+import com.mcss.microadmin.data.entity.Status;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
@@ -49,6 +49,6 @@ public interface CatalogModel {
 
     public Iterable<Product> products();
     
-    public Iterable<SaleStatus> status();
+    public Iterable<Status> status();
 
 }
