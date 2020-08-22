@@ -5,10 +5,8 @@
  */
 package com.mcss.microadmin.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,8 +38,7 @@ public class Product implements Serializable {
     private BigDecimal minimumStock;
     private boolean active;
     private ProductType type;
-    private Set<ProductKit> kits;
-    private Set<ProductKit> kitProducts;
+    private ProductKit kit;
 
     public Product() {
     }
@@ -204,24 +201,14 @@ public class Product implements Serializable {
     public void setType(ProductType type) {
         this.type = type;
     }
-    
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "kit", orphanRemoval = true)
-    public Set<ProductKit> getKits() {
-        return kits;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product", optional = true)
+    public ProductKit getKit() {
+        return kit;
     }
 
-    public void setKits(Set<ProductKit> kits) {
-        this.kits = kits;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
-    public Set<ProductKit> getKitProducts() {
-        return kitProducts;
-    }
-
-    public void setKitProducts(Set<ProductKit> kitProducts) {
-        this.kitProducts = kitProducts;
+    public void setKit(ProductKit kit) {
+        this.kit = kit;
     }
 
 }

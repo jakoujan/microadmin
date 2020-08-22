@@ -144,7 +144,6 @@ CREATE TABLE product (
   `promotion` BOOLEAN NOT NULL,
   `minimum_stock` DECIMAL(8,2) NOT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
-  `flavor` INTEGER NOT NULL,
   `type` INTEGER NOT NULL,
 CONSTRAINT `brand_product_fk`
     FOREIGN KEY (`BRAND`)
@@ -154,11 +153,6 @@ CONSTRAINT `brand_product_fk`
 CONSTRAINT `product_type_fk`
     FOREIGN KEY (`type`)
     REFERENCES `product_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT `flavor_product_fk`
-    FOREIGN KEY (`flavor`)
-    REFERENCES `Flavor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
    CONSTRAINT `tax_product_type_fk`
@@ -206,14 +200,6 @@ CREATE TABLE IF NOT EXISTS `product_type` (
 
 ALTER TABLE `product_type` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
 
-
-CREATE TABLE IF NOT EXISTS `flavor` (
-    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR (40) NOT NULL,
-    `active` BOOLEAN NOT NULL DEFAULT TRUE
-);
-
-ALTER TABLE `flavor` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
 
 CREATE TABLE IF NOT EXISTS `order_comand` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -376,16 +362,9 @@ CREATE UNIQUE INDEX `bar_code_idx`
  ( `barcode` ASC );
 
 CREATE TABLE IF NOT EXISTS `product_kit` (
-    `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `kit` INT NOT NULL,
-    `product` INT NOT NULL,
-    `quantity` DECIMAL(8,2) NOT NULL,
-    CONSTRAINT `product_product_kit_fk`
-            FOREIGN KEY (`kit`)
-            REFERENCES `product` (`id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT `product_kit_product_fk`
+    `product` INT NOT NULL PRIMARY KEY,
+    `products` JSON NOT NULL,
+    CONSTRAINT `product_kit`
             FOREIGN KEY (`product`)
             REFERENCES `product` (`id`)
             ON DELETE NO ACTION

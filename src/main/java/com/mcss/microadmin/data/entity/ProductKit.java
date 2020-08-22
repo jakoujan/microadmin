@@ -5,17 +5,17 @@
  */
 package com.mcss.microadmin.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mcss.microadmin.data.converter.KitItemsConverter;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Basic;
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,18 +23,17 @@ import javax.persistence.Table;
 public class ProductKit implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Integer id;
-    private Product kit;
     private Product product;
-    private BigDecimal quantity;
+    private Set<ItemKit> items;
 
     public ProductKit() {
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "PRODUCT", nullable = false)
     public Integer getId() {
         return id;
     }
@@ -43,20 +42,8 @@ public class ProductKit implements Serializable {
         this.id = id;
     }
 
-   
-    @JsonIgnore
-    @JoinColumn(name = "product", referencedColumnName = "ID", nullable = false)
-    @ManyToOne()
-    public Product getKit() {
-        return kit;
-    }
-
-    public void setKit(Product kit) {
-        this.kit = kit;
-    }
-
-    @JoinColumn(name = "kit", referencedColumnName = "ID", nullable = false)
-    @ManyToOne()
+    @JoinColumn(name = "product", nullable = false)
+    @OneToOne()
     public Product getProduct() {
         return product;
     }
@@ -64,14 +51,15 @@ public class ProductKit implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
-    @Basic(optional = false)
-    @Column(name = "QUANTITY" ,nullable = false, precision = 8, scale = 2)
-    public BigDecimal getQuantity() {
-        return quantity;
+
+    @Convert(converter = KitItemsConverter.class)
+    @Column(name = "PRODUCTS", columnDefinition = "text")
+    public Set<ItemKit> getItems() {
+        return items;
     }
 
-    public void setQuantity(BigDecimal quantity) {
-        this.quantity = quantity;
-    } 
+    public void setItems(Set<ItemKit> items) {
+        this.items = items;
+    }
+
 }
