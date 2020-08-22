@@ -166,16 +166,48 @@
                         </div>
                     </div>
                 </div>
-                <mat-tab label="Combo/kit" [disabled]="form.controls.type.value.name !== 'Combo/Kit'">
+                <mat-tab label="Combo/kit" [disabled]="checkCombo">
                     <div class="list-header">
-                        <div class="header">Productos</div>
+                        <h3 class="header">Productos</h3>
                         <span class="filler"></span>
-                        <button mat-icon-button (click)="addComboProduct()"><mat-icon>add</mat-icon></button>
+                        <button mat-stroked-button color="primary" (click)="addComboProduct()">Agregar</button>
                     </div>
-                    <mat-divider></mat-divider>
                     <mat-list>
-                        <mat-list-item>
-
+                        <mat-list-item class="list-item" *ngFor="let item of kitProducts.controls; let i = index">
+                            <form [formGroup]="item" class="product-form">
+                                <div class="item">
+                                    <div class="quantity">
+                                        <mat-form-field appearance="fill" class="input-full-width">
+                                            <mat-label>Cantidad</mat-label>
+                                            <input matInput class="number" placeholder="Cantidad"
+                                                formControlName="quantity" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="product">
+                                        <mat-form-field appearance="fill" class="input-full-width">
+                                            <mat-label>Producto</mat-label>
+                                            <mat-select matNativeControl placeholder="Producto"
+                                                formControlName="product" [compareWith]="compare" required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="productFilter"
+                                                        placeholderLabel="Busqueda de producto"
+                                                        noEntriesFoundLabel="No se ha encontrado ningun registro">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let product of filteredProducts" [value]="product">
+                                                    {{ product.description }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="button">
+                                        <button mat-icon-button (click)="removeItem(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <mat-divider></mat-divider>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>

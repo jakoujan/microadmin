@@ -60,6 +60,8 @@ import { CheckoutComponent } from './operation/checkout/checkout.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ProductTypesComponent } from './modules/product-types/product-types.component';
 import { ProductTypeFormComponent } from './modules/product-type-form/product-type-form.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { OrderComponent } from './operation/order/order.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,8 @@ import { ProductTypeFormComponent } from './modules/product-type-form/product-ty
     InitialStockComponent,
     CheckoutComponent,
     ProductTypesComponent,
-    ProductTypeFormComponent
+    ProductTypeFormComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
@@ -126,7 +129,8 @@ import { ProductTypeFormComponent } from './modules/product-type-form/product-ty
     MatDialogModule,
     DirectivesModule,
     MatTabsModule,
-    PipesModule
+    PipesModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class ComponentsModule { }

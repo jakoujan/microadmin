@@ -116,7 +116,8 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
       promotion: undefined,
       minimumStock: undefined,
       active: true,
-      type: undefined
+      type: undefined,
+      kitProducts: []
     }
     this.showForm(entity, false);
   }

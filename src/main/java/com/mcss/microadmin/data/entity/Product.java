@@ -5,6 +5,7 @@
  */
 package com.mcss.microadmin.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -216,6 +217,7 @@ public class Product implements Serializable {
         this.flavor = flavor;
     }
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "kit", orphanRemoval = true)
     public Set<ProductKit> getKits() {
         return kits;
