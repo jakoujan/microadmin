@@ -21,5 +21,5 @@ export interface IProduct {
     minimumStock: number;
     active: boolean;
     type: IProductType;
-    kitProducts: Array<IProductKit>;
+    kit: IProductKit;
 }

@@ -1,9 +1,8 @@
-import { IProductKitId } from "./product-kit-id";
 import { IProduct } from "./product";
+import { IItemKit } from "./item-kit";
 
 export interface IProductKit {
     id: number;
-    kit: IProduct;
     product: IProduct;
-    quantity: number;
+    items: Array<IItemKit>
 }
