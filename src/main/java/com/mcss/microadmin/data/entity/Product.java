@@ -204,7 +204,7 @@ public class Product implements Serializable {
     public void setType(ProductType type) {
         this.type = type;
     }
-
+    
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "kit", orphanRemoval = true)
     public Set<ProductKit> getKits() {

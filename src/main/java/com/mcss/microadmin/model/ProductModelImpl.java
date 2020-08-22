@@ -10,6 +10,8 @@ import com.mcss.microadmin.Constants;
 import com.mcss.microadmin.data.Status;
 import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.entity.Product;
+import com.mcss.microadmin.data.entity.ProductKit;
+import com.mcss.microadmin.data.entity.ProductOrder;
 
 import com.mcss.microadmin.data.filter.ProductViewFilter;
 import javax.transaction.Transactional;
@@ -26,6 +28,10 @@ public class ProductModelImpl implements ProductModel {
     @Transactional
     public Response save(Product product) {
         Response response = Response.getInstance();
+        product.getKitProducts().forEach((ProductKit kit)->{
+            kit.setKit(product);
+            kit.setProduct(this.productDAO.findById(kit.getProduct().getId()).get());
+        });
         this.productDAO.save(product);
         response.setMessage("El producto se ha guardado con exito");
         response.addField(Constants.ENTITY, product);

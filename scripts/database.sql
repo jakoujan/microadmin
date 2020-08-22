@@ -193,6 +193,11 @@ ALTER TABLE `product` add CONSTRAINT `flavor_product_fk`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
 
+ALTER TABLE `product` DROP CONSTRAINT `flavor_product_fk`;
+
+ALTER TABLE `product` drop column `flavor`; 
+
+
 CREATE TABLE IF NOT EXISTS `product_type` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
@@ -371,10 +376,10 @@ CREATE UNIQUE INDEX `bar_code_idx`
  ( `barcode` ASC );
 
 CREATE TABLE IF NOT EXISTS `product_kit` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `kit` INT NOT NULL,
     `product` INT NOT NULL,
     `quantity` DECIMAL(8,2) NOT NULL,
-    PRIMARY KEY(kit, product),
     CONSTRAINT `product_product_kit_fk`
             FOREIGN KEY (`kit`)
             REFERENCES `product` (`id`)
