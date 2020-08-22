@@ -40,7 +40,6 @@ public class Product implements Serializable {
     private BigDecimal minimumStock;
     private boolean active;
     private ProductType type;
-    private Flavor flavor;
     private Set<ProductKit> kits;
     private Set<ProductKit> kitProducts;
 
@@ -62,7 +61,6 @@ public class Product implements Serializable {
         this.minimumStock = minimumStock;
         this.active = active;
         this.type = type;
-        this.flavor = flavor;
     }
 
     @Id
@@ -207,16 +205,6 @@ public class Product implements Serializable {
         this.type = type;
     }
 
-    @JoinColumn(name = "FLAVOR", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
-    public Flavor getFlavor() {
-        return flavor;
-    }
-
-    public void setFlavor(Flavor flavor) {
-        this.flavor = flavor;
-    }
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "kit", orphanRemoval = true)
     public Set<ProductKit> getKits() {
@@ -226,7 +214,7 @@ public class Product implements Serializable {
     public void setKits(Set<ProductKit> kits) {
         this.kits = kits;
     }
-    
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
     public Set<ProductKit> getKitProducts() {
         return kitProducts;
