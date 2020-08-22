@@ -31,7 +31,7 @@ export class StockComponent extends BaseComponent implements OnInit {
         promotion: undefined,
         taxType: undefined,
         type: undefined,
-        kitProducts: undefined
+        kit: undefined
       },
       store: undefined,
       currentStock: undefined,

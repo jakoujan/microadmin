@@ -11,6 +11,7 @@ import { CatalogsService } from 'src/app/services/catalogs.service';
 import { IProductType } from 'src/app/interfaces/product-type';
 import { IProduct } from 'src/app/interfaces/product';
 import { IProductKit } from 'src/app/interfaces/product-kit';
+import { IItemKit } from 'src/app/interfaces/item-kit';
 
 @Component({
   selector: 'app-product-form',
@@ -63,12 +64,12 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       promotion: [this.product.promotion],
       minimumStock: [this.product.minimumStock, Validators.required],
       type: [this.product.type, Validators.required],
-      kitProducts: this.fb.array([])
+      kit: this.fb.array([])
     });
 
-    if (this.product.kitProducts.length >= 1) {
-      this.product.kitProducts.forEach(productKit => {
-        this.addComboProduct(productKit);
+    if (this.product.kit.items.length >= 1) {
+      this.product.kit.items.forEach(item => {
+        this.addComboProduct(item);
       });
     }
   }
@@ -92,18 +93,15 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     this.product.promotion = this.form.controls.promotion.value;
     this.product.minimumStock = this.form.controls.minimumStock.value;
     this.product.type = this.form.controls.type.value;
-
-    this.product.kitProducts = [];
+    this.product.kit.items = [];
     this.kitProducts.controls.forEach((form: FormGroup) => {
-      this.product.kitProducts.push({
-        id: form.get('id').value,
-        kit: form.get('kit').value,
+      this.product.kit.items.push({
         product: form.get('product').value,
         quantity: form.get('quantity').value
       });
     });
 
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.product);
   }
 
   close() {
@@ -145,13 +143,10 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     return this.form.get('kitProducts') as FormArray;
   }
 
-  public addComboProduct(productKit?: IProductKit) {
-    if (!productKit) {
-      productKit = {
-        kit: undefined,
-        product: undefined,
-        quantity: 1,
-        id: undefined
+  public addComboProduct(item?: IItemKit) {
+    if (!item) {
+      item = {
+
       }
     }
     this.kitProducts.push(this.fb.group({

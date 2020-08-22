@@ -1,3 +1,5 @@
 import { IProduct } from "./product";
-export interface IItemKit extends IProduct {
+export interface IItemKit {
+    product: IProduct;
+    quantity: number;
 }

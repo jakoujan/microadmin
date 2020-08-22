@@ -5,6 +5,7 @@
  */
 package com.mcss.microadmin.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mcss.microadmin.data.converter.KitItemsConverter;
 import java.io.Serializable;
 import java.util.Set;
@@ -42,6 +43,7 @@ public class ProductKit implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     @JoinColumn(name = "product", nullable = false)
     @OneToOne()
     public Product getProduct() {
