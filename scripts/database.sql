@@ -362,7 +362,8 @@ CREATE UNIQUE INDEX `bar_code_idx`
  ( `barcode` ASC );
 
 CREATE TABLE IF NOT EXISTS `product_kit` (
-    `product` INT NOT NULL PRIMARY KEY,
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `product` INT NOT NULL,
     `products` JSON NOT NULL,
     CONSTRAINT `product_kit`
             FOREIGN KEY (`product`)
