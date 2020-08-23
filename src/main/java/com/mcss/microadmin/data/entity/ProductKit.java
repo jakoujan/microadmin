@@ -33,7 +33,6 @@ public class ProductKit implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT", nullable = false)
     public Integer getId() {
         return id;
