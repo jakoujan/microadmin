@@ -12,6 +12,7 @@ import { IProductType } from 'src/app/interfaces/product-type';
 import { IProduct } from 'src/app/interfaces/product';
 import { IProductKit } from 'src/app/interfaces/product-kit';
 import { IItemKit } from 'src/app/interfaces/item-kit';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-form',
@@ -67,7 +68,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
       kit: this.fb.array([])
     });
 
-    if (this.product.kit.items.length >= 1) {
+    if (this.product.kit && this.product.kit.items.length >= 1) {
       this.product.kit.items.forEach(item => {
         this.addComboProduct(item);
       });
@@ -93,13 +94,19 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
     this.product.promotion = this.form.controls.promotion.value;
     this.product.minimumStock = this.form.controls.minimumStock.value;
     this.product.type = this.form.controls.type.value;
-    this.product.kit.items = [];
-    this.kitProducts.controls.forEach((form: FormGroup) => {
-      this.product.kit.items.push({
-        product: form.get('product').value,
-        quantity: form.get('quantity').value
+    if (this.product.type.name === 'Combo/Kit') {
+      this.product.kit = {
+        items: []
+      }
+
+      this.kitProducts.controls.forEach((form: FormGroup) => {
+        this.product.kit.items.push({
+          product: form.get('product').value,
+          quantity: form.get('quantity').value
+        });
       });
-    });
+    }
+    
 
     this.dialogRef.close(this.product);
   }
@@ -140,20 +147,19 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   }
 
   public get kitProducts(): FormArray {
-    return this.form.get('kitProducts') as FormArray;
+    return this.form.get('kit') as FormArray;
   }
 
   public addComboProduct(item?: IItemKit) {
     if (!item) {
       item = {
-
+        product: undefined,
+        quantity: 1
       }
     }
     this.kitProducts.push(this.fb.group({
-      kit: [productKit.kit],
-      product: [productKit.product, Validators.required],
-      quantity: [productKit.quantity, Validators.required],
-      id: [productKit.id]
+      product: [item.product, Validators.required],
+      quantity: [item.quantity, Validators.required]
     }));
   }
 

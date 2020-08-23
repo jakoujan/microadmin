@@ -131,9 +131,9 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
           data: { entity: response.fields.entity }
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            this.productService.save(result.entity).then(response => {
+        dialogRef.afterClosed().subscribe(product => {
+          if (product) {
+            this.productService.save(product).then(response => {
               this.setFilter();
             });
           }
@@ -146,9 +146,9 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
         data: { entity: entity }
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.productService.save(result.entity).then(response => {
+      dialogRef.afterClosed().subscribe(product => {
+        if (product) {
+          this.productService.save(product).then(response => {
             this.setFilter();
           });
         }
