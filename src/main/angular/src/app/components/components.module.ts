@@ -62,6 +62,8 @@ import { ProductTypesComponent } from './modules/product-types/product-types.com
 import { ProductTypeFormComponent } from './modules/product-type-form/product-type-form.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { OrderComponent } from './operation/order/order.component';
+import { TablesComponent } from './modules/tables/tables.component';
+import { TableFormComponent } from './modules/table-form/table-form.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,9 @@ import { OrderComponent } from './operation/order/order.component';
     CheckoutComponent,
     ProductTypesComponent,
     ProductTypeFormComponent,
-    OrderComponent
+    OrderComponent,
+    TablesComponent,
+    TableFormComponent
   ],
   imports: [
     CommonModule,

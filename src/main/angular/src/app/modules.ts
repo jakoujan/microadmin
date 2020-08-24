@@ -47,7 +47,7 @@ export const MODULES: Array<Module> = [
         id: 'cash-balance',
         uri: '/modules/cash-balance',
         icon: '',
-        default: true,
+        default: false,
         active: false
       }
     ],
@@ -71,7 +71,15 @@ export const MODULES: Array<Module> = [
         id: 'workstations',
         uri: '/modules/workstations',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
+        active: false
+      },
+      {
+        name: 'Mesas',
+        id: 'tables',
+        uri: '/modules/tables',
+        icon: '',
+        default: false,
         active: false
       },
       {
@@ -79,7 +87,7 @@ export const MODULES: Array<Module> = [
         id: 'users',
         uri: '/modules/users',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -87,7 +95,7 @@ export const MODULES: Array<Module> = [
         id: 'customers',
         uri: '/modules/customers',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -95,7 +103,7 @@ export const MODULES: Array<Module> = [
         id: 'payment-methods',
         uri: '/modules/payment-methods',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -103,7 +111,7 @@ export const MODULES: Array<Module> = [
         id: 'brands',
         uri: '/modules/brands',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -111,7 +119,7 @@ export const MODULES: Array<Module> = [
         id: 'sections',
         uri: '/modules/sections',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -119,7 +127,7 @@ export const MODULES: Array<Module> = [
         id: 'suppliers',
         uri: '/modules/suppliers',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -127,7 +135,7 @@ export const MODULES: Array<Module> = [
         id: 'product-types',
         uri: '/modules/product/types',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -135,7 +143,7 @@ export const MODULES: Array<Module> = [
         id: 'products',
         uri: '/modules/products',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -143,7 +151,7 @@ export const MODULES: Array<Module> = [
         id: 'units',
         uri: '/modules/units',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -151,7 +159,7 @@ export const MODULES: Array<Module> = [
         id: 'configuration',
         uri: '/modules/configuration',
         icon: '',
-        default: true,
+        default: false,
         active: false
       }
     ],

@@ -19,11 +19,14 @@ import javax.persistence.Id;
 @Entity
 @javax.persistence.Table(name = "TABLE_CHAIR", schema = "PUBLIC", catalog = "DB")
 public class Table implements Serializable {
-    
+
     private Integer id;
     private String name;
     private Integer places;
     private Boolean active;
+
+    public Table() {
+    }
 
     public Table(String name, Integer places, Boolean active) {
         this.name = name;
@@ -31,8 +34,6 @@ public class Table implements Serializable {
         this.active = active;
     }
 
-    
-    
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
@@ -43,7 +44,7 @@ public class Table implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     @Column(name = "NAME", length = 120)
     public String getName() {
         return name;
@@ -52,7 +53,7 @@ public class Table implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Column(name = "PLACES", nullable = false)
     public Integer getPlaces() {
         return places;
@@ -61,7 +62,7 @@ public class Table implements Serializable {
     public void setPlaces(Integer places) {
         this.places = places;
     }
-    
+
     @Column(name = "ACTIVE", length = 1)
     public Boolean getActive() {
         return active;
@@ -70,9 +71,5 @@ public class Table implements Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
-    
-    
-    
-    
-    
+
 }
