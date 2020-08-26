@@ -39,6 +39,7 @@ public class Order implements Serializable {
     private PaymentMethod payment_method;
     private Status status;
     private BigDecimal total_amount;
+    private Integer serviceType;
     private Set<ProductOrder> products = new HashSet<>();
 
     public Order(Date order_date, String responsible, User waiter, User cashier, Table table, PaymentMethod payment_method, Status status, BigDecimal total_amount) {
@@ -142,6 +143,17 @@ public class Order implements Serializable {
     public void setTotal_amount(BigDecimal total_amount) {
         this.total_amount = total_amount;
     }
+    
+    @Column(name = "SERVICE_TYPE")
+    public Integer getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(Integer serviceType) {
+        this.serviceType = serviceType;
+    }
+    
+    
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
     public Set<ProductOrder> getProducts() {
