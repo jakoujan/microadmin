@@ -210,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `order_comand` (
   `table_chair` INTEGER NOT NULL,
   `payment_method` INTEGER NOT NULL,
   `status` INTEGER NOT NULL,
+  `service_type` INTEGER NOT NULL DEFAULT 1;,
   `total_amount` DECIMAL(10,2) NOT NULL,
   CONSTRAINT `waiter_order_fk`
     FOREIGN KEY (`waiter`)
@@ -237,6 +238,9 @@ CREATE TABLE IF NOT EXISTS `order_comand` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+
+ALTER TABLE `order_comand` add column `service_type` INTEGER NOT NULL DEFAULT 1;  
 
 ALTER TABLE `order` DROP COLUMN `table`;
 
@@ -364,7 +368,7 @@ CREATE UNIQUE INDEX `bar_code_idx`
 CREATE TABLE IF NOT EXISTS `product_kit` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `product` INT NOT NULL,
-    `products` JSON NOT NULL,
+    `products` TEXT,
     CONSTRAINT `product_kit`
             FOREIGN KEY (`product`)
             REFERENCES `product` (`id`)
