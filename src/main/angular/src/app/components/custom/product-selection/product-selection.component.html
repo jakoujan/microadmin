@@ -1,0 +1,17 @@
+<div mat-dialog-content class="dialog-content">
+    <mat-tab-group>
+        <mat-tab class="product-tab" [label]="type.type.name" *ngFor="let type of types">
+            <mat-selection-list #products [multiple]="false">
+                <mat-list-option matRipple *ngFor="let product of type.products" (click)="select(product)">
+                    <div mat-line>{{ product.description }}</div>
+                    <div mat-line>{{product.retailPrice | currency}}</div>
+                    <mat-divider></mat-divider>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-flat-button [mat-dialog-close]="false">Cerrar</button>
+    <button mat-button (click)="selected()" color="accent" cdkFocusInitial>Seleccionar</button>
+</div>

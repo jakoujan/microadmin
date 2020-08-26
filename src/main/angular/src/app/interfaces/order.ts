@@ -1,4 +1,5 @@
 import { IUser } from './user';
+import { IProductOrder } from "./product-order";
 
 export interface IOrder {
     id: number;
@@ -10,4 +11,6 @@ export interface IOrder {
     paymentMethod: number;
     status: number;
     totalAmount: number;
+    serviceType: number;
+    products: Array<IProductOrder>;
 }

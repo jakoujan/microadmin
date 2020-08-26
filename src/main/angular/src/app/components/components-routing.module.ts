@@ -18,6 +18,8 @@ import { StockComponent } from './operation/stock/stock.component';
 import { CheckoutComponent } from './operation/checkout/checkout.component';
 import { ProductTypesComponent } from './modules/product-types/product-types.component';
 import { TablesComponent } from './modules/tables/tables.component';
+import { OrdersComponent } from './operation/orders/orders.component';
+import { OrderFormComponent } from './operation/order-form/order-form.component';
 
 
 const routes: Routes = [
@@ -39,6 +41,8 @@ const routes: Routes = [
       { path: 'products', component: ProductsComponent, data: { validate: true, module: 'administration', id: 'products' }, canActivate: [SessionGuard] },
       { path: 'configuration', component: ConfigurationComponent, data: { validate: true, module: 'administration', id: 'configuration' }, canActivate: [SessionGuard] },
       { path: 'checkout', component: CheckoutComponent, data: { validate: true, module: 'operation', id: 'checkout' }, canActivate: [SessionGuard] },
+      { path: 'orders', component: OrdersComponent, data: { validate: true, module: 'operation', id: 'orders' }, canActivate: [SessionGuard] },
+      { path: 'orders/order', component: OrderFormComponent, data: { validate: false, module: 'operation', id: 'order-form' }, canActivate: [SessionGuard] },
       
     ]
   }

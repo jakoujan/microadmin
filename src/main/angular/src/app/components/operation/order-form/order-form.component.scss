@@ -1,0 +1,45 @@
+.order-card {
+    margin: 10px;
+    padding: 0;
+}
+.action-marign {
+    margin-bottom: 65px;
+}
+.order-active {
+    margin: 15px 0 5px 20px;
+}
+
+.command-title {
+    display: flex;
+    margin: 10px 10px 0 10px;
+    .order-title {
+        font-weight: 400 !important;
+        font-size: 15px !important;
+        margin: 10px 0 0 10px;
+    }
+}
+
+
+.general-form {
+    padding: 10px 20px;
+}
+
+.item {
+    .price,
+    .amount {
+        margin: 0 10px;
+    }
+}
+
+.command-buttons {
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 10px;
+    button.command {
+        width: 100%;
+    }
+}

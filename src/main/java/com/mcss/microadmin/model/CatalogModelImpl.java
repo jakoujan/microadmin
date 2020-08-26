@@ -15,6 +15,7 @@ import com.mcss.microadmin.data.dao.StateDAO;
 import com.mcss.microadmin.data.dao.StatusDAO;
 import com.mcss.microadmin.data.dao.StoreDAO;
 import com.mcss.microadmin.data.dao.SupplierDAO;
+import com.mcss.microadmin.data.dao.TableDAO;
 import com.mcss.microadmin.data.dao.TaxTypeDAO;
 import com.mcss.microadmin.data.dao.UnitDAO;
 import com.mcss.microadmin.data.entity.Brand;
@@ -27,6 +28,7 @@ import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
 import com.mcss.microadmin.data.entity.Supplier;
+import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
 import java.util.ArrayList;
@@ -74,6 +76,9 @@ public class CatalogModelImpl implements CatalogModel {
     
     @Autowired
     StatusDAO statusDAO;
+    
+    @Autowired
+    TableDAO tableDAO;
 
     @Override
     public Iterable<Country> countries() {
@@ -143,5 +148,10 @@ public class CatalogModelImpl implements CatalogModel {
     @Override
     public Iterable<Status> status() {
         return this.statusDAO.findAll();
+    }
+
+    @Override
+    public Iterable<Table> tables() {
+        return this.tableDAO.findByActive(Boolean.TRUE);
     }
 }

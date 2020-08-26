@@ -61,9 +61,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProductTypesComponent } from './modules/product-types/product-types.component';
 import { ProductTypeFormComponent } from './modules/product-type-form/product-type-form.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { OrderComponent } from './operation/order/order.component';
 import { TablesComponent } from './modules/tables/tables.component';
 import { TableFormComponent } from './modules/table-form/table-form.component';
+import { OrdersComponent } from './operation/orders/orders.component';
+import { OrderFormComponent } from './operation/order-form/order-form.component';
+import { ProductSelectionComponent } from './custom/product-selection/product-selection.component';
 
 @NgModule({
   declarations: [
@@ -97,9 +99,11 @@ import { TableFormComponent } from './modules/table-form/table-form.component';
     CheckoutComponent,
     ProductTypesComponent,
     ProductTypeFormComponent,
-    OrderComponent,
     TablesComponent,
-    TableFormComponent
+    TableFormComponent,
+    OrdersComponent,
+    OrderFormComponent,
+    ProductSelectionComponent
   ],
   imports: [
     CommonModule,

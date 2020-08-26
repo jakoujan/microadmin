@@ -44,8 +44,8 @@ export const MODULES: Array<Module> = [
       },
       {
         name: 'Comandas',
-        id: 'cash-balance',
-        uri: '/modules/cash-balance',
+        id: 'orders',
+        uri: '/modules/orders',
         icon: '',
         default: false,
         active: false

@@ -12,6 +12,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author oscardanielrangelmartinez
  */
-public interface TableDAO extends PagingAndSortingRepository<Table, Integer>, ExtendedTableDAO{ 
-     public void findByActive(boolean active);      
+public interface TableDAO extends PagingAndSortingRepository<Table, Integer>, ExtendedTableDAO {
+
+    public Iterable<Table> findByActive(boolean active);
 }

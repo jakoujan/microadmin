@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrderFilter } from 'src/app/filters/order-filter';
 import { IOrder } from 'src/app/interfaces/order';
+import { Router } from '@angular/router';
+import { SessionStorageService } from 'ngx-webstorage';
+import { constants } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class CheckoutComponent implements OnInit {
-  orders: IOrder[] = [
-    
-  ];
+export class OrdersComponent implements OnInit {
+  orders: IOrder[] = [];
   filter: IOrderFilter = {
     entity: {
       id: undefined,
@@ -31,13 +32,27 @@ export class CheckoutComponent implements OnInit {
     page: 0,
     rows: 20
   };
-  constructor() { }
+  constructor(private router: Router, private sessionStorageService: SessionStorageService) { }
 
   ngOnInit(): void {
   }
 
-  initialStock() {
-
+  newOrder() {
+    const order: IOrder = {
+      cashier: undefined,
+      id: undefined,
+      orderDate: new Date(),
+      paymentMethod: undefined,
+      responsible: undefined,
+      status: undefined,
+      table: undefined,
+      totalAmount: 0,
+      waiter: undefined,
+      serviceType: 1,
+      products: []
+    }
+    this.sessionStorageService.store(constants.ORDER, order);
+    this.router.navigate(['modules/orders/order']);
   }
 
   toggleSearchBar() {

@@ -14,7 +14,8 @@ export const constants = {
   SESSION: 'session',
   MODULE: 'module',
   TYPE_FILL: 1,
-  TYPE_DOSIFICATION: 2
+  TYPE_DOSIFICATION: 2,
+  ORDER: 'order'
 }
 /*
  * For easier debugging in development mode, you can import the following file

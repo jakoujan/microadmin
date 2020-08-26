@@ -1,11 +1,14 @@
 export const environment = {
-  production: true,
+  production: false,
   API_URL: '',
   user: '',
-  password: ''
+  password: '',
 };
 
 export const constants = {
   SESSION: 'session',
-  MODULE: 'module'
+  MODULE: 'module',
+  TYPE_FILL: 1,
+  TYPE_DOSIFICATION: 2,
+  ORDER: 'order'
 }

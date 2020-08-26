@@ -26,8 +26,10 @@ public class ProductModelImpl implements ProductModel {
     @Transactional
     public Response save(Product product) {
         Response response = Response.getInstance();
-        product.getKit().setId(product.getId());
-        product.getKit().setProduct(product);
+        if (product.getKit() != null) {
+            product.getKit().setId(product.getId());
+            product.getKit().setProduct(product);
+        }
         this.productDAO.save(product);
         response.setMessage("El producto se ha guardado con exito");
         response.addField(Constants.ENTITY, product);

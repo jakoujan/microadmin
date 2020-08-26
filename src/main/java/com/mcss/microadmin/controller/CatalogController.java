@@ -15,6 +15,7 @@ import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
 import com.mcss.microadmin.data.entity.Supplier;
+import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
 import com.mcss.microadmin.model.CatalogModel;
@@ -94,6 +95,11 @@ public class CatalogController {
     @GetMapping(value = "status")
     public Iterable<Status> status() {
         return this.catalogModel.status();
+    }
+    
+    @GetMapping(value = "tables")
+    public Iterable<Table> tables() {
+        return this.catalogModel.tables();
     }
 
 }
