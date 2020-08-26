@@ -101,6 +101,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
 
       this.kitProducts.controls.forEach((form: FormGroup) => {
         this.product.kit.items.push({
+          id: form.get('id').value,
           product: form.get('product').value,
           quantity: form.get('quantity').value
         });
@@ -117,10 +118,6 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
 
   compare(val1, val2) {
     return val1.id === val2.id;
-  }
-
-  public addBrand() {
-    console.log('Se agrega')
   }
 
   public get checkCombo(): boolean {
@@ -153,11 +150,13 @@ export class ProductFormComponent implements OnInit, AfterViewInit {
   public addComboProduct(item?: IItemKit) {
     if (!item) {
       item = {
+        id: undefined,
         product: undefined,
         quantity: 1
       }
     }
     this.kitProducts.push(this.fb.group({
+      id: [item.id],
       product: [item.product, Validators.required],
       quantity: [item.quantity, Validators.required]
     }));

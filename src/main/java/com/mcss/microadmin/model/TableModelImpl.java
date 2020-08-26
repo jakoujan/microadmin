@@ -25,6 +25,9 @@ public class TableModelImpl implements TableModel {
     @Transactional
     public Response save(Table table) {
         Response response = Response.getInstance();
+        if(table.getId() == null) {
+            table.setActive(Boolean.TRUE);
+        }
         this.tableDAO.save(table);
         response.setMessage("La mesa se ha guardado con exito");
         response.addField(Constants.ENTITY, table);
