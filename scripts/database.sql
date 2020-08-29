@@ -144,7 +144,7 @@ CREATE TABLE product (
   `promotion` BOOLEAN NOT NULL,
   `minimum_stock` DECIMAL(8,2) NOT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
-  `type` INTEGER NOT NULL,
+  `type` INTEGER NOT NULL DEFAULT 1,
 CONSTRAINT `brand_product_fk`
     FOREIGN KEY (`BRAND`)
     REFERENCES `BRAND` (`id`)
@@ -169,11 +169,14 @@ CONSTRAINT `product_type_fk`
     FOREIGN KEY (`unit`)
     REFERENCES `UNIT` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
+    ON UPDATE NO ACTION,
+   CONSTRAINT `product_type_fk`
+    FOREIGN KEY (`type`)
+    REFERENCES `product_type` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
 
-ALTER TABLE `product` add column `flavor` INTEGER NOT NULL DEFAULT 1;
-ALTER TABLE `product` add column `type` INTEGER NOT NULL DEFAULT 1;
+);
 
 ALTER TABLE `product` add CONSTRAINT `product_type_fk`
     FOREIGN KEY (`type`)
@@ -181,25 +184,11 @@ ALTER TABLE `product` add CONSTRAINT `product_type_fk`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
 
-ALTER TABLE `product` add CONSTRAINT `flavor_product_fk`
-    FOREIGN KEY (`flavor`)
-    REFERENCES `Flavor` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
-
-ALTER TABLE `product` DROP CONSTRAINT `flavor_product_fk`;
-
-ALTER TABLE `product` drop column `flavor`; 
-
-
 CREATE TABLE IF NOT EXISTS `product_type` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (40) NOT NULL,
     `active` BOOLEAN NOT NULL DEFAULT TRUE
 );
-
-ALTER TABLE `product_type` add COLUMN `active` BOOLEAN NOT NULL DEFAULT TRUE;
-
 
 CREATE TABLE IF NOT EXISTS `order_comand` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -239,20 +228,6 @@ CREATE TABLE IF NOT EXISTS `order_comand` (
     ON UPDATE NO ACTION
 );
 
-
-ALTER TABLE `order_comand` add column `service_type` INTEGER NOT NULL DEFAULT 1;  
-
-ALTER TABLE `order` DROP COLUMN `table`;
-
-ALTER TABLE `order` add column `table_chair` INTEGER NOT NULL DEFAULT 1;    
-ALTER TABLE `order` add CONSTRAINT `table_order_fk`
-    FOREIGN KEY (`table_chair`)
-    REFERENCES `table_chair` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
-
-
-
 CREATE TABLE `retail` (
   `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `retail_date` TIMESTAMP NOT NULL,
@@ -284,8 +259,6 @@ CREATE TABLE IF NOT EXISTS `sales` (
     `quantity` DECIMAL(10,2) NOT NULL
 );
 
-ALTER TABLE `sales` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
-
 CREATE TABLE IF NOT EXISTS `order_sale` (
     `order_comand` INTEGER NOT NULL,
     `sale` INTEGER NOT NULL,
@@ -300,16 +273,6 @@ CREATE TABLE IF NOT EXISTS `order_sale` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
-
-ALTER TABLE `order_sale` DROP CONSTRAINT `order_fk`;
-
-ALTER TABLE `order_sale` add column `order_comand` INTEGER NOT NULL DEFAULT 1;
-ALTER TABLE `order_sale` add CONSTRAINT `order_fk`
-    FOREIGN KEY (`order_comand`)
-    REFERENCES `order_comand` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
-
 
 CREATE TABLE IF NOT EXISTS `retail_sale` (
     `retail` INTEGER NOT NULL,
@@ -335,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `product_order` (
     `id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `order_comand` INTEGER NOT NULL,
     `product` INTEGER NOT NULL,
-    `quantity` INTEGER NOT NULL,
+    `quantity` DECIMAL(10,2) NOT NULL,
     CONSTRAINT `order_comand_product_order_fk`
         FOREIGN KEY (`order_comand`)
         REFERENCES `order_comand` (`id`)
@@ -347,18 +310,6 @@ CREATE TABLE IF NOT EXISTS `product_order` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION
 );
-
-ALTER TABLE `product_order` DROP CONSTRAINT `order_product_order_fk`;
-
-ALTER TABLE `product_order` add column `order_comand` INTEGER NOT NULL DEFAULT 1;
-ALTER TABLE `product_order` add CONSTRAINT `order_comand_product_order_fk`
-    FOREIGN KEY (`order_comand`)
-    REFERENCES `order_comand` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
-
-
-ALTER TABLE `product_order` ALTER COLUMN `quantity` DECIMAL(10,2) NOT NULL;
 
 
 CREATE UNIQUE INDEX `bar_code_idx`
