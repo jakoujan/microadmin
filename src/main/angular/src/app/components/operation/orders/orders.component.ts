@@ -4,6 +4,7 @@ import { IOrder } from 'src/app/interfaces/order';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { constants } from 'src/environments/environment';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,14 +16,14 @@ export class OrdersComponent implements OnInit {
   filter: IOrderFilter = {
     entity: {
       id: undefined,
-      orderDate: undefined,
+      order_date: undefined,
       responsible: undefined,
       waiter: undefined,
       cashier: undefined,
       table: undefined,
-      paymentMethod: undefined,
+      payment_method: undefined,
       status: undefined,
-      totalAmount: undefined,
+      total_amount: undefined,
       serviceType: 1,
       products: undefined
     },
@@ -32,21 +33,25 @@ export class OrdersComponent implements OnInit {
     page: 0,
     rows: 20
   };
-  constructor(private router: Router, private sessionStorageService: SessionStorageService) { }
+  constructor(private router: Router, private sessionStorageService: SessionStorageService,
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.orderService.filter(this.filter).then(response => {
+      this.orders = response.fields.data;
+    });
   }
 
   newOrder() {
     const order: IOrder = {
       cashier: undefined,
       id: undefined,
-      orderDate: new Date(),
-      paymentMethod: undefined,
+      order_date: new Date(),
+      payment_method: undefined,
       responsible: undefined,
       status: undefined,
       table: undefined,
-      totalAmount: 0,
+      total_amount: 0,
       waiter: undefined,
       serviceType: 1,
       products: []
@@ -63,8 +68,9 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  public pay(order: IOrder) {
-    console.log(order);
+  public open(order: IOrder) {
+    this.sessionStorageService.store(constants.ORDER, order);
+    this.router.navigate(['modules/orders/order']);
   }
 
   charge(order: IOrder) {

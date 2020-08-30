@@ -34,12 +34,12 @@
     <mat-card-content>
         <mat-list>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let order of orders" matRipple (click)="pay(order)">
+            <mat-list-item *ngFor="let order of orders" matRipple (click)="open(order)">
                 <mat-icon mat-list-icon>receipt_long</mat-icon>
-                <div mat-line class="order-title">Mesa: {{order.table | leadingZeros: 2}} </div>
+                <div mat-line class="order-title">Mesa: {{order.table.name}} </div>
                 <div mat-line>Nombre: {{order.responsible}} </div>
                 <div mat-line>Orden: {{order.id | leadingZeros: 5}}</div>
-                <div mat-line>Total: {{order.totalAmount | currency}} </div>
+                <div mat-line>Total: {{order.total_amount | currency}} </div>
 
                 <button mat-icon-button class="search-button" aria-labelledby="Opciones"
                     (click)="$event.stopPropagation()" [matMenuTriggerFor]="orderMenu">

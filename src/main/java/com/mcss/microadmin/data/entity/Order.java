@@ -29,7 +29,7 @@ import javax.persistence.Temporal;
 @Entity
 @javax.persistence.Table(name = "ORDER_COMAND", schema = "PUBLIC", catalog = "DB")
 public class Order implements Serializable {
- 
+
     private Integer id;
     private Date order_date;
     private String responsible;
@@ -42,6 +42,9 @@ public class Order implements Serializable {
     private Integer serviceType;
     private Set<ProductOrder> products = new HashSet<>();
 
+    public Order() {
+    }
+
     public Order(Date order_date, String responsible, User waiter, User cashier, Table table, PaymentMethod payment_method, Status status, BigDecimal total_amount) {
         this.order_date = order_date;
         this.responsible = responsible;
@@ -52,9 +55,7 @@ public class Order implements Serializable {
         this.status = status;
         this.total_amount = total_amount;
     }
-    
-    
-    
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
@@ -65,7 +66,7 @@ public class Order implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     @Column(name = "ORDER_DATE")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     public Date getOrder_date() {
@@ -75,7 +76,7 @@ public class Order implements Serializable {
     public void setOrder_date(Date order_date) {
         this.order_date = order_date;
     }
-    
+
     @Column(name = "RESPONSIBLE", length = 120)
     public String getResponsible() {
         return responsible;
@@ -84,7 +85,7 @@ public class Order implements Serializable {
     public void setResponsible(String responsible) {
         this.responsible = responsible;
     }
-    
+
     @JoinColumn(name = "WAITER", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public User getWaiter() {
@@ -94,7 +95,7 @@ public class Order implements Serializable {
     public void setWaiter(User waiter) {
         this.waiter = waiter;
     }
-    
+
     @JoinColumn(name = "CASHIER", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public User getCashier() {
@@ -104,7 +105,7 @@ public class Order implements Serializable {
     public void setCashier(User cashier) {
         this.cashier = cashier;
     }
-    
+
     @JoinColumn(name = "TABLE_CHAIR", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Table getTable() {
@@ -114,7 +115,7 @@ public class Order implements Serializable {
     public void setTable(Table table) {
         this.table = table;
     }
-    
+
     @JoinColumn(name = "PAYMENT_METHOD", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public PaymentMethod getPayment_method() {
@@ -124,7 +125,7 @@ public class Order implements Serializable {
     public void setPayment_method(PaymentMethod payment_method) {
         this.payment_method = payment_method;
     }
-    
+
     @JoinColumn(name = "STATUS", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     public Status getStatus() {
@@ -134,7 +135,7 @@ public class Order implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
-    
+
     @Column(name = "TOTAL_AMOUNT", length = 8, precision = 2)
     public BigDecimal getTotal_amount() {
         return total_amount;
@@ -143,7 +144,7 @@ public class Order implements Serializable {
     public void setTotal_amount(BigDecimal total_amount) {
         this.total_amount = total_amount;
     }
-    
+
     @Column(name = "SERVICE_TYPE")
     public Integer getServiceType() {
         return serviceType;
@@ -152,10 +153,8 @@ public class Order implements Serializable {
     public void setServiceType(Integer serviceType) {
         this.serviceType = serviceType;
     }
-    
-    
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product", orphanRemoval = true)
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "product", orphanRemoval = true)
     public Set<ProductOrder> getProducts() {
         return products;
     }
@@ -163,10 +162,5 @@ public class Order implements Serializable {
     public void setProducts(Set<ProductOrder> products) {
         this.products = products;
     }
-    
-    
-    
-    
-    
-    
+
 }

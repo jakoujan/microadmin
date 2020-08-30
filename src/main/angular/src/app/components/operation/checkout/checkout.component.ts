@@ -14,14 +14,14 @@ export class CheckoutComponent implements OnInit {
   filter: IOrderFilter = {
     entity: {
       id: undefined,
-      orderDate: undefined,
+      order_date: undefined,
       responsible: undefined,
       waiter: undefined,
       cashier: undefined,
       table: undefined,
-      paymentMethod: undefined,
+      payment_method: undefined,
       status: undefined,
-      totalAmount: undefined,
+      total_amount: undefined,
       serviceType: 1,
       products: undefined
     },

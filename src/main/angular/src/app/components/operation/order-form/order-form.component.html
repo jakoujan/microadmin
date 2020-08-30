@@ -34,7 +34,7 @@
                 <div class="col">
                     <mat-form-field class="input-full-width">
                         <mat-label>Servicio</mat-label>
-                        <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType"
+                        <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType" [compareWith]="compare"
                             required>
                             <mat-option *ngFor="let type of servicesTypes" [value]="type.id">
                                 {{ type.description }}
@@ -50,13 +50,28 @@
                 <div class="col">
                     <mat-form-field class="input-full-width">
                         <mat-label>Mesa</mat-label>
-                        <mat-select matNativeControl placeholder="Mesa" formControlName="table" required>
+                        <mat-select matNativeControl placeholder="Mesa" formControlName="table" required [compareWith]="compare">
                             <mat-option *ngFor="let table of tables" [value]="table">
                                 {{ table.name }}
                             </mat-option>
                         </mat-select>
                         <mat-error>
                             <custom-mat-error [control]="generalForm.controls.table"></custom-mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Metodo de pago</mat-label>
+                        <mat-select matNativeControl placeholder="Metodo de pago" formControlName="paymentMethod" required [compareWith]="compare">
+                            <mat-option *ngFor="let method of paymentMethods" [value]="method">
+                                {{ method.description }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <custom-mat-error [control]="generalForm.controls.paymentMethod"></custom-mat-error>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -71,16 +86,22 @@
             </button>
         </div>
         <mat-list>
-            <mat-list-item matRipple class="item" *ngFor="let product of order.products">
+            <mat-list-item matRipple class="item" *ngFor="let product of order.products" (click)="add(product)">
                 <div mat-line>{{ product.product.description }}</div>
                 <div mat-line>Cantidad: {{ product.quantity | number }}</div>
                 <div class="amout">{{ (product.quantity * product.product.retailPrice)  | currency }}</div>
                 <div>
-                    <button mat-icon-button>
+                    <button mat-icon-button (click)="removeProduct(product);$event.stopPropagation()">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
                 <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item class="item">
+                <div mat-line>
+                    Total:
+                </div>
+                <div class="amout">{{ totalAmount  | currency }}</div>
             </mat-list-item>
         </mat-list>
     </mat-card-content>
