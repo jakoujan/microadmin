@@ -174,15 +174,8 @@ CONSTRAINT `product_type_fk`
     FOREIGN KEY (`type`)
     REFERENCES `product_type` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-
+    ON UPDATE NO ACTION
 );
-
-ALTER TABLE `product` add CONSTRAINT `product_type_fk`
-    FOREIGN KEY (`type`)
-    REFERENCES `product_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION;
 
 CREATE TABLE IF NOT EXISTS `product_type` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -199,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `order_comand` (
   `table_chair` INTEGER NOT NULL,
   `payment_method` INTEGER NOT NULL,
   `status` INTEGER NOT NULL,
-  `service_type` INTEGER NOT NULL DEFAULT 1;,
+  `service_type` INTEGER NOT NULL DEFAULT 1,
   `total_amount` DECIMAL(10,2) NOT NULL,
   CONSTRAINT `waiter_order_fk`
     FOREIGN KEY (`waiter`)
