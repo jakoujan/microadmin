@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { SpinnerService } from './spinner.service';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Service } from './service';
-import { IOrderFilter } from '../filters/order-filter';
+import { IOrderViewFilter } from '../filters/order-filter';
 import { IResponse } from '../interfaces/response';
 import { IOrder } from '../interfaces/order';
 
@@ -22,7 +22,7 @@ export class OrderService extends Service {
     super(http, spinner, ps);
   }
 
-  public filter(filter: IOrderFilter): Promise<IResponse> {
+  public filter(filter: IOrderViewFilter): Promise<IResponse> {
     return this.preparePromisePost(OrderService.ORDER_LIST, filter);
   }
 
