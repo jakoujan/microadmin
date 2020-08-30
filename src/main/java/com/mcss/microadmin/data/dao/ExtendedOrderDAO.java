@@ -8,6 +8,7 @@ package com.mcss.microadmin.data.dao;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
+import com.mcss.microadmin.data.view.OrderView;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface ExtendedOrderDAO {
     
-    public List<Order> findByFilter(OrderViewFilter filter);
+    public List<OrderView> findByFilter(OrderViewFilter filter);
     
     public Long count(OrderViewFilter filter);
     

@@ -22,4 +22,6 @@ public interface OrderModel {
 
     public Response getOrders(OrderViewFilter filter);
     
+    public Response getOrder(Integer id);
+    
 }

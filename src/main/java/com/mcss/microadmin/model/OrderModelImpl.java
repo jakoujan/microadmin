@@ -61,5 +61,12 @@ public class OrderModelImpl implements OrderModel {
         response.addField(Constants.COUNT, this.orderDAO.count(filter));
         return response;
     }
+    
+    @Override
+    public Response getOrder(Integer id) {
+        Response response = Response.getInstance();
+        response.addField(Constants.ENTITY, this.orderDAO.findById(id).get());
+        return response;
+    }
 
 }

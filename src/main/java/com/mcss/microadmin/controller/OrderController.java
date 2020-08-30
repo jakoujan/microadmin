@@ -11,9 +11,11 @@ import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,6 +33,11 @@ public class OrderController {
     @PostMapping(value = "/save")
     public Response save(@RequestBody Order order) {
         return this.orderModel.save(order);
+    }
+    
+    @GetMapping(value = "/order")
+    public Response order(@RequestParam("id") Integer id) {
+        return this.orderModel.getOrder(id);
     }
     
     @PostMapping(value = "/delete")
