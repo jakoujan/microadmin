@@ -154,7 +154,7 @@ public class Order implements Serializable {
         this.serviceType = serviceType;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "product", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order", orphanRemoval = true)
     public Set<ProductOrder> getProducts() {
         return products;
     }
