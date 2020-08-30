@@ -20,6 +20,7 @@ public class OrderView implements Serializable {
     private String table;
     private String responsible;
     private BigDecimal totalAmount;
+    private Integer status;
 
     public OrderView() {
     }
@@ -64,6 +65,15 @@ public class OrderView implements Serializable {
 
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    @Column(name = "STATUS")
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 }

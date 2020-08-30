@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrderFilter } from 'src/app/filters/order-filter';
+import { IOrderViewFilter } from 'src/app/filters/order-filter';
 import { IOrder } from 'src/app/interfaces/order';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -13,19 +13,12 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersComponent implements OnInit {
   orders: IOrder[] = [];
-  filter: IOrderFilter = {
+  filter: IOrderViewFilter = {
     entity: {
       id: undefined,
-      order_date: undefined,
-      responsible: undefined,
-      waiter: undefined,
-      cashier: undefined,
       table: undefined,
-      payment_method: undefined,
-      status: undefined,
-      total_amount: undefined,
-      serviceType: 1,
-      products: undefined
+      responsible: undefined,
+      totalAmount: undefined
     },
     startDate: undefined,
     endDate: undefined,
