@@ -12,6 +12,7 @@ import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.filter.OrderFilter;
+import com.mcss.microadmin.data.filter.OrderViewFilter;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ public class OrderModelImpl implements OrderModel {
     }
 
     @Override
-    public Response getOrders(OrderFilter filter) {
+    public Response getOrders(OrderViewFilter filter) {
         Response response = Response.getInstance();
         response.addField(Constants.DATA, this.orderDAO.findByFilter(filter));
         response.addField(Constants.COUNT, this.orderDAO.count(filter));

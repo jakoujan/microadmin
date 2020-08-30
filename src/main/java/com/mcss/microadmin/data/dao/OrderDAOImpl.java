@@ -7,6 +7,7 @@ package com.mcss.microadmin.data.dao;
 
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
+import com.mcss.microadmin.data.filter.OrderViewFilter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
    private EntityManager manager;
 
     @Override
-    public List<Order> findByFilter(OrderFilter filter) {
+    public List<Order> findByFilter(OrderViewFilter filter) {
         CriteriaBuilder builder = this.manager.getCriteriaBuilder();
         CriteriaQuery<Order> criteria = builder.createQuery(Order.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -36,9 +37,9 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
             predicates.add(builder.like(root.get("table"), "%" + filter.getEntity().getTable() + "%"));
         }
         
-        if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
+        /*if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
             predicates.add(builder.like(root.get("status"), "%" + filter.getEntity().getTable() + "%"));
-        }
+        }*/
         
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<Order> where = criteria.where(builder.and(predicates.toArray(pa)));
@@ -50,7 +51,7 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
     }
 
     @Override
-    public Long count(OrderFilter filter) {
+    public Long count(OrderViewFilter filter) {
         CriteriaBuilder builder = this.manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         List<Predicate> predicates = new ArrayList<>();
@@ -67,9 +68,9 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
             predicates.add(builder.like(root.get("table"), "%" + filter.getEntity().getTable() + "%"));
         }
         
-        if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
+        /*if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
             predicates.add(builder.like(root.get("status"), "%" + filter.getEntity().getTable() + "%"));
-        }
+        }*/
         
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<Long> where = criteria.select(builder.count(root)).where(builder.and(predicates.toArray(pa)));

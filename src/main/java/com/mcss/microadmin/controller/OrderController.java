@@ -8,6 +8,7 @@ package com.mcss.microadmin.controller;
 import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
+import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class OrderController {
     OrderModel orderModel;
     
     @PostMapping(value = "")
-    public Response orders(@RequestBody OrderFilter filter) {
+    public Response orders(@RequestBody OrderViewFilter filter) {
         return this.orderModel.getOrders(filter);
     }
 
