@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { constants } from 'src/environments/environment';
 import { OrderService } from 'src/app/services/order.service';
+import { IOrderView } from 'src/app/interfaces/view/order-view';
 
 @Component({
   selector: 'app-orders',
@@ -12,13 +13,14 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  orders: IOrder[] = [];
+  orders: Array<IOrderView> = [];
   filter: IOrderViewFilter = {
     entity: {
       id: undefined,
       table: undefined,
       responsible: undefined,
-      totalAmount: undefined
+      totalAmount: undefined,
+      status: 1
     },
     startDate: undefined,
     endDate: undefined,
@@ -61,9 +63,11 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  public open(order: IOrder) {
-    this.sessionStorageService.store(constants.ORDER, order);
-    this.router.navigate(['modules/orders/order']);
+  public open(order: IOrderView) {
+    this.orderService.getOrder(order.id).then(response => {
+      this.sessionStorageService.store(constants.ORDER, response.fields.entity);
+      this.router.navigate(['modules/orders/order']);
+    });
   }
 
   charge(order: IOrder) {

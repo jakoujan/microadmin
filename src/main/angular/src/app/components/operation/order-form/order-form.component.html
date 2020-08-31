@@ -3,8 +3,15 @@
         <span>Comanda</span>
         <span class="filler"></span>
         <mat-menu #appMenu="matMenu">
-            <button mat-menu-item (click)="closeOrder()">
-                <mat-icon>receipt</mat-icon> Cerrar comanda
+            <button mat-menu-item (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon> Atras
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="save(3)" [disabled]="checkOrderStatus()">
+                <mat-icon>receipt_long</mat-icon> Cerrar comanda
+            </button>
+            <button mat-menu-item (click)="cancel()" [disabled]="checkOrderStatus()">
+                <mat-icon>cancel_presentation</mat-icon> Cancelar comanda
             </button>
         </mat-menu>
         <button mat-icon-button class="search-button" aria-labelledby="Opciones" [matMenuTriggerFor]="appMenu">
@@ -34,8 +41,8 @@
                 <div class="col">
                     <mat-form-field class="input-full-width">
                         <mat-label>Servicio</mat-label>
-                        <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType" [compareWith]="compare"
-                            required>
+                        <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType"
+                            [compareWith]="compare" required>
                             <mat-option *ngFor="let type of servicesTypes" [value]="type.id">
                                 {{ type.description }}
                             </mat-option>
@@ -50,7 +57,8 @@
                 <div class="col">
                     <mat-form-field class="input-full-width">
                         <mat-label>Mesa</mat-label>
-                        <mat-select matNativeControl placeholder="Mesa" formControlName="table" required [compareWith]="compare">
+                        <mat-select matNativeControl placeholder="Mesa" formControlName="table" required
+                            [compareWith]="compare">
                             <mat-option *ngFor="let table of tables" [value]="table">
                                 {{ table.name }}
                             </mat-option>
@@ -65,7 +73,8 @@
                 <div class="col">
                     <mat-form-field class="input-full-width">
                         <mat-label>Metodo de pago</mat-label>
-                        <mat-select matNativeControl placeholder="Metodo de pago" formControlName="paymentMethod" required [compareWith]="compare">
+                        <mat-select matNativeControl placeholder="Metodo de pago" formControlName="paymentMethod"
+                            required [compareWith]="compare">
                             <mat-option *ngFor="let method of paymentMethods" [value]="method">
                                 {{ method.description }}
                             </mat-option>
@@ -107,5 +116,8 @@
     </mat-card-content>
 </mat-card>
 <div class="command-buttons">
-    <button class="command" mat-raised-button color="accent" (click)="save()" [disabled]="form.invalid">Ordenar</button>
+    <button class="command" mat-raised-button color="accent" (click)="save(1)"
+        [disabled]="form.invalid">Ordenar</button>
+    <button class="command close" mat-raised-button color="primary" (click)="save(3)"
+        [disabled]="checkOrderStatus()">Cerrar comanda</button>
 </div>

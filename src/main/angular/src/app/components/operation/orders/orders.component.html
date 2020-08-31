@@ -36,10 +36,10 @@
             <mat-divider></mat-divider>
             <mat-list-item *ngFor="let order of orders" matRipple (click)="open(order)">
                 <mat-icon mat-list-icon>receipt_long</mat-icon>
-                <div mat-line class="order-title">Mesa: {{order.table.name}} </div>
+                <div mat-line class="order-title">Mesa: {{order.table}} </div>
                 <div mat-line>Nombre: {{order.responsible}} </div>
                 <div mat-line>Orden: {{order.id | leadingZeros: 5}}</div>
-                <div mat-line>Total: {{order.total_amount | currency}} </div>
+                <div mat-line>Total: {{order.totalAmount | currency}} </div>
 
                 <button mat-icon-button class="search-button" aria-labelledby="Opciones"
                     (click)="$event.stopPropagation()" [matMenuTriggerFor]="orderMenu">

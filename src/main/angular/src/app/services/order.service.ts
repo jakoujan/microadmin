@@ -12,6 +12,7 @@ import { IOrder } from '../interfaces/order';
 })
 export class OrderService extends Service {
 
+  private static ORDER = 'api/orders/order';
   private static ORDER_LIST = 'api/orders';
   private static ORDER_SAVE = 'api/orders/save';
   private static ORDER_DELETE = 'api/orders/delete';
@@ -33,4 +34,15 @@ export class OrderService extends Service {
   public delete(order: IOrder): Promise<IResponse> {
     return this.preparePromiseEntityPost(OrderService.ORDER_DELETE, order);
   }
+
+  public getOrder(id: number): Promise<IResponse> {
+    const params = [
+      {
+        name: 'id',
+        value: id
+      }
+    ];
+    return this.preparePromiseGet(OrderService.ORDER, params);
+  }
+
 }

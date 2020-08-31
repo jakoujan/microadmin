@@ -36,8 +36,8 @@ export class OrderFormComponent implements OnInit {
   tables: Array<ITable> = [];
   paymentMethods: Array<IPaymentMethod> = [];
 
-  constructor(private formBuilder: FormBuilder, private catalogService: CatalogsService, 
-    private router: Router, private productSelectionService: ProductSelectionService, 
+  constructor(private formBuilder: FormBuilder, private catalogService: CatalogsService,
+    private router: Router, private productSelectionService: ProductSelectionService,
     private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
@@ -55,11 +55,7 @@ export class OrderFormComponent implements OnInit {
     });
   }
 
-  closeOrder() {
-
-  }
-
-  return() {
+  public goBack() {
     this.router.navigate(['modules/orders']);
   }
 
@@ -68,12 +64,21 @@ export class OrderFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const product: IProduct = result;
-        this.order.products.push({
-          id: undefined,
-          order: undefined,
-          product: product,
-          quantity: 1
-        });
+
+        const added = this.order.products.some(p => {
+          if (p.product.id === product.id) {
+            p.quantity = p.quantity + 1;
+            return true;
+          }
+        })
+        if (!added) {
+          this.order.products.push({
+            id: undefined,
+            order: undefined,
+            product: product,
+            quantity: 1
+          });
+        }
       }
     });
   }
@@ -83,14 +88,36 @@ export class OrderFormComponent implements OnInit {
   }
 
   public removeProduct(product: IProductOrder) {
-    if(product.quantity >= 2) {
+    if (product.quantity >= 2) {
       product.quantity = product.quantity - 1;
     } else {
       this.order.products.splice(this.order.products.indexOf(product), 1);
     }
   }
 
-  public save() {
+  public checkOrderStatus(): boolean {
+    return this.order.status ? this.form.invalid : true;
+  }
+
+  public cancel() {
+    let dialogResult = this.confirmationDialogService.showConfirmationDialog("¿Seguro desea cancelar la comanda?", '350px', 'Aceptar');
+    dialogResult.afterClosed().subscribe(result => {
+      if (result) {
+        this.order.status = {
+          id: 3,
+          name: undefined,
+        }
+        this.orderService.save(this.order).then(response => {
+          dialogResult = this.confirmationDialogService.showConfirmationDialog("La orden se cancelo correctamente", '350px', 'Aceptar');
+          dialogResult.afterClosed().subscribe(result => {
+            this.router.navigate(['modules/orders']);
+          });
+        });
+      }
+    });
+  }
+
+  public save(status: number) {
     this.order.responsible = this.generalForm.get('responsible').value;
     this.order.table = this.generalForm.get('table').value;
     this.order.serviceType = this.generalForm.get('serviceType').value;
@@ -99,17 +126,28 @@ export class OrderFormComponent implements OnInit {
     this.order.waiter = this.session.user;
     this.order.order_date = new Date();
     this.order.status = {
-      id: 1,
+      id: status,
       name: ''
     }
 
 
     this.orderService.save(this.order).then(response => {
-      if(response.code === 0) {
-        const dialogResult = this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar');
-        dialogResult.afterClosed().subscribe(result => {
-          this.router.navigate(['modules/orders']);
-        });
+      if (response.code === 0) {
+        if (this.order.status.id === 3) {
+          let dialogResult = this.confirmationDialogService.showConfirmationDialog("Indicar el total de la orden al cliente: $" + this.order.total_amount, '350px', 'Aceptar');
+          dialogResult.afterClosed().subscribe(result => {
+            dialogResult = this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar');
+            dialogResult.afterClosed().subscribe(result => {
+              this.router.navigate(['modules/orders']);
+            });
+          });
+        } else {
+          let dialogResult = this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar');
+          dialogResult.afterClosed().subscribe(result => {
+            this.router.navigate(['modules/orders']);
+          });
+        }
+
       }
     });
   }
