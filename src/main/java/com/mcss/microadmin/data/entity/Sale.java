@@ -8,11 +8,17 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -27,11 +33,16 @@ public class Sale implements Serializable{
     private Date sale_date;
     private BigDecimal total_amount;
     private BigDecimal quantity;
+    private OrderSale order;
 
     public Sale(Date sale_date, BigDecimal total_amount, BigDecimal quantity) {
         this.sale_date = sale_date;
         this.total_amount = total_amount;
         this.quantity = quantity;
+    }
+
+    public Sale() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
@@ -73,6 +84,15 @@ public class Sale implements Serializable{
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
+    }
+    
+    @OneToOne(mappedBy = "sale")
+    public OrderSale getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderSale order) {
+        this.order = order;
     }
     
     

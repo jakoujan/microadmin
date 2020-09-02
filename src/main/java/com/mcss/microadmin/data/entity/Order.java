@@ -18,8 +18,10 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -41,6 +43,7 @@ public class Order implements Serializable {
     private BigDecimal total_amount;
     private Integer serviceType;
     private Set<ProductOrder> products = new HashSet<>();
+    private OrderSale sale;
 
     public Order() {
     }
@@ -162,5 +165,19 @@ public class Order implements Serializable {
     public void setProducts(Set<ProductOrder> products) {
         this.products = products;
     }
+    
+    @JoinTable(name = "ORDER_SALE", joinColumns = {
+    @JoinColumn(name = "ORDER_COMAND", referencedColumnName = "ID", nullable = false)}, inverseJoinColumns = {
+    @JoinColumn(name = "SALE", referencedColumnName = "ID", nullable = false)})
+    @OneToOne
+    public OrderSale getSale() {
+        return sale;
+    }
+
+    public void setSale(OrderSale sale) {
+        this.sale = sale;
+    }
+    
+    
 
 }

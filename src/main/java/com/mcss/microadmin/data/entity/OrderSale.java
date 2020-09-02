@@ -12,6 +12,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -19,7 +22,7 @@ import javax.persistence.ManyToOne;
 @javax.persistence.Table(name = "ORDER_SALE")
 public class OrderSale implements Serializable {
 
-    private OrderSaleId id;
+    private Integer id;
     private Order order;
     private Sale sale;
 
@@ -30,18 +33,19 @@ public class OrderSale implements Serializable {
         this.order = order;
         this.sale = sale;
     }
-
-    @EmbeddedId
-    @AttributeOverrides({
-        @AttributeOverride(name = "order", column = @Column(name = "ORDER_COMAND", nullable = false)),
-        @AttributeOverride(name = "sale", column = @Column(name = "SALE", nullable = false))})
-    public OrderSaleId getId() {
+    
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
+    public Integer getId() {
         return id;
     }
 
-    public void setId(OrderSaleId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+
+    
 
     @JoinColumn(name = "ORDER_COMAND", nullable = false, insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.EAGER)

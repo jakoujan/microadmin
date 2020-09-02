@@ -258,6 +258,7 @@ CREATE TABLE IF NOT EXISTS `sales` (
 );
 
 CREATE TABLE IF NOT EXISTS `order_sale` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `order_comand` INTEGER NOT NULL,
     `sale` INTEGER NOT NULL,
     CONSTRAINT `order_fk`

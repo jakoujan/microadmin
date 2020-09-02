@@ -13,6 +13,7 @@ import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
+import com.mcss.microadmin.service.TicketPrintService;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderModelImpl implements OrderModel {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderModelImpl.class);
+    
+    @Autowired
+    private SaleModel saleModel;
+    
+    @Autowired
+    private TicketPrintService ticketPrint;
     
     @Autowired
     OrderDAO orderDAO;
@@ -38,6 +45,19 @@ public class OrderModelImpl implements OrderModel {
             product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
         });
         this.orderDAO.save(order);
+        
+        switch(order.getStatus().getId()){
+            case 3:
+                break;
+            case 4:
+                this.saleModel.createSaleFromOrder(order);
+                break;
+        }
+        
+        if(order.getStatus().getId().equals(4)){
+           this.saleModel.createSaleFromOrder(order);
+        }
+        
         response.setMessage("La orden se ha generado con exito");
         response.addField(Constants.ENTITY, order);
         return response;
