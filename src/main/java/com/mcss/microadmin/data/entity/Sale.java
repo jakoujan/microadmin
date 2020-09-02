@@ -8,16 +8,11 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -42,7 +37,7 @@ public class Sale implements Serializable{
     }
 
     public Sale() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     
