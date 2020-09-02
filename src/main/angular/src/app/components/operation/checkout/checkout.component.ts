@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrderFilter } from 'src/app/filters/order-filter';
+import { IOrderFilter, IOrderViewFilter } from 'src/app/filters/order-filter';
 import { IOrder } from 'src/app/interfaces/order';
+import { IOrderView } from 'src/app/interfaces/view/order-view';
+import { OrderService } from 'src/app/services/order.service';
+import { SessionStorageService } from 'ngx-webstorage';
+import { constants } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -8,22 +13,14 @@ import { IOrder } from 'src/app/interfaces/order';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  orders: IOrder[] = [
-    
-  ];
-  filter: IOrderFilter = {
+  orders: Array<IOrderView> = [];
+  filter: IOrderViewFilter = {
     entity: {
       id: undefined,
-      order_date: undefined,
-      responsible: undefined,
-      waiter: undefined,
-      cashier: undefined,
       table: undefined,
-      payment_method: undefined,
-      status: undefined,
-      total_amount: undefined,
-      serviceType: 1,
-      products: undefined
+      responsible: undefined,
+      totalAmount: undefined,
+      status: 3
     },
     startDate: undefined,
     endDate: undefined,
@@ -31,9 +28,12 @@ export class CheckoutComponent implements OnInit {
     page: 0,
     rows: 20
   };
-  constructor() { }
+  constructor(private orderService: OrderService, private sessionStorageService: SessionStorageService, private router: Router) { }
 
   ngOnInit(): void {
+    this.orderService.filter(this.filter).then(response => {
+      this.orders = response.fields.data;
+    });
   }
 
   initialStock() {
@@ -52,12 +52,12 @@ export class CheckoutComponent implements OnInit {
     console.log(order);
   }
 
-  charge(order: IOrder) {
-
-  }
-
-  cancelOrder(order: IOrder) {
-
+  open(order: IOrderView) {
+    this.orderService.getOrder(order.id).then(response => {
+      const order: IOrder = response.fields.entity;
+      this.sessionStorageService.store(constants.ORDER, order);
+      this.router.navigate(['modules/checkout/order']);
+    });
   }
 
 }

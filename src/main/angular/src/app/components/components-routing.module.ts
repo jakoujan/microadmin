@@ -20,6 +20,7 @@ import { ProductTypesComponent } from './modules/product-types/product-types.com
 import { TablesComponent } from './modules/tables/tables.component';
 import { OrdersComponent } from './operation/orders/orders.component';
 import { OrderFormComponent } from './operation/order-form/order-form.component';
+import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
       { path: 'checkout', component: CheckoutComponent, data: { validate: true, module: 'operation', id: 'checkout' }, canActivate: [SessionGuard] },
       { path: 'orders', component: OrdersComponent, data: { validate: true, module: 'operation', id: 'orders' }, canActivate: [SessionGuard] },
       { path: 'orders/order', component: OrderFormComponent, data: { validate: false, module: 'operation', id: 'order-form' }, canActivate: [SessionGuard] },
+      { path: 'checkout/order', component: CheckoutFormComponent, data: { validate: false, module: 'operation', id: 'checkout-form' }, canActivate: [SessionGuard] },
       
     ]
   }

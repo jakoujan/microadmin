@@ -3,10 +3,10 @@
         <span>Caja de cobro</span>
         <span class="filler"></span>
         <mat-menu #appMenu="matMenu">
-            <button mat-menu-item (click)="initialStock()">
+            <!--button mat-menu-item (click)="initialStock()">
                 <mat-icon>shopping_basket</mat-icon> Venta sencilla
             </button>
-            <mat-divider></mat-divider>
+            <mat-divider></mat-divider-->
             <button mat-menu-item (click)="toggleSearchBar()">
                 <mat-icon>search</mat-icon> Buscar
             </button>
@@ -29,14 +29,14 @@
 
 <mat-card class="order-card">
     <mat-card-header>
-        <h3 class="order-active">Ordenes activas</h3>
+        <h3 class="order-active">Ordenes por cobrar</h3>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let order of orders" matRipple (click)="pay(order)">
+            <mat-list-item *ngFor="let order of orders" matRipple (click)="open(order)">
                 <mat-icon mat-list-icon>receipt_long</mat-icon>
-                <div mat-line class="order-title">Mesa: {{order.table | leadingZeros: 2}} </div>
+                <div mat-line class="order-title">Mesa: {{order.table}} </div>
                 <div mat-line>Nombre: {{order.responsible}} </div>
                 <div mat-line>Orden: {{order.id | leadingZeros: 5}}</div>
                 <div mat-line>Total: {{order.totalAmount | currency}} </div>
@@ -47,12 +47,8 @@
                 </button>
                 <mat-divider></mat-divider>
                 <mat-menu #orderMenu="matMenu">
-                    <button mat-menu-item (click)="charge(order)">
+                    <button mat-menu-item (click)="open(order)">
                         <mat-icon>payments</mat-icon> Cobrar
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="cancelOrder(order)">
-                        <mat-icon>clear</mat-icon> Cancelar
                     </button>
                 </mat-menu>
             </mat-list-item>

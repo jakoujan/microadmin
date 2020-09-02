@@ -1,0 +1,104 @@
+<mat-toolbar class="module-toolbar" role="heading">
+    <mat-toolbar-row class="toolbar">
+        <span>Orden por cobrar</span>
+        <span class="filler"></span>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon> Atras
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="reopen()">
+                <mat-icon>receipt_long</mat-icon> Reabrir comanda
+            </button>
+        </mat-menu>
+        <button mat-icon-button class="search-button" aria-labelledby="Opciones" [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-card class="order-card action-marign">
+    <mat-card-header>
+        <h3 class="order-active">Datos de la orden</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="order-data">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Nombre del cliente</mat-label>
+                        <input matInput placeholder="Nombre del cliente" value="{{order.responsible}}" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Tipo de servicio</mat-label>
+                        <input matInput placeholder="Tipo de servicio" value="{{orderTypeData(order.serviceType)}}"
+                            readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Mesa</mat-label>
+                        <input matInput placeholder="Mesa" value="{{order.table.name}}" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Mesa</mat-label>
+                        <input matInput placeholder="Mesa" value="{{order.payment_method.description}}" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="command-title">
+            <h3 class="order-title">Productos</h3>
+        </div>
+        <mat-list>
+            <mat-list-item class="item" *ngFor="let product of order.products">
+                <div mat-line>{{ product.product.description }}</div>
+                <div mat-line>Cantidad: {{ product.quantity | number }}</div>
+                <div class="amout">{{ (product.quantity * product.product.retailPrice)  | currency }}</div>
+                <mat-divider></mat-divider>
+            </mat-list-item>
+            <mat-list-item class="item">
+                <div mat-line>
+                    Total:
+                </div>
+                <div class="amout">{{ totalAmount  | currency }}</div>
+            </mat-list-item>
+            <mat-list-item class="item form">
+                <form [formGroup]="form" class="form">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-label>Cantidad recibida</mat-label>
+                                <input class="quantity" matInput placeholder="Cantidad recibida" formControlName="amount" required>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.amount"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </mat-list-item>
+            <mat-list-item class="item">
+                <div mat-line>
+                    Cambio:
+                </div>
+                <div class="amout">{{ change  | currency }}</div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
+<div class="command-buttons">
+    <button class="command" mat-raised-button color="accent" [disabled]="form.invalid" (click)="checkout()">cobrar</button>
+</div>
