@@ -48,16 +48,13 @@ public class OrderModelImpl implements OrderModel {
         
         switch(order.getStatus().getId()){
             case 3:
+                ticketPrint.printOrder(order);
                 break;
             case 4:
                 this.saleModel.createSaleFromOrder(order);
                 break;
         }
-        
-        if(order.getStatus().getId().equals(4)){
-           this.saleModel.createSaleFromOrder(order);
-        }
-        
+         
         response.setMessage("La orden se ha generado con exito");
         response.addField(Constants.ENTITY, order);
         return response;
