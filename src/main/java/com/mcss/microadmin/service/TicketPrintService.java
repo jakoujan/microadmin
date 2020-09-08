@@ -63,7 +63,7 @@ public class TicketPrintService {
         getProducts(order, ps);
         ps.lineBreak(1);
         ps.setTextTypeBold();
-        ps.printLn(sangria("Total:")+"$ "+order.getTotal_amount().toString());
+        ps.printLn(indentation("Total:")+"$ "+order.getTotal_amount().toString());
         ps.lineBreak(1);
         ps.setTextTypeBold();
         ps.print("     Fecha: ");
@@ -80,18 +80,18 @@ public void getProducts(Order order, io.github.escposjava.PrinterService ps){
         for(ProductOrder product : order.getProducts()) {
             if(product.getQuantity().compareTo(BigDecimal.ONE) >= 1){
                 ps.printLn(product.getProduct().getDescription());
-                ps.print(sangria("       "+product.getQuantity().toString()+" X $"+
+                ps.print(indentation("       "+product.getQuantity().toString()+" X $"+
                         product.getProduct().getRetailPrice().toString()));
                 ps.printLn("$ "+product.getProduct().getRetailPrice().multiply(product.getQuantity())); 
             }else{
-                ps.print(sangria(product.getProduct().getDescription()));
+                ps.print(indentation(product.getProduct().getDescription()));
                 ps.printLn("$ "+product.getProduct().getRetailPrice().toString());
             }
         }
   
     }
    
-   private String sangria(String word){
+   private String indentation(String word){
        String indent = "....................................";
        word += indent.substring(0, indent.length() - word.length());
        return word;
