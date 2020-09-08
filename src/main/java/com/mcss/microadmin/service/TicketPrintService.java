@@ -77,8 +77,6 @@ public class TicketPrintService {
     }
     
 public void getProducts(Order order, io.github.escposjava.PrinterService ps){
-        DecimalFormat f = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-        DecimalFormatSymbols symbols = f.getDecimalFormatSymbols();
         for(ProductOrder product : order.getProducts()) {
             if(product.getQuantity().compareTo(BigDecimal.ONE) >= 1){
                 ps.printLn(product.getProduct().getDescription());
