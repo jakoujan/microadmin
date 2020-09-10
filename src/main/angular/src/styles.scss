@@ -96,7 +96,10 @@ tr.mat-row:hover {
 .dialog-content {
   padding: 15px 24px !important;
   width: 100%;
-  text-align: left;
+  text-align: center;
+  p {
+    text-align: center !important;
+  }
 }
 
 .module-toolbar {

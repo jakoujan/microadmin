@@ -9,7 +9,7 @@ export class ConfirmationDialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  public showConfirmationDialog(message: string, width: string = '350px', labelOk: string = 'Aceptar', labelNo: string = 'Cancelar'): MatDialogRef<ConfirmationDialogComponent> {
+  public showConfirmationDialog(message: string, width: string = '350px', labelOk: string = 'Aceptar', labelNo?: string): MatDialogRef<ConfirmationDialogComponent> {
     return this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
       disableClose: true,

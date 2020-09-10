@@ -130,26 +130,27 @@ export class OrderFormComponent implements OnInit {
       name: ''
     }
 
-
-    this.orderService.save(this.order).then(response => {
-      if (response.code === 0) {
-        if (this.order.status.id === 3) {
-          let dialogResult = this.confirmationDialogService.showConfirmationDialog("Indicar el total de la orden al cliente: $" + this.order.total_amount, '350px', 'Aceptar');
-          dialogResult.afterClosed().subscribe(result => {
-            dialogResult = this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar');
-            dialogResult.afterClosed().subscribe(result => {
-              this.router.navigate(['modules/orders']);
-            });
+    if (this.order.status.id === 3) {
+      this.confirmationDialogService.showConfirmationDialog("<p>Se va a cerrar la comanda</p><p>¿desea continuar?</p><p><b>Indicar el total de la orden: $" + this.order.total_amount + "</b></p>",
+        '350px', 'Aceptar', "Cancelar").afterClosed().subscribe(result => {
+          this.orderService.save(this.order).then(response => {
+            if (response.code === 0) {
+              this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar').afterClosed().subscribe(result => {
+                this.router.navigate(['modules/orders']);
+              });
+            }
           });
-        } else {
+        });
+    } else {
+      this.orderService.save(this.order).then(response => {
+        if (response.code === 0) {
           let dialogResult = this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar');
           dialogResult.afterClosed().subscribe(result => {
             this.router.navigate(['modules/orders']);
           });
         }
-
-      }
-    });
+      });
+    }
   }
 
   public get totalAmount(): number {
