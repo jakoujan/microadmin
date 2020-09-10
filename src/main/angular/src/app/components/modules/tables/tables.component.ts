@@ -60,7 +60,10 @@ export class TablesComponent extends BaseComponent implements OnInit, OnDestroy,
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.tableService.filter(this.filter).then(response => {
       this.dataSource = new TablesDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

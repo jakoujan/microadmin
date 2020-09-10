@@ -72,7 +72,10 @@ export class SuppliersComponent extends BaseComponent implements OnInit, OnDestr
   ngAfterViewInit() {
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.supplierService.filter(this.filter).then(response => {
       this.dataSource = new SuppliersDataSource();
       this.dataSource.sort = this.sort;

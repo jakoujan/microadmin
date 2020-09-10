@@ -26,7 +26,7 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
   @ViewChild(MatTable) table: MatTable<IProductView>;
   dataSource: ProductsDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['description','actions', 'barcode', 'brand', 'minimumStock', 'supplierPrice', 'retailPrice', 'section', 'unit'];
+  displayedColumns = ['description', 'actions', 'barcode', 'brand', 'minimumStock', 'supplierPrice', 'retailPrice', 'section', 'unit'];
   filter: IProductViewFilter = {
     entity: {
       id: undefined,
@@ -67,7 +67,10 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.productService.filter(this.filter).then(response => {
       this.dataSource = new ProductsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

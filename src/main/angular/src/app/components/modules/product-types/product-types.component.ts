@@ -59,7 +59,10 @@ export class ProductTypesComponent extends BaseComponent implements OnInit, OnDe
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.productTypeService.filter(this.filter).then(response => {
       this.dataSource = new ProductTypesDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

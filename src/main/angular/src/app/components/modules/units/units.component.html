@@ -16,7 +16,7 @@
             [floatLabel]="'never'">
             <input matInput placeholder="Unidad" [(ngModel)]="filter.entity.unit">
         </mat-form-field>
-        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter()">
+        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter(true)">
             <mat-icon>search</mat-icon>
         </button>
         <button mat-icon-button aria-labelledby="Cerrar la busqueda" (click)="toggleSearchBar()">
