@@ -15,6 +15,7 @@ import { IPaymentMethod } from 'src/app/interfaces/payment-method';
 import { OrderService } from "src/app/services/order.service";
 import { ConfirmationDialogService } from '../../common/ui/confirmation-dialog/confirmation-dialog.service';
 import { Session } from 'src/app/interfaces/session';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-order-form',
@@ -57,6 +58,17 @@ export class OrderFormComponent implements OnInit {
 
   public goBack() {
     this.router.navigate(['modules/orders']);
+  }
+
+  public typeSelected(event: MatSelectChange) {
+    switch (event.value) {
+      case 2:
+        this.generalForm.get('table').setValue({ id: 1 });
+        this.generalForm.get('table').disable();
+        break;
+      default:
+        this.generalForm.get('table').enable();
+    }
   }
 
   public addProduct() {
@@ -133,13 +145,15 @@ export class OrderFormComponent implements OnInit {
     if (this.order.status.id === 3) {
       this.confirmationDialogService.showConfirmationDialog("<p>Se va a cerrar la comanda</p><p>¿desea continuar?</p><p><b>Indicar el total de la orden: $" + this.order.total_amount + "</b></p>",
         '350px', 'Aceptar', "Cancelar").afterClosed().subscribe(result => {
-          this.orderService.save(this.order).then(response => {
-            if (response.code === 0) {
-              this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar').afterClosed().subscribe(result => {
-                this.router.navigate(['modules/orders']);
-              });
-            }
-          });
+          if (result) {
+            this.orderService.save(this.order).then(response => {
+              if (response.code === 0) {
+                this.confirmationDialogService.showConfirmationDialog(response.message, '350px', 'Aceptar').afterClosed().subscribe(result => {
+                  this.router.navigate(['modules/orders']);
+                });
+              }
+            });
+          }
         });
     } else {
       this.orderService.save(this.order).then(response => {
