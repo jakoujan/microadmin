@@ -12,6 +12,7 @@ import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.entity.Sale;
 import com.mcss.microadmin.service.print.USBPrinter;
 import io.github.escposjava.print.Printer;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -34,7 +35,7 @@ public class TicketPrintService {
     @Autowired
     Store store;
 
-    public void printOrder(Order order) {
+    public void printOrder(Order order) throws IOException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat hourformatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         DecimalFormat f = (DecimalFormat) NumberFormat.getInstance(Locale.US);
@@ -50,6 +51,7 @@ public class TicketPrintService {
         String direccion = "Av Madero Norte #25 Colonia Centro, CP:61940, Huetamo, Michoacan";
         ps.init();
         ps.setTextAlignCenter();
+        ps.printImage(ticketData.getLogoPath());
         ps.setTextSizeNormal();
         ps.printLn(store.getBussinesName());
         ps.printLn(direccion);
@@ -71,30 +73,32 @@ public class TicketPrintService {
         ps.setTextAlignCenter();
         ps.setTextSize2W();
         ps.lineBreak(1);
-        ps.printLn("Gracias por su Visita");
+        ps.printLn(ticketData.getMessageOne());
+        ps.printLn(ticketData.getFooter());
+        ps.lineBreak(1);
         ps.cutFull();
         ps.close();
     }
     
-public void getProducts(Order order, io.github.escposjava.PrinterService ps){
-        for(ProductOrder product : order.getProducts()) {
-            if(product.getQuantity().compareTo(BigDecimal.ONE) >= 1){
+    public void getProducts(Order order, io.github.escposjava.PrinterService ps) {
+        for (ProductOrder product : order.getProducts()) {
+            if (product.getQuantity().compareTo(BigDecimal.ONE) >= 1) {
                 ps.printLn(product.getProduct().getDescription());
-                ps.print(indentation("       "+product.getQuantity().toString()+" X $"+
-                        product.getProduct().getRetailPrice().toString()));
-                ps.printLn("$ "+product.getProduct().getRetailPrice().multiply(product.getQuantity())); 
-            }else{
+                ps.print(indentation("       " + product.getQuantity().toString() + " X $"
+                        + product.getProduct().getRetailPrice().toString()));
+                ps.printLn("$ " + product.getProduct().getRetailPrice().multiply(product.getQuantity()));
+            } else {
                 ps.print(indentation(product.getProduct().getDescription()));
-                ps.printLn("$ "+product.getProduct().getRetailPrice().toString());
+                ps.printLn("$ " + product.getProduct().getRetailPrice().toString());
             }
         }
-  
+
     }
    
-   private String indentation(String word){
-       String indent = "....................................";
-       word += indent.substring(0, indent.length() - word.length());
-       return word;
-   }
+    private String indentation(String word) {
+        String indent = "....................................";
+        word += indent.substring(0, indent.length() - word.length());
+        return word;
+    }
     
 }
