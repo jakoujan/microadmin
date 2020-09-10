@@ -47,7 +47,7 @@ public class USBPrinter implements Printer {
 
     @Override
     public void open() {
-        bbuf = ByteBuffer.allocate(5120);
+        bbuf = ByteBuffer.allocate(8120);
         flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
         PrintService printService[] = PrintServiceLookup.lookupPrintServices(

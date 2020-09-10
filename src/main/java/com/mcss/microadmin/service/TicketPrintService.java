@@ -65,17 +65,22 @@ public class TicketPrintService {
         getProducts(order, ps);
         ps.lineBreak(1);
         ps.setTextTypeBold();
-        ps.printLn(indentation("Total:")+"$ "+order.getTotal_amount().toString());
-        ps.lineBreak(1);
+        ps.printLn(indentation("Total:")+"$ "+f.format(order.getTotal_amount()));
+        ps.lineBreak(2);
         ps.setTextTypeBold();
-        ps.print("     Fecha: ");
+        ps.print("Fecha: ");
         ps.printLn(hourformatter.format(order.getOrder_date()));
+        ps.setTextTypeBold();
+        ps.lineBreak(2);
+        ps.printLn("Mesa: "+order.getTable().getName());
+        ps.lineBreak(2);
+        ps.printLn("Responsable: "+order.getResponsible());
         ps.setTextAlignCenter();
-        ps.setTextSize2W();
-        ps.lineBreak(1);
+        ps.lineBreak(3);
         ps.printLn(ticketData.getMessageOne());
+        ps.lineBreak(3);
         ps.printLn(ticketData.getFooter());
-        ps.lineBreak(1);
+        ps.lineBreak(10);
         ps.cutFull();
         ps.close();
     }
