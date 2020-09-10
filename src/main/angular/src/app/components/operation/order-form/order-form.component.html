@@ -42,7 +42,7 @@
                     <mat-form-field class="input-full-width">
                         <mat-label>Servicio</mat-label>
                         <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType"
-                            [compareWith]="compare" required>
+                            [compareWith]="compare" required (selectionChange)="typeSelected($event)">
                             <mat-option *ngFor="let type of servicesTypes" [value]="type.id">
                                 {{ type.description }}
                             </mat-option>
@@ -90,8 +90,8 @@
         <div class="command-title">
             <h3 class="order-title">Productos</h3>
             <div class="filler"></div>
-            <button mat-mini-fab color="warn" (click)="addProduct()">
-                <mat-icon>add</mat-icon>
+            <button mat-flat-button color="warn" (click)="addProduct()">
+                agregar
             </button>
         </div>
         <mat-list>

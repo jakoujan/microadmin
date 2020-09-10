@@ -6,7 +6,6 @@
 package com.mcss.microadmin.service.print;
 
 import com.mcss.microadmin.data.dto.TicketData;
-import com.mcss.microadmin.data.entity.Store;
 import io.github.escposjava.print.Printer;
 import java.io.File;
 import java.io.PrintWriter;
@@ -49,7 +48,6 @@ public class USBPrinter implements Printer {
     @Override
     public void open() {
         bbuf = ByteBuffer.allocate(5120);
-        // find the printService of name printerName
         flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
         PrintService printService[] = PrintServiceLookup.lookupPrintServices(
