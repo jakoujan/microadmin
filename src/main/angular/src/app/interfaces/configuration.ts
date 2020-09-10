@@ -25,6 +25,7 @@ export interface ITicketData {
   footer: string;
   messageOne: string;
   messageTwo: string;
+  logoPath: string;
 }
 
 export interface IPort {

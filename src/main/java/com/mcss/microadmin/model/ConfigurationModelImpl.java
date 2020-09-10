@@ -53,6 +53,7 @@ public class ConfigurationModelImpl implements ConfigurationModel {
         this.ticket.setMessageOne(configuration.getTicket().getMessageOne().trim());
         this.ticket.setMessageTwo(configuration.getTicket().getMessageTwo().trim());
         this.ticket.setPrinterName(configuration.getTicket().getPrinterName().trim());
+        this.ticket.setLogoPath(configuration.getTicket().getLogoPath().trim());
 
         this.store.setName(configuration.getStore().getName().trim());
         this.store.setBussinesName(configuration.getStore().getBussinesName().trim());
@@ -84,6 +85,7 @@ public class ConfigurationModelImpl implements ConfigurationModel {
             prop.setProperty("ticket.footer", this.ticket.getFooter());
             prop.setProperty("ticket.message.1", this.ticket.getMessageOne());
             prop.setProperty("ticket.message.2", this.ticket.getMessageTwo());
+            prop.setProperty("ticket.logo.path", this.ticket.getLogoPath());
 
             prop.setProperty("store.name", this.port.getName());
             prop.setProperty("store.bussinesName", this.store.getBussinesName());

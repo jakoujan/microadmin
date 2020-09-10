@@ -85,32 +85,6 @@ public class Microadmin extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public TicketData ticketData(@Value("${ticket.printer}") String printerName, @Value("${ticket.header}") String header, @Value("${ticket.footer}") String footer,
-            @Value("${ticket.message.1}") String messageOne, @Value("${ticket.message.2}") String messageTwo) {
-        return new TicketData(printerName, header, footer, messageOne, messageTwo);
-    }
-
-    @Bean
-    public Store store(@Value("${store.name}") String name,
-            @Value("${store.bussinesName}") String bussinesName,
-            @Value("${store.taxId}") String taxId,
-            @Value("${store.street}") String street,
-            @Value("${store.external}") String external,
-            @Value("${store.internal}") String internal,
-            @Value("${store.colony}") String colony,
-            @Value("${store.city}") String city,
-            @Value("${store.county}") String county,
-            @Value("${store.state}") int state,
-            @Value("${store.country}") int country,
-            @Value("${store.postalCode}") String postalCode,
-            @Value("${store.phoneNumber}") String phoneNumber,
-            @Value("${store.email}") String email,
-            @Value("${store.webpage}") String webpage,
-            @Value("${store.taxRegime}") String taxRegime) {
-        return new Store(name, bussinesName, taxId, street, external, internal, colony, city, county, state, country, postalCode, phoneNumber, email, webpage, taxRegime);
-    }
-
-    @Bean
     PortConfig portConfig(@Value("${port.name}") String name, @Value("${port.baudrate}") Integer baudRate,
             @Value("${port.parity}") Integer parity, @Value("${port.databits}") Integer dataBits,
             @Value("${port.stopbits}") Integer stopBits) {

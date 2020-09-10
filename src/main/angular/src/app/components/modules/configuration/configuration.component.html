@@ -192,6 +192,14 @@
                 </mat-error>
               </mat-form-field>
             </div>
+            <div class="col">
+              <mat-form-field class="input-full-width">
+                <input matInput placeholder="Logotipo" formControlName="logoPath" required>
+                <mat-error>
+                  <custom-mat-error [control]="ticketForm.controls.logoPath"></custom-mat-error>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
           <div class="row">
             <div class="col">

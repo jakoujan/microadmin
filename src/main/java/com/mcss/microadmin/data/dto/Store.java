@@ -5,27 +5,43 @@
  */
 package com.mcss.microadmin.data.dto;
 
-/**
- *
- * @author Edgar
- */
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Store {
 
+    @Value("${store.name}")
     private String name;
+    @Value("${store.bussinesName}")
     private String bussinesName;
+    @Value("${store.taxId}")
     private String taxId;
+    @Value("${store.street}")
     private String street;
+    @Value("${store.external}")
     private String external;
+    @Value("${store.internal}")
     private String internal;
+    @Value("${store.colony}")
     private String colony;
+    @Value("${store.city}")
     private String city;
+    @Value("${store.county}")
     private String county;
+    @Value("${store.state}")
     private int state;
+    @Value("${store.country}")
     private int country;
+    @Value("${store.postalCode}")
     private String postalCode;
+    @Value("${store.phoneNumber}")
     private String phoneNumber;
+    @Value("${store.email}")
     private String email;
+    @Value("${store.webpage}")
     private String webpage;
+    @Value("${store.taxRegime}")
     private String taxRegime;
 
     public Store() {
@@ -49,8 +65,6 @@ public class Store {
         this.webpage = webpage;
         this.taxRegime = taxRegime;
     }
-
-    
 
     public String getName() {
         return name;
