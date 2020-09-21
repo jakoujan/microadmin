@@ -14,6 +14,8 @@ import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.service.TicketPrintService;
+import java.io.IOException;
+import java.util.logging.Level;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +50,15 @@ public class OrderModelImpl implements OrderModel {
         
         switch(order.getStatus().getId()){
             case 3:
-                ticketPrint.printOrder(order);
+            {
+                try {
+                    ticketPrint.printOrder(order);
+                } catch (IOException ex) {
+                    LOGGER.error("Error al imprimir ticket", ex);
+                }
+            }
                 break;
+
             case 4:
                 this.saleModel.createSaleFromOrder(order);
                 break;
