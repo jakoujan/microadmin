@@ -11,59 +11,62 @@ import com.mcss.microadmin.data.dao.OrderDAO;
 import com.mcss.microadmin.data.dao.ProductDAO;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.ProductOrder;
-import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.service.TicketPrintService;
 import java.io.IOException;
-import java.util.logging.Level;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderModelImpl implements OrderModel {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderModelImpl.class);
-    
+
     @Autowired
     private SaleModel saleModel;
-    
+
     @Autowired
     private TicketPrintService ticketPrint;
-    
+
     @Autowired
     OrderDAO orderDAO;
-    
+
     @Autowired
     ProductDAO productDAO;
+
+    @Autowired
+    private SimpMessageSendingOperations messagingTemplate;
 
     @Override
     @Transactional
     public Response save(Order order) {
         Response response = Response.getInstance();
-        order.getProducts().forEach((ProductOrder product)->{
+        order.getProducts().forEach((ProductOrder product) -> {
             product.setOrder(order);
             product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
         });
         this.orderDAO.save(order);
-        
-        switch(order.getStatus().getId()){
-            case 3:
-            {
+
+        switch (order.getStatus().getId()) {
+            case 3: {
+                this.updateCheckout();
                 try {
                     ticketPrint.printOrder(order);
                 } catch (IOException ex) {
                     LOGGER.error("Error al imprimir ticket", ex);
                 }
             }
-                break;
+            break;
 
             case 4:
                 this.saleModel.createSaleFromOrder(order);
                 break;
         }
-         
+
         response.setMessage("La orden se ha generado con exito");
         response.addField(Constants.ENTITY, order);
         return response;
@@ -87,12 +90,16 @@ public class OrderModelImpl implements OrderModel {
         response.addField(Constants.COUNT, this.orderDAO.count(filter));
         return response;
     }
-    
+
     @Override
     public Response getOrder(Integer id) {
         Response response = Response.getInstance();
         response.addField(Constants.ENTITY, this.orderDAO.findById(id).get());
         return response;
+    }
+
+    private void updateCheckout() {
+        this.messagingTemplate.convertAndSend(Constants.CHECKOUT_TOPIC, "order");
     }
 
 }

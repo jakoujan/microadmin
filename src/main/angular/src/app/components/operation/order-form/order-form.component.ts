@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SessionStorage } from 'ngx-webstorage';
-import { constants } from 'src/environments/environment';
+import { constants, environment } from 'src/environments/environment';
 import { IOrder } from 'src/app/interfaces/order';
 import { IServiceType } from "src/app/interfaces/service-type";
 import { SERVICE_TYPES } from "src/app/catalogs/catalogs";
@@ -16,6 +16,7 @@ import { OrderService } from "src/app/services/order.service";
 import { ConfirmationDialogService } from '../../common/ui/confirmation-dialog/confirmation-dialog.service';
 import { Session } from 'src/app/interfaces/session';
 import { MatSelectChange } from '@angular/material/select';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-order-form',
@@ -39,7 +40,8 @@ export class OrderFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private catalogService: CatalogsService,
     private router: Router, private productSelectionService: ProductSelectionService,
-    private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService) { }
+    private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService, 
+    private rxStompService: RxStompService) { }
 
   ngOnInit(): void {
     this.catalogService.getTables().then(tables => this.tables = tables);
@@ -165,6 +167,14 @@ export class OrderFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  private refreshOrders() {
+    const configurator = {
+      topic: environment.websocket.topicPrefix
+    };
+    const v = JSON.stringify(configurator);
+    this.rxStompService.publish({ destination: environment.websocket.destination, body: v });
   }
 
   public get totalAmount(): number {

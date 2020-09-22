@@ -4,8 +4,11 @@ import { IOrder } from 'src/app/interfaces/order';
 import { IOrderView } from 'src/app/interfaces/view/order-view';
 import { OrderService } from 'src/app/services/order.service';
 import { SessionStorageService } from 'ngx-webstorage';
-import { constants } from 'src/environments/environment';
+import { constants, environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Message } from '@stomp/stompjs';
+import { RxStompService } from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-checkout',
@@ -28,11 +31,20 @@ export class CheckoutComponent implements OnInit {
     page: 0,
     rows: 20
   };
-  constructor(private orderService: OrderService, private sessionStorageService: SessionStorageService, private router: Router) { }
+  subscription: Subscription;
+
+  constructor(private orderService: OrderService, private sessionStorageService: SessionStorageService, private router: Router,
+    private rxStompService: RxStompService) { }
 
   ngOnInit(): void {
     this.orderService.filter(this.filter).then(response => {
       this.orders = response.fields.data;
+    });
+    this.subscription = this.rxStompService.watch(environment.websocket.topicPrefix).subscribe((message: Message) => {
+      // const response = JSON.parse(message.body);
+      this.orderService.filter(this.filter).then(response => {
+        this.orders = response.fields.data;
+      });
     });
   }
 

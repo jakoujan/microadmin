@@ -38,4 +38,5 @@ public class Constants {
     public static String ENTITY = "entity";
     public static String STORE = "store";
     public static String PORT = "port";
+    public static String CHECKOUT_TOPIC = "/web/action";
 }
