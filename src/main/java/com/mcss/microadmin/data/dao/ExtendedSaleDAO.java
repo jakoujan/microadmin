@@ -6,17 +6,20 @@
 package com.mcss.microadmin.data.dao;
 
 import com.mcss.microadmin.data.entity.Sale;
+import com.mcss.microadmin.data.filter.SaleFilter;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import com.mcss.microadmin.data.filter.SaleReportViewFilter;
+import com.mcss.microadmin.data.view.SaleReportView;
+import java.util.List;
 
 /**
  *
  * @author oscardanielrangelmartinez
  */
-public interface SaleDAO extends PagingAndSortingRepository<Sale, Integer>{ 
-
-    public Object findByFilter(SaleReportViewFilter filter);
-
-    public Object count(SaleReportViewFilter filter);
-     
+public interface ExtendedSaleDAO {
+    
+    public List<SaleReportView> findByFilter(SaleReportViewFilter filter);
+    
+    public Long count(SaleReportViewFilter filter);
+    
 }

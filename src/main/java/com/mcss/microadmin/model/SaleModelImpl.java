@@ -13,6 +13,8 @@ import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.Sale;
 import com.mcss.microadmin.data.entity.OrderSale;
 import com.mcss.microadmin.data.filter.SaleFilter;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 //import com.mcss.microadmin.data.filter.SaleViewFilter;
 import javax.transaction.Transactional;
@@ -74,7 +76,7 @@ public class SaleModelImpl implements SaleModel {
         OrderSale os = new OrderSale();
         os.setOrder(order);
         os.setSale(sale);
-        sale.setQuantity(order.getTotal_amount());
+        sale.setQuantity(BigDecimal.valueOf(order.getProducts().size()));
         sale.setSale_date(new Date());
         sale.setTotal_amount(order.getTotal_amount());
         order.setSale(os);
