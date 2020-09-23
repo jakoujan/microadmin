@@ -72,16 +72,13 @@ public class SaleModelImpl implements SaleModel {
     public Boolean createSaleFromOrder(Order order){
         Sale sale = new Sale();
         OrderSale os = new OrderSale();
-        
-        
         os.setOrder(order);
         os.setSale(sale);
-        
-        sale.setOrder(os);
         sale.setQuantity(order.getTotal_amount());
         sale.setSale_date(new Date());
         sale.setTotal_amount(order.getTotal_amount());
-        
+        order.setSale(os);
+        sale.setOrder(os);
         try {
             this.saleDAO.save(sale);
         } catch (Exception e) {

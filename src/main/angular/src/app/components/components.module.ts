@@ -67,6 +67,7 @@ import { OrdersComponent } from './operation/orders/orders.component';
 import { OrderFormComponent } from './operation/order-form/order-form.component';
 import { ProductSelectionComponent } from './custom/product-selection/product-selection.component';
 import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.component';
+import { CashCountComponent } from './reports/cash-count/cash-count.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.c
     OrdersComponent,
     OrderFormComponent,
     ProductSelectionComponent,
-    CheckoutFormComponent
+    CheckoutFormComponent,
+    CashCountComponent
   ],
   imports: [
     CommonModule,

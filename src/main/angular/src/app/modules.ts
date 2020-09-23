@@ -54,6 +54,22 @@ export const MODULES: Array<Module> = [
     opened: false
   },
   {
+    title: 'Reportes',
+    icon: 'topic',
+    id: 'reports',
+    submodules: [
+      {
+        name: 'Arqueo de caja',
+        id: 'cash-count',
+        uri: '/modules/cashcount',
+        icon: '',
+        default: false,
+        active: false
+      }
+    ],
+    opened: false
+  },
+  {
     title: 'Administración',
     icon: 'settings',
     id: 'administration',
