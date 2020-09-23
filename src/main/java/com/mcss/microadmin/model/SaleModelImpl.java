@@ -30,7 +30,7 @@ public class SaleModelImpl implements SaleModel {
     
     @Autowired
     OrderDAO productDAO;
-
+   
     @Override
     @Transactional
     public Response save(Sale sale) {
