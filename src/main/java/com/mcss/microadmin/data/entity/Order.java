@@ -5,6 +5,7 @@
  */
 package com.mcss.microadmin.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -166,10 +167,11 @@ public class Order implements Serializable {
         this.products = products;
     }
     
+    @JsonIgnore
     @JoinTable(name = "ORDER_SALE", joinColumns = {
     @JoinColumn(name = "ORDER_COMAND", referencedColumnName = "ID", nullable = false)}, inverseJoinColumns = {
     @JoinColumn(name = "SALE", referencedColumnName = "ID", nullable = false)})
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public OrderSale getSale() {
         return sale;
     }

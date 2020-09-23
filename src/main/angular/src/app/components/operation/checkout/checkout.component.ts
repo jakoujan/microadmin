@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrderFilter, IOrderViewFilter } from 'src/app/filters/order-filter';
+import { IOrderViewFilter } from 'src/app/filters/order-filter';
 import { IOrder } from 'src/app/interfaces/order';
 import { IOrderView } from 'src/app/interfaces/view/order-view';
 import { OrderService } from 'src/app/services/order.service';

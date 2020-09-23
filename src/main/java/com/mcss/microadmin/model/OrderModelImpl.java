@@ -50,7 +50,6 @@ public class OrderModelImpl implements OrderModel {
             product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
         });
         this.orderDAO.save(order);
-
         switch (order.getStatus().getId()) {
             case 3: {
                 this.updateCheckout();
@@ -66,9 +65,7 @@ public class OrderModelImpl implements OrderModel {
                 this.saleModel.createSaleFromOrder(order);
                 break;
         }
-
         response.setMessage("La orden se ha generado con exito");
-        response.addField(Constants.ENTITY, order);
         return response;
     }
 

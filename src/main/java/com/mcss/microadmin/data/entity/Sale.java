@@ -8,6 +8,7 @@ package com.mcss.microadmin.data.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -81,7 +82,7 @@ public class Sale implements Serializable{
         this.quantity = quantity;
     }
     
-    @OneToOne(mappedBy = "sale")
+    @OneToOne(mappedBy = "sale", cascade = CascadeType.ALL)
     public OrderSale getOrder() {
         return order;
     }
