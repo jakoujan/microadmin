@@ -18,6 +18,7 @@ import com.mcss.microadmin.data.entity.Supplier;
 import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
+import com.mcss.microadmin.data.entity.User;
 import com.mcss.microadmin.model.CatalogModel;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,11 @@ public class CatalogController {
     @GetMapping(value = "tables")
     public Iterable<Table> tables() {
         return this.catalogModel.tables();
+    }
+    
+    @GetMapping(value = "users")
+    public Iterable<User> users() {
+        return this.catalogModel.users();
     }
 
 }

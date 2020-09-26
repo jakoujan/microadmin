@@ -18,6 +18,7 @@ import com.mcss.microadmin.data.entity.Supplier;
 import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
+import com.mcss.microadmin.data.entity.User;
 import java.util.List;
 
 /**
@@ -53,5 +54,7 @@ public interface CatalogModel {
     public Iterable<Status> status();
 
     public Iterable<Table> tables();
+    
+    public Iterable<User> users();
 
 }
