@@ -23,6 +23,7 @@ public class SaleReportView implements Serializable {
     private BigDecimal quantity;
     private Integer orderComand;
     private Integer cashier;
+    private String cashierName;
 
     public SaleReportView() {
     }
@@ -82,9 +83,15 @@ public class SaleReportView implements Serializable {
         this.cashier = cashier;
     }
     
+    @Column(name = "CASHIER_NAME")
+    public String getCashierName() {
+        return cashierName;
+    }
+
+    public void setCashierName(String cashierName) {
+        this.cashierName = cashierName;
+    }
    
-
-
 
   
     
