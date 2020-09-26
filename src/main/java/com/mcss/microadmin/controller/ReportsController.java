@@ -9,7 +9,9 @@ import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
+import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.model.OrderModel;
+import com.mcss.microadmin.model.SaleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,25 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReportsController {
 
     @Autowired
-    OrderModel orderModel;
+    SaleModel saleModel;
     
     @PostMapping(value = "")
-    public Response orders(@RequestBody OrderViewFilter filter) {
-        return this.orderModel.getOrders(filter);
-    }
-
-    @PostMapping(value = "/save")
-    public Response save(@RequestBody Order order) {
-        return this.orderModel.save(order);
+    public Response reportSales(@RequestBody SaleReportViewFilter filter) {
+        return this.saleModel.getSales(filter);
     }
     
-    @GetMapping(value = "/order")
-    public Response order(@RequestParam("id") Integer id) {
-        return this.orderModel.getOrder(id);
+    @GetMapping(value = "/sale")
+    public Response sale(@RequestParam("id") Integer id) {
+        return this.saleModel.getSale(id);
     }
     
-    @PostMapping(value = "/delete")
-    public Response delete(@RequestBody Order order) {
-        return this.orderModel.delete(order);
-    }
 }
