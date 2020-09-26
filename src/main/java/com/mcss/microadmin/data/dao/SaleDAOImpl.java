@@ -30,13 +30,18 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         CriteriaQuery<SaleReportView> criteria = builder.createQuery(SaleReportView.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
-        if (filter.getEntity().getSale_date()!= null && !filter.getEntity().getSale_date().equals("")) {
-            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getSale_date() + "%"));
+        if (filter.getEntity().getSaleDate()!= null && !filter.getEntity().getSaleDate().equals("")) {
+            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getSaleDate() + "%"));
+        }
+        
+        if (filter.getEntity().getCashier()!= null && !filter.getEntity().getCashier().equals("")) {
+            predicates.add(builder.like(root.get("cashier"), "%" + filter.getEntity().getCashier()+ "%"));
         }
           
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<SaleReportView> where = criteria.where(builder.and(predicates.toArray(pa)));
         criteria.orderBy(builder.asc(root.get("order_comand")));
+        criteria.orderBy(builder.asc(root.get("cashier")));
         TypedQuery<SaleReportView> tq = manager.createQuery(where);
         tq.setFirstResult(filter.getPage() * filter.getRows());
         tq.setMaxResults(filter.getRows());
@@ -49,8 +54,12 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
-        if (filter.getEntity().getOrder_comand() != null && !filter.getEntity().getOrder_comand().equals("")) {
-            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getOrder_comand() + "%"));
+        if (filter.getEntity().getOrderComand() != null && !filter.getEntity().getOrderComand().equals("")) {
+            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getOrderComand() + "%"));
+        }
+        
+        if (filter.getEntity().getCashier()!= null && !filter.getEntity().getCashier().equals("")) {
+            predicates.add(builder.like(root.get("cashier"), "%" + filter.getEntity().getCashier()+ "%"));
         }
            
         Predicate[] pa = new Predicate[predicates.size()];

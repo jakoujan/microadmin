@@ -17,11 +17,13 @@ import javax.persistence.Table;
 @Table(name = "SALES_REPORT_VEW", schema = "PUBLIC", catalog = "DB")
 public class SaleReportView implements Serializable {
 
-    private int id;
-    private Date sale_date;
-    private BigDecimal total_amount;
+    private Integer id;
+    private Date saleDate;
+    private BigDecimal totalAmount;
     private BigDecimal quantity;
-    
+    private Integer orderComand;
+    private Integer cashier;
+
     public SaleReportView() {
     }
 
@@ -34,25 +36,25 @@ public class SaleReportView implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     @Column(name = "SALE_DATE")
-    public Date getSale_date() {
-        return sale_date;
+    public Date getSaleDate() {
+        return saleDate;
     }
 
-    public void setSale_date(Date sale_date) {
-        this.sale_date = sale_date;
+    public void setSaleDate(Date saleDate) {
+        this.saleDate = saleDate;
     }
-    
+
     @Column(name = "TOTAL_AMOUNT")
-    public BigDecimal getTotal_amount() {
-        return total_amount;
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setTotal_amount(BigDecimal total_amount) {
-        this.total_amount = total_amount;
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
-    
+
     @Column(name = "QUANTITY")
     public BigDecimal getQuantity() {
         return quantity;
@@ -61,17 +63,26 @@ public class SaleReportView implements Serializable {
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
-    
+
     @Column(name = "ORDER_COMAND")
-    public Integer getOrder_comand() {
-        return order_comand;
+    public Integer getOrderComand() {
+        return orderComand;
     }
 
-    public void setOrder_comand(Integer order_comand) {
-        this.order_comand = order_comand;
+    public void setOrderComand(Integer orderComand) {
+        this.orderComand = orderComand;
     }
-    private Integer order_comand;
+    
+    @Column(name = "CASHIER")
+    public Integer getCashier() {
+        return cashier;
+    }
 
+    public void setCashier(Integer cashier) {
+        this.cashier = cashier;
+    }
+    
+   
 
 
 

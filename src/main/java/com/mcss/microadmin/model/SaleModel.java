@@ -8,6 +8,7 @@ package com.mcss.microadmin.model;
 import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.Sale;
+import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 //import com.mcss.microadmin.data.filter.SaleFilter;
 //import com.mcss.microadmin.data.filter.SaleViewFilter;
 
@@ -21,7 +22,7 @@ public interface SaleModel {
 
     public Response delete(Sale sale);
 
-    //public Response getSales(SaleViewFilter filter);
+    public Response getSales(SaleReportViewFilter filter);
     
     public Response getSale(Integer id);
     

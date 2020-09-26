@@ -13,6 +13,7 @@ import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.Sale;
 import com.mcss.microadmin.data.entity.OrderSale;
 import com.mcss.microadmin.data.filter.SaleFilter;
+import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -55,13 +56,13 @@ public class SaleModelImpl implements SaleModel {
         return response;
     }
 
-   /* @Override
-    public Response getSales(SaleViewFilter filter) {
+    @Override
+    public Response getSales(SaleReportViewFilter filter) {
         Response response = Response.getInstance();
         response.addField(Constants.DATA, this.saleDAO.findByFilter(filter));
         response.addField(Constants.COUNT, this.saleDAO.count(filter));
         return response;
-    }*/
+    }
     
     @Override
     public Response getSale(Integer id) {
