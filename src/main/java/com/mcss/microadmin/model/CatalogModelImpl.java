@@ -162,6 +162,6 @@ public class CatalogModelImpl implements CatalogModel {
     
     @Override
     public Iterable<User> users() {
-        return this.userDAO.findAll();
+        return this.userDAO.findByActive(Boolean.TRUE);
     }
 }
