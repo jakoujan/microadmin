@@ -69,6 +69,7 @@ export class CheckoutFormComponent implements OnInit {
   }
 
   public checkout(status?: number) {
+    this.order.cashier = this.session.user;
     this.order.status = {
       id: 4,
       name: undefined

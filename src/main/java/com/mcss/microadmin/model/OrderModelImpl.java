@@ -62,7 +62,6 @@ public class OrderModelImpl implements OrderModel {
             break;
 
             case 4:
-                order.setCashier(cashier);
                 this.saleModel.createSaleFromOrder(order);
                 break;
         }
