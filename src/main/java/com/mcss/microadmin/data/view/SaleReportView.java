@@ -12,9 +12,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "SALES_REPORT_VEW", schema = "PUBLIC", catalog = "DB")
+@Table(name = "SALES_REPORT_VIEW", schema = "PUBLIC", catalog = "DB")
 public class SaleReportView implements Serializable {
 
     private Integer id;
@@ -38,6 +40,7 @@ public class SaleReportView implements Serializable {
         this.id = id;
     }
 
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "SALE_DATE")
     public Date getSaleDate() {
         return saleDate;
@@ -73,7 +76,7 @@ public class SaleReportView implements Serializable {
     public void setOrderComand(Integer orderComand) {
         this.orderComand = orderComand;
     }
-    
+
     @Column(name = "CASHIER")
     public Integer getCashier() {
         return cashier;
@@ -82,7 +85,7 @@ public class SaleReportView implements Serializable {
     public void setCashier(Integer cashier) {
         this.cashier = cashier;
     }
-    
+
     @Column(name = "CASHIER_NAME")
     public String getCashierName() {
         return cashierName;
@@ -91,9 +94,5 @@ public class SaleReportView implements Serializable {
     public void setCashierName(String cashierName) {
         this.cashierName = cashierName;
     }
-   
 
-  
-    
-    
 }

@@ -2,8 +2,54 @@
     <mat-toolbar-row class="toolbar">
         <span>Arqueo de caja</span>
         <span class="filler"></span>
-        
     </mat-toolbar-row>
 </mat-toolbar>
 
-
+<mat-card class="order-card">
+    <mat-card-header>
+        <h3 class="order-active">Filtro de busqueda</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="filter-container">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Fecha</mat-label>
+                        <mat-placeholder>Fecha</mat-placeholder>
+                        <mat-datetimepicker-toggle [for]="saleDatetimePicker" matSuffix>
+                        </mat-datetimepicker-toggle>
+                        <mat-datetimepicker #saleDatetimePicker type="date" openOnFocus="true">
+                        </mat-datetimepicker>
+                        <input matInput [(ngModel)]="filter.entity.saleDate" [matDatetimepicker]="saleDatetimePicker"
+                            autocomplete="false">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Usuario</mat-label>
+                        <mat-select matNativeControl placeholder="Usuario" [(ngModel)]="filter.entity.cashier">
+                            <mat-option *ngFor="let user of users" [value]="user.id">
+                                {{ user.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="filter-command">
+                <button class="command-button" color="accent" mat-flat-button (click)="generate()">Generar</button>
+            </div>
+        </div>
+        <mat-divider *ngIf="sales.length >= 1"></mat-divider>
+        <mat-list>
+            <mat-list-item matRipple *ngFor="let sale of sales">
+                <div mat-line>folio: {{ sale.orderComand | leadingZeros: 5}}</div>
+                <div mat-line>Hora: {{ sale.saleDate | date: 'HH:mm'}}</div>
+                <div mat-line>Total: {{ sale.totalAmount | currency }}</div>
+                <div mat-line>Productos: {{ sale.quantity | number }}</div>
+                <mat-divider [inset]="true"></mat-divider>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

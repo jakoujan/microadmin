@@ -32,7 +32,7 @@ import { CustomersComponent } from './modules/customers/customers.component';
 import { CustomerFormComponent } from './modules/customer-form/customer-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ModulesPanelMenuComponent } from './common/modules-panel-menu/modules-panel-menu.component';
-import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
+import { MatRippleModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ConfigurationComponent } from './modules/configuration/configuration.component';
 import { DirectivesModule } from '../directives/directives.module';
@@ -68,6 +68,8 @@ import { OrderFormComponent } from './operation/order-form/order-form.component'
 import { ProductSelectionComponent } from './custom/product-selection/product-selection.component';
 import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.component';
 import { CashCountComponent } from './reports/cash-count/cash-count.component';
+import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
+import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
 
 @NgModule({
   declarations: [
@@ -142,7 +144,12 @@ import { CashCountComponent } from './reports/cash-count/cash-count.component';
     DirectivesModule,
     MatTabsModule,
     PipesModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatDatetimepickerModule,
+    MatMomentDatetimeModule,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }
   ]
 })
 export class ComponentsModule { }

@@ -5,13 +5,8 @@ import { constants } from 'src/environments/environment';
 import { IOrder } from 'src/app/interfaces/order';
 import { IServiceType } from "src/app/interfaces/service-type";
 import { SERVICE_TYPES } from "src/app/catalogs/catalogs";
-import { ITable } from 'src/app/interfaces/table';
-import { CatalogsService } from 'src/app/services/catalogs.service';
 import { Router } from '@angular/router';
-import { ProductSelectionService } from "../../custom/product-selection/product-selection.service";
-import { IProduct } from 'src/app/interfaces/product';
 import { IProductOrder } from 'src/app/interfaces/product-order';
-import { IPaymentMethod } from 'src/app/interfaces/payment-method';
 import { OrderService } from "src/app/services/order.service";
 import { ConfirmationDialogService } from '../../common/ui/confirmation-dialog/confirmation-dialog.service';
 import { Session } from 'src/app/interfaces/session';
@@ -41,6 +36,8 @@ export class CheckoutFormComponent implements OnInit {
       amount: [undefined, Validators.compose([Validators.required, onlyNumber, Validators.min(this.order.total_amount)])]
     })
   }
+
+
 
   public goBack() {
     this.router.navigate(['modules/checkout']);

@@ -5,8 +5,6 @@
  */
 package com.mcss.microadmin.data.dao;
 
-import com.mcss.microadmin.data.entity.Sale;
-import com.mcss.microadmin.data.filter.SaleFilter;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.data.view.SaleReportView;
 import java.util.ArrayList;
@@ -21,8 +19,8 @@ import javax.persistence.criteria.Root;
 
 public class SaleDAOImpl implements ExtendedSaleDAO {
 
-   @PersistenceContext
-   private EntityManager manager;
+    @PersistenceContext
+    private EntityManager manager;
 
     @Override
     public List<SaleReportView> findByFilter(SaleReportViewFilter filter) {
@@ -30,17 +28,17 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         CriteriaQuery<SaleReportView> criteria = builder.createQuery(SaleReportView.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
-        if (filter.getEntity().getSaleDate()!= null && !filter.getEntity().getSaleDate().equals("")) {
-            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getSaleDate() + "%"));
+        if (filter.getEntity().getSaleDate() != null) {
+            predicates.add(builder.equal(root.get("saleDate"), filter.getEntity().getSaleDate()));
         }
-        
-        if (filter.getEntity().getCashier()!= null && !filter.getEntity().getCashier().equals("")) {
-            predicates.add(builder.like(root.get("cashier"), "%" + filter.getEntity().getCashier()+ "%"));
+
+        if (filter.getEntity().getCashier() != null) {
+            predicates.add(builder.equal(root.get("cashier"), filter.getEntity().getCashier()));
         }
-          
+
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<SaleReportView> where = criteria.where(builder.and(predicates.toArray(pa)));
-        criteria.orderBy(builder.asc(root.get("order_comand")));
+        criteria.orderBy(builder.asc(root.get("orderComand")));
         criteria.orderBy(builder.asc(root.get("cashier")));
         TypedQuery<SaleReportView> tq = manager.createQuery(where);
         tq.setFirstResult(filter.getPage() * filter.getRows());
@@ -54,18 +52,18 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
-        if (filter.getEntity().getOrderComand() != null && !filter.getEntity().getOrderComand().equals("")) {
-            predicates.add(builder.like(root.get("order_comand"), "%" + filter.getEntity().getOrderComand() + "%"));
+        if (filter.getEntity().getSaleDate() != null) {
+            predicates.add(builder.equal(root.get("saleDate"), filter.getEntity().getSaleDate()));
         }
-        
-        if (filter.getEntity().getCashier()!= null && !filter.getEntity().getCashier().equals("")) {
-            predicates.add(builder.like(root.get("cashier"), "%" + filter.getEntity().getCashier()+ "%"));
+
+        if (filter.getEntity().getCashier() != null) {
+            predicates.add(builder.equal(root.get("cashier"), filter.getEntity().getCashier()));
         }
-           
+
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<Long> where = criteria.select(builder.count(root)).where(builder.and(predicates.toArray(pa)));
         return manager.createQuery(where).getSingleResult();
-        
+
     }
-    
+
 }

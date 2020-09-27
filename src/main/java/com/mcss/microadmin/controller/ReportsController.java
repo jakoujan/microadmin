@@ -6,11 +6,7 @@
 package com.mcss.microadmin.controller;
 
 import com.ispc.slibrary.dto.Response;
-import com.mcss.microadmin.data.entity.Order;
-import com.mcss.microadmin.data.filter.OrderFilter;
-import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
-import com.mcss.microadmin.model.OrderModel;
 import com.mcss.microadmin.model.SaleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +23,7 @@ public class ReportsController {
     @Autowired
     SaleModel saleModel;
     
-    @PostMapping(value = "")
+    @PostMapping(value = "cashcount")
     public Response reportSales(@RequestBody SaleReportViewFilter filter) {
         return this.saleModel.getSales(filter);
     }

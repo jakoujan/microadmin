@@ -102,6 +102,15 @@ tr.mat-row:hover {
   }
 }
 
+.filter-container {
+  padding: 20px;
+  .filter-command {
+    button.command-button {
+      width: 100%;
+    }
+  }
+}
+
 .module-toolbar {
   .icon {
     margin-right: 15px;
