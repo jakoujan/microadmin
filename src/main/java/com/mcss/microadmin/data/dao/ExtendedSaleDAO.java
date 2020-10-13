@@ -10,6 +10,7 @@ import com.mcss.microadmin.data.filter.SaleFilter;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.data.view.SaleReportView;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -21,5 +22,7 @@ public interface ExtendedSaleDAO {
     public List<SaleReportView> findByFilter(SaleReportViewFilter filter);
     
     public Long count(SaleReportViewFilter filter);
+    
+    public BigDecimal sum(SaleReportViewFilter filter);
     
 }
