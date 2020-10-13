@@ -9,11 +9,9 @@ import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.model.SaleReportModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,15 +20,14 @@ public class ReportsController {
 
     @Autowired
     SaleReportModel saleReportModel;
-    
+
     @PostMapping(value = "cashcount")
     public Response reportSales(@RequestBody SaleReportViewFilter filter) {
         return this.saleReportModel.getSaleReports(filter);
     }
-    
+
     /*@GetMapping(value = "/sale")
     public Response sale(@RequestParam("id") Integer id) {
         return this.saleReportModel.getSale(id);
     }*/
-    
 }

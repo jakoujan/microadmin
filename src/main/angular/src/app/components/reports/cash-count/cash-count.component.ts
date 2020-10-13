@@ -31,7 +31,8 @@ export class CashCountComponent implements OnInit {
   }
   users: Array<IUser> = [];
   sales: Array<ICashCountView> = []
-
+  totalAmount: number = 0;
+  count: number = 0;
   constructor(private router: Router, private reportService: ReportService, private catalogsService: CatalogsService) { }
 
   ngOnInit(): void {
@@ -45,6 +46,8 @@ export class CashCountComponent implements OnInit {
   generate() {
     this.reportService.cashCount(this.filter).then(response => {
       this.sales = response.fields.data;
+      this.totalAmount = response.fields.totalAmount;
+      this.count = response.fields.count;
     });
   }
 

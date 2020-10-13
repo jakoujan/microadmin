@@ -39,5 +39,5 @@ public class Constants {
     public static String STORE = "store";
     public static String PORT = "port";
     public static String CHECKOUT_TOPIC = "/web/action";
-    public static String AMOUNT = "total_amount";
+    public static String AMOUNT = "totalAmount";
 }

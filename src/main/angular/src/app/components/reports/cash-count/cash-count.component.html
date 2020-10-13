@@ -39,11 +39,16 @@
             </div>
             <div class="filter-command">
                 <button class="command-button" color="accent" mat-flat-button (click)="generate()">Generar</button>
-                <button class="command-button"  mat-stroked-button (click)="clean()">Limpiar</button>
+                <button class="command-button" mat-stroked-button (click)="clean()">Limpiar</button>
             </div>
         </div>
         <mat-divider *ngIf="sales.length >= 1"></mat-divider>
         <mat-list>
+            <mat-list-item *ngIf="sales.length">
+                <div mat-line>Monto total: {{ totalAmount | currency }}</div>
+                <div mat-line>Total de ventas: {{ count | number }}</div>
+                <mat-divider [inset]="true"></mat-divider>
+            </mat-list-item>
             <mat-list-item matRipple *ngFor="let sale of sales">
                 <div mat-line>folio: {{ sale.orderComand | leadingZeros: 5}}</div>
                 <div mat-line>Hora: {{ sale.saleDate | date: 'dd-MM-yy HH:mm'}}</div>
