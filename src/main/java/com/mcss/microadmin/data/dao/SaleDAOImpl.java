@@ -5,9 +5,11 @@
  */
 package com.mcss.microadmin.data.dao;
 
+import com.ispc.slibrary.helper.DateHelper;
 import com.mcss.microadmin.data.filter.SaleReportViewFilter;
 import com.mcss.microadmin.data.view.SaleReportView;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,7 +31,7 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
         if (filter.getEntity().getSaleDate() != null) {
-            predicates.add(builder.equal(root.get("saleDate"), filter.getEntity().getSaleDate()));
+            predicates.add(builder.between(root.<Date>get("saleDate"), DateHelper.prepareDateForBetweenStart(filter.getEntity().getSaleDate()), DateHelper.prepareDateForBetweenEnd(filter.getEntity().getSaleDate())));
         }
 
         if (filter.getEntity().getCashier() != null) {
