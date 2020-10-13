@@ -48,6 +48,24 @@ export class CashCountComponent implements OnInit {
     });
   }
 
+  clean() {
+    this.filter = {
+      entity: {
+        cashier: undefined,
+        id: undefined,
+        orderComand: undefined,
+        quantity: undefined,
+        saleDate: undefined,
+        totalAmount: undefined
+      },
+      startDate: undefined,
+      endDate: undefined,
+      hidden: true,
+      page: 0,
+      rows: 20,
+    }
+  }
+
 
 
   public compare(val1, val2) {

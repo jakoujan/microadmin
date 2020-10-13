@@ -9,10 +9,10 @@ import com.mcss.microadmin.data.dto.Store;
 import com.mcss.microadmin.data.dto.TicketData;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.ProductOrder;
-import com.mcss.microadmin.data.entity.Sale;
 import com.mcss.microadmin.service.print.USBPrinter;
 import io.github.escposjava.print.Printer;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -85,7 +85,7 @@ public class TicketPrintService {
         ps.close();
     }
     
-    public void getProducts(Order order, io.github.escposjava.PrinterService ps) {
+    public void getProducts(Order order, io.github.escposjava.PrinterService ps) throws UnsupportedEncodingException {
         for (ProductOrder product : order.getProducts()) {
             if (product.getQuantity().compareTo(BigDecimal.ONE) >= 1) {
                 ps.printLn(product.getProduct().getDescription());
