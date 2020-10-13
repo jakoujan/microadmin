@@ -58,7 +58,9 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
         if (filter.getEntity().getSaleDate() != null) {
-            predicates.add(builder.between(root.<Date>get("saleDate"), DateHelper.prepareDateForBetweenStart(filter.getEntity().getSaleDate()), DateHelper.prepareDateForBetweenEnd(filter.getEntity().getSaleDate())));
+            predicates.add(builder.between(root.<Date>get("saleDate"), 
+                    DateHelper.prepareDateForBetweenStart(filter.getEntity().getSaleDate()), 
+                    DateHelper.prepareDateForBetweenEnd(filter.getEntity().getSaleDate())));
         }
 
         if (filter.getEntity().getCashier() != null) {
@@ -78,7 +80,9 @@ public class SaleDAOImpl implements ExtendedSaleDAO {
         List<Predicate> predicates = new ArrayList<>();
         Root<SaleReportView> root = criteria.from(SaleReportView.class);
         if (filter.getEntity().getSaleDate() != null) {
-            predicates.add(builder.between(root.<Date>get("saleDate"), DateHelper.prepareDateForBetweenStart(filter.getEntity().getSaleDate()), DateHelper.prepareDateForBetweenEnd(filter.getEntity().getSaleDate())));
+            predicates.add(builder.between(root.<Date>get("saleDate"), 
+                    DateHelper.prepareDateForBetweenStart(filter.getEntity().getSaleDate()), 
+                    DateHelper.prepareDateForBetweenEnd(filter.getEntity().getSaleDate())));
         }
 
         if (filter.getEntity().getCashier() != null) {
