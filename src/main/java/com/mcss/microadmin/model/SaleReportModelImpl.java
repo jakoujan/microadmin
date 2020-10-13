@@ -47,6 +47,7 @@ public class SaleReportModelImpl implements SaleReportModel {
     public Response getSaleReports(SaleReportViewFilter filter) {
         Response response = Response.getInstance();
         response.addField(Constants.DATA, this.saleDAO.findByFilter(filter));
+        response.addField(Constants.AMOUNT, this.saleDAO.sum(filter));
         response.addField(Constants.COUNT, this.saleDAO.count(filter));
         return response;
     }
