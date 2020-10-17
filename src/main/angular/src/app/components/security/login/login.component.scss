@@ -1,5 +1,8 @@
 :host {
-  background: url('/assets/2bg.jpg');
+  background: #000000 url("/assets/bglogo.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   width: 100%;
   height: 100%;
   display: block;
@@ -10,14 +13,15 @@ div.login {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('/assets/batthern.png') #00000090;
+  background: url("/assets/batthern.png") #00000090;
 }
 
 mat-card {
   width: 350px;
 }
 
-mat-form-field, mat-checkbox {
+mat-form-field,
+mat-checkbox {
   width: 80%;
   display: block;
   margin: auto;
@@ -32,4 +36,3 @@ mat-card-content {
   width: 80%;
   margin: 20px auto;
 }
-
