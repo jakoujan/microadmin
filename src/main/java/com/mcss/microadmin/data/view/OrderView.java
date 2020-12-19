@@ -21,7 +21,7 @@ public class OrderView implements Serializable {
     private String responsible;
     private BigDecimal totalAmount;
     private Integer status;
-    private String orderNameStatus;
+    private String orderStatusName;
 
     public OrderView() {
     }
@@ -76,14 +76,16 @@ public class OrderView implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-    public String getOrderNameStatus() {
-        return orderNameStatus;
+    
+    @Column(name = "ORDER_STATUS_NAME")
+    public String getOrderStatusName() {
+        return orderStatusName;
     }
 
-    public void setOrderNameStatus(String orderNameStatus) {
-        this.orderNameStatus = orderNameStatus;
+    public void setOrderStatusName(String orderStatusName) {
+        this.orderStatusName = orderStatusName;
     }
+
     
     
 
