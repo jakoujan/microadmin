@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `product_order` (
     `product` INTEGER NOT NULL,
     `quantity` DECIMAL(10,2) NOT NULL,
     `comment` TEXT,
-    `product_status`,
+    `product_status` INTEGER NOT NULL,
     CONSTRAINT `order_comand_product_order_fk`
         FOREIGN KEY (`order_comand`)
         REFERENCES `order_comand` (`id`)
