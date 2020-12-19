@@ -1,4 +1,5 @@
 import { Item } from '../interfaces/item';
+import { ISaleStatus } from '../interfaces/sale-status';
 import { IServiceType } from "../interfaces/service-type";
 
 export class Catalog {
@@ -47,4 +48,14 @@ export const COUNTRIES: Array<Item> = [
 export const SERVICE_TYPES: Array<IServiceType> = [
     { id: 1, description: "Consumo en local" },
     { id: 2, description: "Orden para llevar" }
+];
+
+
+export const SALE_STATUS: Array<ISaleStatus> = [
+    { id: 1, name: "Abierto" },
+    { id: 2, name: "En Preparación" },
+    { id: 3, name: "Por Cobrar" },
+    { id: 4, name: "Cobrado" },
+    { id: 5, name: "Cancelado" },
+    { id: 6, name: "Preparado" }
 ];

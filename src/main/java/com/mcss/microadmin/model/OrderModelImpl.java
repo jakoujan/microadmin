@@ -53,11 +53,11 @@ public class OrderModelImpl implements OrderModel {
         switch (order.getStatus().getId()) {
             case 3: {
                 this.updateCheckout();
-//                try {
-//                    ticketPrint.printOrder(order);
-//                } catch (IOException ex) {
-//                    LOGGER.error("Error al imprimir ticket", ex);
-//                }
+                try {
+                    ticketPrint.printOrder(order);
+                } catch (IOException ex) {
+                    LOGGER.error("Error al imprimir ticket", ex);
+                }
             }
             break;
 

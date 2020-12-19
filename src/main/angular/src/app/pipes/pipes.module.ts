@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerPipe } from './customer.pipe';
 import { CustomerTypePipe } from './customer-type.pipe';
 import { LeadingZerosPipe } from './leading-zeros.pipe';
+import { OrderStatusPipe } from './order-status.pipe';
 
 
 
@@ -10,12 +11,14 @@ import { LeadingZerosPipe } from './leading-zeros.pipe';
   declarations: [
     CustomerPipe,
     CustomerTypePipe,
-    LeadingZerosPipe
+    LeadingZerosPipe,
+    OrderStatusPipe
   ],
   exports: [
     CustomerPipe,
     CustomerTypePipe,
-    LeadingZerosPipe
+    LeadingZerosPipe,
+    OrderStatusPipe
   ],
   imports: [
     CommonModule
