@@ -85,7 +85,7 @@
                                 <mat-select matNativeControl placeholder="Unidad de medida" formControlName="unit"
                                     [compareWith]="compare" required>
                                     <mat-optgroup label="Unidades de medida">
-                                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.description }}
+                                        <mat-option *ngFor="let unit of units" [value]="unit">{{ unit.unit }}
                                         </mat-option>
                                     </mat-optgroup>
                                 </mat-select>
@@ -150,7 +150,67 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="input-full-width">
+                                <mat-select matNativeControl placeholder="Tipo de producto" formControlName="type"
+                                    [compareWith]="compare" required
+                                    (change)="productTypeChange(form.controls.type.value)">
+                                    <mat-option *ngFor="let type of productTypes" [value]="type">{{ type.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error>
+                                    <custom-mat-error [control]="form.controls.type"></custom-mat-error>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
+                <mat-tab label="Combo/kit" [disabled]="checkCombo">
+                    <div class="list-header">
+                        <h3 class="header">Productos</h3>
+                        <span class="filler"></span>
+                        <button mat-stroked-button color="primary" (click)="addComboProduct()">Agregar</button>
+                    </div>
+                    <mat-list>
+                        <mat-list-item class="list-item" *ngFor="let item of kitProducts.controls; let i = index">
+                            <form [formGroup]="item" class="product-form">
+                                <div class="item">
+                                    <div class="quantity">
+                                        <mat-form-field appearance="fill" class="input-full-width">
+                                            <mat-label>Cantidad</mat-label>
+                                            <input matInput class="number" placeholder="Cantidad"
+                                                formControlName="quantity" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="product">
+                                        <mat-form-field appearance="fill" class="input-full-width">
+                                            <mat-label>Producto</mat-label>
+                                            <mat-select matNativeControl placeholder="Producto"
+                                                formControlName="product" [compareWith]="compare" required>
+                                                <mat-option>
+                                                    <ngx-mat-select-search [formControl]="productFilter"
+                                                        placeholderLabel="Busqueda de producto"
+                                                        noEntriesFoundLabel="No se ha encontrado ningun registro">
+                                                    </ngx-mat-select-search>
+                                                </mat-option>
+                                                <mat-option *ngFor="let product of filteredProducts" [value]="product">
+                                                    {{ product.description }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="button">
+                                        <button mat-icon-button (click)="removeItem(i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
             </mat-tab>
         </mat-tab-group>
     </form>

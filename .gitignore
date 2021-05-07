@@ -3,3 +3,8 @@
 src/main/.DS_Store
 src/main/java/.DS_Store
 src/main/java/com/.DS_Store
+/src/main/angular/node_modules/
+/src/main/angular/dist/
+/data/db.mv.db
+/dist/
+/src/main/resources/static/

@@ -14,7 +14,14 @@ import { PaymentMethodsComponent } from './modules/payment-methods/payment-metho
 import { ProductsComponent } from './modules/products/products.component';
 import { StoresComponent } from './modules/stores/stores.component';
 import { WorkstationsComponent } from './modules/workstations/workstations.component';
-import { StockComponent } from './operation/stock/stock.component';
+import { CheckoutComponent } from './operation/checkout/checkout.component';
+import { ProductTypesComponent } from './modules/product-types/product-types.component';
+import { TablesComponent } from './modules/tables/tables.component';
+import { OrdersComponent } from './operation/orders/orders.component';
+import { OrderFormComponent } from './operation/order-form/order-form.component';
+import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.component';
+import { CashCountComponent } from './reports/cash-count/cash-count.component';
+import { ProductElaborationsComponent } from './operation/product-elaborations/product-elaborations.component';
 
 
 const routes: Routes = [
@@ -31,9 +38,16 @@ const routes: Routes = [
       { path: 'units', component: UnitsComponent, data: { validate: true, module: 'administration', id: 'units' }, canActivate: [SessionGuard] },
       { path: 'customers', component: CustomersComponent, data: { validate: true, module: 'administration', id: 'customers' }, canActivate: [SessionGuard] },
       { path: 'suppliers', component: SuppliersComponent, data: { validate: true, module: 'administration', id: 'suppliers' }, canActivate: [SessionGuard] },
+      { path: 'tables', component: TablesComponent, data: { validate: true, module: 'administration', id: 'tables' }, canActivate: [SessionGuard] },
+      { path: 'product/types', component: ProductTypesComponent, data: { validate: true, module: 'administration', id: 'product-types' }, canActivate: [SessionGuard] },
       { path: 'products', component: ProductsComponent, data: { validate: true, module: 'administration', id: 'products' }, canActivate: [SessionGuard] },
       { path: 'configuration', component: ConfigurationComponent, data: { validate: true, module: 'administration', id: 'configuration' }, canActivate: [SessionGuard] },
-      { path: 'stock', component: StockComponent, data: { validate: true, module: 'operation', id: 'stock' }, canActivate: [SessionGuard] },
+      { path: 'checkout', component: CheckoutComponent, data: { validate: true, module: 'operation', id: 'checkout' }, canActivate: [SessionGuard] },
+      { path: 'orders', component: OrdersComponent, data: { validate: true, module: 'operation', id: 'orders' }, canActivate: [SessionGuard] },
+      { path: 'orders/order', component: OrderFormComponent, data: { validate: false, module: 'operation', id: 'order-form' }, canActivate: [SessionGuard] },
+      { path: 'checkout/order', component: CheckoutFormComponent, data: { validate: false, module: 'operation', id: 'checkout-form' }, canActivate: [SessionGuard] },
+      { path: 'cashcount', component: CashCountComponent, data: { validate: false, module: 'reports', id: 'cash-count' }, canActivate: [SessionGuard] },
+      { path: 'elaboration', component: ProductElaborationsComponent, data: { validate: true, module: 'operation', id: 'orders' }, canActivate: [SessionGuard] },
     ]
   }
 ];

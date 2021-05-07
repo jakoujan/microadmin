@@ -45,7 +45,7 @@ export class PaymentMethodsComponent extends BaseComponent implements OnInit, On
     private confirmationDialogService: ConfirmationDialogService,
     protected navigationService: NavigationService,
     private paymentMethodService: PaymentMethodService
-    ) {
+  ) {
     super(navigationService);
   }
   ngOnDestroy(): void {
@@ -60,7 +60,10 @@ export class PaymentMethodsComponent extends BaseComponent implements OnInit, On
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.paymentMethodService.filter(this.filter).then(response => {
       this.dataSource = new PaymentMethodsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

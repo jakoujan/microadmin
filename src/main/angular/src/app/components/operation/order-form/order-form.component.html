@@ -1,0 +1,132 @@
+<mat-toolbar class="module-toolbar" role="heading">
+    <mat-toolbar-row class="toolbar">
+        <span>Comanda</span>
+        <span class="filler"></span>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon> Atras
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="save(3)" [disabled]="checkOrderStatus()">
+                <mat-icon>receipt_long</mat-icon> Cerrar comanda
+            </button>
+            <button mat-menu-item (click)="cancel()" [disabled]="checkOrderStatus()">
+                <mat-icon>cancel_presentation</mat-icon> Cancelar comanda
+            </button>
+        </mat-menu>
+        <button mat-icon-button class="search-button" aria-labelledby="Opciones" [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-card class="order-card action-marign">
+    <mat-card-header>
+        <h3 class="order-active">Datos de la comanda</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="general-form" [formGroup]="generalForm">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <input matInput placeholder="Nombre del cliente" formControlName="responsible" required>
+                        <mat-error>
+                            <custom-mat-error [control]="generalForm.controls.responsible"></custom-mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Servicio</mat-label>
+                        <mat-select matNativeControl placeholder="Tipo de servicio" formControlName="serviceType"
+                            [compareWith]="compare" required (selectionChange)="typeSelected($event)">
+                            <mat-option *ngFor="let type of servicesTypes" [value]="type.id">
+                                {{ type.description }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <custom-mat-error [control]="generalForm.controls.serviceType"></custom-mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Mesa</mat-label>
+                        <mat-select matNativeControl placeholder="Mesa" formControlName="table" required
+                            [compareWith]="compare">
+                            <mat-option *ngFor="let table of tables" [value]="table">
+                                {{ table.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <custom-mat-error [control]="generalForm.controls.table"></custom-mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="input-full-width">
+                        <mat-label>Metodo de pago</mat-label>
+                        <mat-select matNativeControl placeholder="Metodo de pago" formControlName="paymentMethod"
+                            required [compareWith]="compare">
+                            <mat-option *ngFor="let method of paymentMethods" [value]="method">
+                                {{ method.description }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            <custom-mat-error [control]="generalForm.controls.paymentMethod"></custom-mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <mat-divider></mat-divider>
+        <div class="command-title">
+            <h3 class="order-title">Productos</h3>
+            <div class="filler"></div>
+            <button mat-flat-button color="warn" (click)="addProduct()">
+                agregar
+            </button>
+        </div>
+
+        <div class="products">
+            <div matRipple class="item" *ngFor="let product of order.products" (click)="add(product)">
+                <div class="data">
+                    <div>
+                        <p>{{ product.product.description }}</p>
+                        <p>Cantidad: {{ product.quantity | number }}</p>
+                    </div>
+                    <div class="amout">{{ (product.quantity * product.product.retailPrice) | currency }}</div>
+                    <div>
+                        <button mat-icon-button (click)="removeProduct(product);$event.stopPropagation()">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="comment">
+                    <mat-form-field  class="input-full-width">
+                        <textarea (click)="$event.stopPropagation()" matInput placeholder="inidicaciones de preparado"
+                            [(ngModel)]="product.comment"></textarea>
+                    </mat-form-field>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="summary">
+                <p>Total: {{ totalAmount | currency }}</p>
+            </div>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+<div class="command-buttons">
+    <button class="command" mat-raised-button color="accent" (click)="save(1)"
+        [disabled]="form.invalid">Ordenar</button>
+    <button class="command close" mat-raised-button color="primary" (click)="save(3)"
+        [disabled]="checkOrderStatus()">Cerrar comanda</button>
+</div>

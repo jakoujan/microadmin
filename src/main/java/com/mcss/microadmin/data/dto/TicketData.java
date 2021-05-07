@@ -5,29 +5,35 @@
  */
 package com.mcss.microadmin.data.dto;
 
-import java.math.BigDecimal;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-/**
- *
- * @author edgar
- */
+@Component
 public class TicketData {
 
+    @Value("${ticket.printer}")
     private String printerName;
+    @Value("${ticket.header}")
     private String header;
+    @Value("${ticket.footer}")
     private String footer;
+    @Value("${ticket.message.1}")
     private String messageOne;
+    @Value("${ticket.message.2}")
     private String messageTwo;
+    @Value("${ticket.logo.path}")
+    private String logoPath;
 
     public TicketData() {
     }
 
-    public TicketData(String printerName, String header, String footer, String messageOne, String messageTwo) {
+    public TicketData(String printerName, String header, String footer, String messageOne, String messageTwo, String logoPath) {
         this.printerName = printerName;
         this.header = header;
         this.footer = footer;
         this.messageOne = messageOne;
         this.messageTwo = messageTwo;
+        this.logoPath = logoPath;
     }
 
     public String getPrinterName() {
@@ -68,6 +74,14 @@ public class TicketData {
 
     public void setMessageTwo(String messageTwo) {
         this.messageTwo = messageTwo;
+    }
+
+    public String getLogoPath() {
+        return logoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
     }
 
 }

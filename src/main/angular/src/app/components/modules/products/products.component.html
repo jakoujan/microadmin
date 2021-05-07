@@ -1,6 +1,5 @@
 <mat-toolbar class="module-toolbar" role="heading">
     <mat-toolbar-row>
-        <mat-icon class="icon">group</mat-icon>
         <span>Productos</span>
         <span class="filler"></span>
         <button mat-flat-button color="accent" aria-labelledby="Nuevo cliente" [disabled]="disable(permission.write)"
@@ -21,7 +20,7 @@
             [floatLabel]="'never'">
             <input matInput placeholder="Descripción" [(ngModel)]="filter.entity.description">
         </mat-form-field>
-        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter()">
+        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter(true)">
             <mat-icon>search</mat-icon>
         </button>
         <button mat-icon-button aria-labelledby="Cerrar la busqueda" (click)="toggleSearchBar()">

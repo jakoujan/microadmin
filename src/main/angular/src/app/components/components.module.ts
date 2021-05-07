@@ -31,13 +31,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CustomersComponent } from './modules/customers/customers.component';
 import { CustomerFormComponent } from './modules/customer-form/customer-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { CustomerPipe } from '../pipes/customer.pipe';
 import { ModulesPanelMenuComponent } from './common/modules-panel-menu/modules-panel-menu.component';
-import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
+import { MatRippleModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ConfigurationComponent } from './modules/configuration/configuration.component';
 import { DirectivesModule } from '../directives/directives.module';
-import { CustomerTypePipe } from '../pipes/customer-type.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SuppliersComponent } from './modules/suppliers/suppliers.component';
 import { SupplierFormComponent } from './modules/supplier-form/supplier-form.component';
@@ -58,6 +56,21 @@ import { WorkstationsComponent } from './modules/workstations/workstations.compo
 import { WorkstationFormComponent } from './modules/workstation-form/workstation-form.component';
 import { StockComponent } from './operation/stock/stock.component';
 import { InitialStockComponent } from './operation/initial-stock/initial-stock.component';
+import { CheckoutComponent } from './operation/checkout/checkout.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProductTypesComponent } from './modules/product-types/product-types.component';
+import { ProductTypeFormComponent } from './modules/product-type-form/product-type-form.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { TablesComponent } from './modules/tables/tables.component';
+import { TableFormComponent } from './modules/table-form/table-form.component';
+import { OrdersComponent } from './operation/orders/orders.component';
+import { OrderFormComponent } from './operation/order-form/order-form.component';
+import { ProductSelectionComponent } from './custom/product-selection/product-selection.component';
+import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.component';
+import { CashCountComponent } from './reports/cash-count/cash-count.component';
+import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
+import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
+import { ProductElaborationsComponent } from './operation/product-elaborations/product-elaborations.component';
 
 @NgModule({
   declarations: [
@@ -70,10 +83,8 @@ import { InitialStockComponent } from './operation/initial-stock/initial-stock.c
     CustomerFormComponent,
     SuppliersComponent,
     SupplierFormComponent,
-    CustomerPipe,
     ModulesPanelMenuComponent,
     ConfigurationComponent,
-    CustomerTypePipe,
     BrandsComponent,
     BrandFormComponent,
     SectionsComponent,
@@ -89,7 +100,18 @@ import { InitialStockComponent } from './operation/initial-stock/initial-stock.c
     WorkstationsComponent,
     WorkstationFormComponent,
     StockComponent,
-    InitialStockComponent
+    InitialStockComponent,
+    CheckoutComponent,
+    ProductTypesComponent,
+    ProductTypeFormComponent,
+    TablesComponent,
+    TableFormComponent,
+    OrdersComponent,
+    OrderFormComponent,
+    ProductSelectionComponent,
+    CheckoutFormComponent,
+    CashCountComponent,
+    ProductElaborationsComponent
   ],
   imports: [
     CommonModule,
@@ -123,6 +145,13 @@ import { InitialStockComponent } from './operation/initial-stock/initial-stock.c
     MatDialogModule,
     DirectivesModule,
     MatTabsModule,
+    PipesModule,
+    NgxMatSelectSearchModule,
+    MatDatetimepickerModule,
+    MatMomentDatetimeModule,
+  ],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }
   ]
 })
 export class ComponentsModule { }

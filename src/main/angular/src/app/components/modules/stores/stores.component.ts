@@ -60,7 +60,10 @@ export class StoresComponent extends BaseComponent implements OnInit, OnDestroy,
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.storeService.filter(this.filter).then(response => {
       this.dataSource = new StoresDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

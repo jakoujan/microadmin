@@ -6,7 +6,9 @@
 package com.mcss.microadmin.data.dao;
 
 import com.mcss.microadmin.data.entity.Product;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -14,6 +16,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ProductDAO extends PagingAndSortingRepository<Product, Integer>, ExtendedProductDAO {
 
-    public Iterable<Product> findByActive(boolean active);
+    @Query("SELECT new com.mcss.microadmin.data.entity.Product(p.id, p.barcode, p.description, p.retailPrice, p.type) From Product p JOIN p.type pt WHERE p.active=:active")
+    public Iterable<Product> findByActive(@Param("active") boolean active);
 
 }

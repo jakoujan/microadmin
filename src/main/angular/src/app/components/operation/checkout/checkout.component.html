@@ -1,0 +1,57 @@
+<mat-toolbar class="module-toolbar" role="heading">
+    <mat-toolbar-row class="toolbar">
+        <span>Caja de cobro</span>
+        <span class="filler"></span>
+        <mat-menu #appMenu="matMenu">
+            <!--button mat-menu-item (click)="initialStock()">
+                <mat-icon>shopping_basket</mat-icon> Venta sencilla
+            </button>
+            <mat-divider></mat-divider-->
+            <button mat-menu-item (click)="toggleSearchBar()">
+                <mat-icon>search</mat-icon> Buscar
+            </button>
+        </mat-menu>
+        <button mat-icon-button class="search-button" aria-labelledby="Opciones" [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="search-bar" [ngClass]="{'showed-search-bar': !filter.hidden}">
+        <mat-form-field class="input-full-width searchable-input" appearance="none" [hideRequiredMarker]="false"
+            [floatLabel]="'never'">
+            <input matInput placeholder="Nombre del cliente" [(ngModel)]="filter.entity.responsible">
+        </mat-form-field>
+        <button mat-icon-button aria-labelledby="Cerrar la busqueda" (click)="toggleSearchBar()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-card class="order-card">
+    <mat-card-header>
+        <h3 class="order-active">Ordenes por cobrar</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let order of orders" matRipple (click)="open(order)">
+                <mat-icon mat-list-icon>receipt_long</mat-icon>
+                <div mat-line class="order-title">Mesa: {{order.table}} </div>
+                <div mat-line>Nombre: {{order.responsible}} </div>
+                <div mat-line>Orden: {{order.id | leadingZeros: 5}}</div>
+                <div mat-line>Total: {{order.totalAmount | currency}} </div>
+
+                <button mat-icon-button class="search-button" aria-labelledby="Opciones"
+                    (click)="$event.stopPropagation()" [matMenuTriggerFor]="orderMenu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+                <mat-menu #orderMenu="matMenu">
+                    <button mat-menu-item (click)="open(order)">
+                        <mat-icon>payments</mat-icon> Cobrar
+                    </button>
+                </mat-menu>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

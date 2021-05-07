@@ -8,11 +8,17 @@ package com.mcss.microadmin.controller;
 import com.mcss.microadmin.data.entity.Brand;
 import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
+import com.mcss.microadmin.data.entity.Product;
+import com.mcss.microadmin.data.entity.ProductType;
+import com.mcss.microadmin.data.entity.Status;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
+import com.mcss.microadmin.data.entity.Supplier;
+import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
+import com.mcss.microadmin.data.entity.User;
 import com.mcss.microadmin.model.CatalogModel;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +76,36 @@ public class CatalogController {
     @GetMapping(value = "stores")
     public Iterable<Store> strores() {
         return this.catalogModel.stores();
+    }
+    
+    @GetMapping(value = "suppliers")
+    public Iterable<Supplier> suppliers() {
+        return this.catalogModel.suppliers();
+    }
+    
+    @GetMapping(value = "product/types")
+    public Iterable<ProductType> productTypes() {
+        return this.catalogModel.productTypes();
+    }
+    
+    @GetMapping(value = "products")
+    public Iterable<Product> products() {
+        return this.catalogModel.products();
+    }
+    
+    @GetMapping(value = "status")
+    public Iterable<Status> status() {
+        return this.catalogModel.status();
+    }
+    
+    @GetMapping(value = "tables")
+    public Iterable<Table> tables() {
+        return this.catalogModel.tables();
+    }
+    
+    @GetMapping(value = "users")
+    public Iterable<User> users() {
+        return this.catalogModel.users();
     }
 
 }

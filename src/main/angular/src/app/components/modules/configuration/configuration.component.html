@@ -1,7 +1,6 @@
 <mat-toolbar class="module-toolbar" role="heading">
   <mat-toolbar-row>
-    <mat-icon class="icon">settings</mat-icon>
-    <span>Configuración del sistema</span>
+    <span>Configuración</span>
     <span class="filler"></span>
     <button mat-flat-button color="accent" aria-labelledby="Nuevo cliente" [disabled]="generalForm.invalid"
       (click)="save()">
@@ -9,297 +8,331 @@
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-card class="card-table">
-  <mat-card-content class="card-table-content">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Datos del establecimiento
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <form [formGroup]="storeForm">
-          <div class="row">
+
+<div class="configuration">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Datos del establecimiento
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="storeForm">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Razon social</mat-label>
+              <input matInput placeholder="Razon social" formControlName="bussinesName" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.bussinesName"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Nombre del responsable</mat-label>
+              <input matInput placeholder="Nombre del responsable" formControlName="name" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.name"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>R.F.C.</mat-label>
+              <input matInput placeholder="R.F.C." formControlName="taxId" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.taxId"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Regimen fiscal</mat-label>
+              <input matInput placeholder="Regimen fiscal" formControlName="taxRegime" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.taxRegime"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Teléfono</mat-label>
+              <input matInput placeholder="Teléfono" formControlName="phoneNumber">
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.phoneNumber"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="box col">
             <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Razon social" formControlName="bussinesName" required>
+              <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="Correo electrónico" formControlName="email">
                 <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.bussinesName"></custom-mat-error>
+                  <custom-mat-error [control]="storeForm.controls.email"></custom-mat-error>
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Nombre del responsable" formControlName="name" required>
+              <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Página web</mat-label>
+                <input matInput placeholder="Página web" formControlName="webpage">
                 <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.name"></custom-mat-error>
+                  <custom-mat-error [control]="storeForm.controls.webpage"></custom-mat-error>
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
-          <div class="row">
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Calle</mat-label>
+              <input matInput placeholder="Calle" formControlName="street" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.street"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="box col">
             <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="R.F.C." formControlName="taxId" required>
+              <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Número exterior</mat-label>
+                <input matInput placeholder="Número exterior" formControlName="external" required>
                 <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.taxId"></custom-mat-error>
+                  <custom-mat-error [control]="storeForm.controls.external"></custom-mat-error>
                 </mat-error>
               </mat-form-field>
             </div>
             <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Regimen fiscal" formControlName="taxRegime" required>
+              <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Número interior</mat-label>
+                <input matInput placeholder="Número interior" formControlName="internal">
                 <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.taxRegime"></custom-mat-error>
+                  <custom-mat-error [control]="storeForm.controls.internal"></custom-mat-error>
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Telefono" formControlName="phoneNumber">
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.phoneNumber"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="box col">
-              <div class="col">
-                <mat-form-field class="input-full-width">
-                  <input matInput placeholder="Correo electronico" formControlName="email">
-                  <mat-error>
-                    <custom-mat-error [control]="storeForm.controls.email"></custom-mat-error>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="input-full-width">
-                  <input matInput placeholder="Pagina web" formControlName="webpage">
-                  <mat-error>
-                    <custom-mat-error [control]="storeForm.controls.webpage"></custom-mat-error>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label></mat-label>
+              <input matInput placeholder="Colonia" formControlName="colony" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.colony"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Calle" formControlName="street" required>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.street"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="box col">
-              <div class="col">
-                <mat-form-field class="input-full-width">
-                  <input matInput placeholder="Numero externo" formControlName="external" required>
-                  <mat-error>
-                    <custom-mat-error [control]="storeForm.controls.external"></custom-mat-error>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field class="input-full-width">
-                  <input matInput placeholder="Numero interno" formControlName="internal">
-                  <mat-error>
-                    <custom-mat-error [control]="storeForm.controls.internal"></custom-mat-error>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Ciudad</mat-label>
+              <input matInput placeholder="Ciudad" formControlName="city" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.city"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Colonia" formControlName="colony" required>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.colony"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Ciudad" formControlName="city" required>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.city"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Municipio</mat-label>
+              <input matInput placeholder="Municipio" formControlName="county" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.county"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Municipio" formControlName="county" required>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.county"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="state" placeholder="Estado" required>
-                  <mat-option *ngFor="let state of states" [value]="state.id">{{ state.name }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.state"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Estado</mat-label>
+              <mat-select matNativeControl formControlName="state" placeholder="Estado" required>
+                <mat-option *ngFor="let state of states" [value]="state.id">{{ state.name }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.state"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="country" placeholder="País" required>
-                  <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.country"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Codigo postal" formControlName="postalCode" required>
-                <mat-error>
-                  <custom-mat-error [control]="storeForm.controls.postalCode"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>País</mat-label>
+              <mat-select matNativeControl formControlName="country" placeholder="País" required>
+                <mat-option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.country"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Ticket
-          </mat-panel-title>
-          <mat-panel-description>
-            Datos informativos del ticket
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <form [formGroup]="ticketForm">
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="printerName" placeholder="Impresora de tickets" required>
-                  <mat-option *ngFor="let printer of printers" [value]="printer">{{ printer }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="ticketForm.controls.printerName"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Código postal</mat-label>
+              <input matInput placeholder="Código postal" formControlName="postalCode" required>
+              <mat-error>
+                <custom-mat-error [control]="storeForm.controls.postalCode"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Encabezado del ticket" formControlName="header" required>
-                <mat-error>
-                  <custom-mat-error [control]="ticketForm.controls.header"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ticket
+        </mat-panel-title>
+        <mat-panel-description>
+          Datos informativos del ticket
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="ticketForm">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Impresora de tickets</mat-label>
+              <mat-select matNativeControl formControlName="printerName" placeholder="Impresora de tickets" required>
+                <mat-option *ngFor="let printer of printers" [value]="printer">{{ printer }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.printerName"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Pie de ticket" formControlName="footer" required>
-                <mat-error>
-                  <custom-mat-error [control]="ticketForm.controls.footer"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label></mat-label>
+              <input matInput placeholder="Logotipo" formControlName="logoPath" required>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.logoPath"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Mensaje 1" formControlName="messageOne" required>
-                <mat-error>
-                  <custom-mat-error [control]="ticketForm.controls.messageOne"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Mensaje 2" formControlName="messageTwo" required>
-                <mat-error>
-                  <custom-mat-error [control]="ticketForm.controls.messageTwo"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Encabezado del ticket</mat-label>
+              <input matInput placeholder="Encabezado del ticket" formControlName="header" required>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.header"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-        </form>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Puerto serial bascula</mat-panel-title>
-        </mat-expansion-panel-header>
-        <form [formGroup]="portForm">
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <input matInput placeholder="Nombre de puerto" formControlName="name" required>
-                <mat-error>
-                  <custom-mat-error [control]="portForm.controls.name"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Pie de ticket</mat-label>
+              <input matInput placeholder="Pie de ticket" formControlName="footer" required>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.footer"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="baudRate" placeholder="Baudios" required>
-                  <mat-option *ngFor="let baudrate of baudrates" [value]="baudrate">{{ baudrate }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="portForm.controls.baudRate"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Mensaje 1</mat-label>
+              <input matInput placeholder="Mensaje 1" formControlName="messageOne" required>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.messageOne"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="dataBits" placeholder="Bits de datos" required>
-                  <mat-option *ngFor="let databit of databits" [value]="databit">{{ databit }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="portForm.controls.dataBits"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Mensaje 2</mat-label>
+              <input matInput placeholder="Mensaje 2" formControlName="messageTwo" required>
+              <mat-error>
+                <custom-mat-error [control]="ticketForm.controls.messageTwo"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="parity" placeholder="Paridad"
-                  [compareWith]="compare" required>
-                  <mat-option *ngFor="let parity of parities" [value]="parity">{{ parity.description }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="portForm.controls.parity"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Puerto serial bascula</mat-panel-title>
+      </mat-expansion-panel-header>
+      <form [formGroup]="portForm">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Nombre de puerto</mat-label>
+              <input matInput placeholder="Nombre de puerto" formControlName="name" required>
+              <mat-error>
+                <custom-mat-error [control]="portForm.controls.name"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col">
-              <mat-form-field class="input-full-width">
-                <mat-select matNativeControl formControlName="stopBits" placeholder="Bit de parada"
-                  [compareWith]="compare" required>
-                  <mat-option *ngFor="let stopbit of stopbits" [value]="stopbit">{{ stopbit.description }}</mat-option>
-                </mat-select>
-                <mat-error>
-                  <custom-mat-error [control]="portForm.controls.stopBits"></custom-mat-error>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Baudios</mat-label>
+              <mat-select matNativeControl formControlName="baudRate" placeholder="Baudios" required>
+                <mat-option *ngFor="let baudrate of baudrates" [value]="baudrate">{{ baudrate }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="portForm.controls.baudRate"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
           </div>
-        </form>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </mat-card-content>
-</mat-card>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Bits de datos</mat-label>
+              <mat-select matNativeControl formControlName="dataBits" placeholder="Bits de datos" required>
+                <mat-option *ngFor="let databit of databits" [value]="databit">{{ databit }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="portForm.controls.dataBits"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Paridad</mat-label>
+              <mat-select matNativeControl formControlName="parity" placeholder="Paridad" [compareWith]="compare"
+                required>
+                <mat-option *ngFor="let parity of parities" [value]="parity">{{ parity.description }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="portForm.controls.parity"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="input-full-width" appearance="fill">
+              <mat-label>Bit de parada</mat-label>
+              <mat-select matNativeControl formControlName="stopBits" placeholder="Bit de parada"
+                [compareWith]="compare" required>
+                <mat-option *ngFor="let stopbit of stopbits" [value]="stopbit">{{ stopbit.description }}</mat-option>
+              </mat-select>
+              <mat-error>
+                <custom-mat-error [control]="portForm.controls.stopBits"></custom-mat-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

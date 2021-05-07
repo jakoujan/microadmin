@@ -19,12 +19,14 @@ import { ConfirmationDialogComponent } from './components/common/ui/confirmation
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getSpanishPaginatorIntl } from './helpers/helpers';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { InjectableRxStompConfig, RxStompService, rxStompServiceFactory } from '@stomp/ng2-stompjs';
+import { stompConfig } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     SpinnerComponent,
-    ConfirmationDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ConfirmationDialogComponent
   ],
   providers: [
-    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
+    {
+      provide: InjectableRxStompConfig,
+      useValue: stompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -60,7 +60,10 @@ export class UnitsComponent extends BaseComponent implements OnInit, OnDestroy, 
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.unitService.filter(this.filter).then(response => {
       this.dataSource = new UnitsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

@@ -43,6 +43,7 @@ export class ConfigurationComponent implements OnInit {
       this.ticketForm.controls.footer.setValue(response.fields.ticket.footer);
       this.ticketForm.controls.messageOne.setValue(response.fields.ticket.messageOne);
       this.ticketForm.controls.messageTwo.setValue(response.fields.ticket.messageTwo);
+      this.ticketForm.controls.logoPath.setValue(response.fields.ticket.logoPath);
 
       this.storeForm.controls.name.setValue(response.fields.store.name);
       this.storeForm.controls.bussinesName.setValue(response.fields.store.bussinesName);
@@ -98,9 +99,10 @@ export class ConfigurationComponent implements OnInit {
       header: ['', Validators.required],
       footer: ['', Validators.required],
       messageOne: [''],
-      messageTwo: ['']
+      messageTwo: [''],
+      logoPath: ['', Validators.required]
     });
-    
+
 
     this.generalForm = this.formBuilder.group({
       store: this.storeForm,
@@ -116,7 +118,8 @@ export class ConfigurationComponent implements OnInit {
         header: this.ticketForm.controls.header.value,
         footer: this.ticketForm.controls.footer.value,
         messageOne: this.ticketForm.controls.messageOne.value,
-        messageTwo: this.ticketForm.controls.messageTwo.value
+        messageTwo: this.ticketForm.controls.messageTwo.value,
+        logoPath: this.ticketForm.controls.logoPath.value
       },
       store: {
         name: this.storeForm.controls.name.value,
@@ -146,7 +149,7 @@ export class ConfigurationComponent implements OnInit {
     }
     this.configurationServices.save(configuration).then(response => {
       if (response.status === 'OK') {
-        const snacBarRef = this.snackBar.open(response.message, undefined, {
+        const snacBarRef = this.snackBar.open(response.message, "CERRAR", {
           duration: 3500
         });
       }

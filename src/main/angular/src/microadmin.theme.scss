@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+@import "~@mat-datetimepicker/core/datetimepicker/datetimepicker-theme.scss";
 @import url("https://fonts.googleapis.com/css?family=Muli:300,400,700,800&display=swap");
 
 $custom-typography: mat-typography-config(
@@ -7,20 +8,20 @@ $custom-typography: mat-typography-config(
 @include mat-core($custom-typography);
 
 $color-microadmin: (
-  50: #e0e4e7,
-  100: #b3bbc3,
-  200: #808e9b,
-  300: #4d6172,
-  400: #263f54,
-  500: #001d36,
-  600: #001a30,
-  700: #001529,
-  800: #001122,
-  900: #000a16,
-  A100: #5684ff,
-  A200: #235fff,
-  A400: #0041ef,
-  A700: #003ad5,
+  50: #e1e6ea,
+  100: #b5c0ca,
+  200: #8396a7,
+  300: #516c84,
+  400: #2c4d69,
+  500: #072d4f,
+  600: #062848,
+  700: #05223f,
+  800: #041c36,
+  900: #021126,
+  A100: #618fff,
+  A200: #2e6bff,
+  A400: #0049fa,
+  A700: #0041e0,
   contrast: (
     50: #000000,
     100: #000000,
@@ -40,6 +41,39 @@ $color-microadmin: (
 );
 
 $color-microadmin-accent: (
+  50: #fdf8e6,
+  100: #fbedc2,
+  200: #f8e199,
+  300: #f5d470,
+  400: #f3cb51,
+  500: #f1c232,
+  600: #efbc2d,
+  700: #edb426,
+  800: #ebac1f,
+  900: #e79f13,
+  A100: #ffffff,
+  A200: #fff4e2,
+  A400: #ffe2af,
+  A700: #ffd896,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$color-microadmin-warning: (
   50: #fee3e3,
   100: #fcb9b9,
   200: #fa8b8b,
@@ -72,39 +106,6 @@ $color-microadmin-accent: (
   ),
 );
 
-$color-microadmin-warning: (
-  50: #f2f7ff,
-  100: #deeaff,
-  200: #c8ddff,
-  300: #b2cfff,
-  400: #a2c4ff,
-  500: #91baff,
-  600: #89b3ff,
-  700: #7eabff,
-  800: #74a3ff,
-  900: #6294ff,
-  A100: #ffffff,
-  A200: #ffffff,
-  A400: #ffffff,
-  A700: #ebf1ff,
-  contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #000000,
-    400: #000000,
-    500: #000000,
-    600: #000000,
-    700: #000000,
-    800: #000000,
-    900: #000000,
-    A100: #000000,
-    A200: #000000,
-    A400: #000000,
-    A700: #000000,
-  ),
-);
-
 $microadmin-app-primary: mat-palette($color-microadmin);
 $microadmin-app-accent: mat-palette($color-microadmin-accent);
 
@@ -112,9 +113,14 @@ $microadmin-app-accent: mat-palette($color-microadmin-accent);
 $microadmin-app-warn: mat-palette($color-microadmin-warning);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$microadmin-app-theme: mat-light-theme($microadmin-app-primary, $microadmin-app-accent, $microadmin-app-warn);
+$microadmin-app-theme: mat-light-theme(
+  $microadmin-app-primary,
+  $microadmin-app-accent,
+  $microadmin-app-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+@include mat-datetimepicker-theme($microadmin-app-theme);
 @include angular-material-theme($microadmin-app-theme);

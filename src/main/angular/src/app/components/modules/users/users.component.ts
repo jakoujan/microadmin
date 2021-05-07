@@ -60,7 +60,10 @@ export class UsersComponent extends BaseComponent implements AfterViewInit, OnIn
   ngAfterViewInit() {
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.userService.filter(this.filter).then(response => {
       this.dataSource = new UsersDataSource();
       this.dataSource.sort = this.sort;

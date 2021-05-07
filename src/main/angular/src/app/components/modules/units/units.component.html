@@ -1,26 +1,27 @@
 <mat-toolbar class="module-toolbar" role="heading">
     <mat-toolbar-row>
-        <mat-icon class="icon">group</mat-icon>
         <span>Unidades de medida</span>
         <span class="filler"></span>
-        <button mat-flat-button color="accent" aria-labelledby="Nuevo cliente" [disabled]="disable(permission.write)" (click)="addRow()">
-      Nueva unidad de medida
-    </button>
+        <button mat-flat-button color="accent" aria-labelledby="Nuevo cliente" [disabled]="disable(permission.write)"
+            (click)="addRow()">
+            Nueva
+        </button>
         <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="toggleSearchBar()">
-      <mat-icon>search</mat-icon>
-    </button>
+            <mat-icon>search</mat-icon>
+        </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="search-bar" [ngClass]="{'showed-search-bar': !filter.hidden}">
         <mat-icon class="search-icon">search</mat-icon>
-        <mat-form-field class="input-full-width searchable-input" appearance="none" [hideRequiredMarker]="false" [floatLabel]="'never'">
+        <mat-form-field class="input-full-width searchable-input" appearance="none" [hideRequiredMarker]="false"
+            [floatLabel]="'never'">
             <input matInput placeholder="Unidad" [(ngModel)]="filter.entity.unit">
         </mat-form-field>
-        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter()">
-      <mat-icon>search</mat-icon>
-    </button>
+        <button mat-icon-button class="search-button" aria-labelledby="Busqueda" (click)="setFilter(true)">
+            <mat-icon>search</mat-icon>
+        </button>
         <button mat-icon-button aria-labelledby="Cerrar la busqueda" (click)="toggleSearchBar()">
-      <mat-icon>close</mat-icon>
-    </button>
+            <mat-icon>close</mat-icon>
+        </button>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -39,10 +40,16 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
                 <td mat-cell *matCellDef="let row">
                     <mat-menu #appMenu="matMenu">
-                        <button mat-menu-item [disabled]="disable(permission.write)" (click)="showForm(row)"><mat-icon>create</mat-icon> Editar</button>
-                        <button mat-menu-item [disabled]="disable(permission.write)" (click)="delete(row)"><mat-icon>delete</mat-icon> Eliminar</button>
+                        <button mat-menu-item [disabled]="disable(permission.write)" (click)="showForm(row)">
+                            <mat-icon>create</mat-icon> Editar
+                        </button>
+                        <button mat-menu-item [disabled]="disable(permission.write)" (click)="delete(row)">
+                            <mat-icon>delete</mat-icon> Eliminar
+                        </button>
                     </mat-menu>
-                    <button mat-icon-button color="warn" [matMenuTriggerFor]="appMenu"><mat-icon>more_vert</mat-icon></button>
+                    <button mat-icon-button color="warn" [matMenuTriggerFor]="appMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
                 </td>
             </ng-container>
 
@@ -50,7 +57,9 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <mat-paginator class="sticky-paginator" #paginator [length]="dataSource?.count" [pageIndex]="filter.page" [pageSize]="filter.rows" [pageSizeOptions]="[20, 50, 100, 200]" (page)="pageChangeEvent($event)" showFirstLastButtons>
+        <mat-paginator class="sticky-paginator" #paginator [length]="dataSource?.count" [pageIndex]="filter.page"
+            [pageSize]="filter.rows" [pageSizeOptions]="[20, 50, 100, 200]" (page)="pageChangeEvent($event)"
+            showFirstLastButtons>
         </mat-paginator>
     </mat-card-content>
 </mat-card>

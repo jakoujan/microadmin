@@ -59,7 +59,10 @@ export class BrandsComponent extends BaseComponent implements OnInit, OnDestroy,
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.brandService.filter(this.filter).then(response => {
       this.dataSource = new BrandsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

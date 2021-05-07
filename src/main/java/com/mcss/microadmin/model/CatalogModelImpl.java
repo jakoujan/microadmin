@@ -5,23 +5,34 @@
  */
 package com.mcss.microadmin.model;
 
-import com.mcss.microadmin.data.Status;
 import com.mcss.microadmin.data.dao.BrandDAO;
 import com.mcss.microadmin.data.dao.CountryDAO;
 import com.mcss.microadmin.data.dao.PaymentMethodDAO;
+import com.mcss.microadmin.data.dao.ProductDAO;
+import com.mcss.microadmin.data.dao.ProductTypeDAO;
 import com.mcss.microadmin.data.dao.SectionDAO;
 import com.mcss.microadmin.data.dao.StateDAO;
+import com.mcss.microadmin.data.dao.StatusDAO;
 import com.mcss.microadmin.data.dao.StoreDAO;
+import com.mcss.microadmin.data.dao.SupplierDAO;
+import com.mcss.microadmin.data.dao.TableDAO;
 import com.mcss.microadmin.data.dao.TaxTypeDAO;
 import com.mcss.microadmin.data.dao.UnitDAO;
+import com.mcss.microadmin.data.dao.UserDAO;
 import com.mcss.microadmin.data.entity.Brand;
 import com.mcss.microadmin.data.entity.Country;
 import com.mcss.microadmin.data.entity.PaymentMethod;
+import com.mcss.microadmin.data.entity.Product;
+import com.mcss.microadmin.data.entity.ProductType;
+import com.mcss.microadmin.data.entity.Status;
 import com.mcss.microadmin.data.entity.Section;
 import com.mcss.microadmin.data.entity.State;
 import com.mcss.microadmin.data.entity.Store;
+import com.mcss.microadmin.data.entity.Supplier;
+import com.mcss.microadmin.data.entity.Table;
 import com.mcss.microadmin.data.entity.TaxType;
 import com.mcss.microadmin.data.entity.Unit;
+import com.mcss.microadmin.data.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.print.PrintService;
@@ -54,7 +65,25 @@ public class CatalogModelImpl implements CatalogModel {
     TaxTypeDAO taxTypeDAO;
 
     @Autowired
-    private StoreDAO storeDAO;
+    StoreDAO storeDAO;
+
+    @Autowired
+    SupplierDAO supplierDAO;
+
+    @Autowired
+    ProductTypeDAO productTypeDAO;
+
+    @Autowired
+    ProductDAO productDAO;
+    
+    @Autowired
+    StatusDAO statusDAO;
+    
+    @Autowired
+    TableDAO tableDAO;
+    
+    @Autowired
+    UserDAO userDAO;
 
     @Override
     public Iterable<Country> countries() {
@@ -68,7 +97,7 @@ public class CatalogModelImpl implements CatalogModel {
 
     @Override
     public Iterable<Brand> brands() {
-        return this.brandDAO.findByActive(Status.ACTIVE);
+        return this.brandDAO.findByActive(com.mcss.microadmin.data.Status.ACTIVE);
     }
 
     @Override
@@ -104,5 +133,35 @@ public class CatalogModelImpl implements CatalogModel {
     @Override
     public Iterable<Store> stores() {
         return this.storeDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<Supplier> suppliers() {
+        return this.supplierDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<ProductType> productTypes() {
+        return this.productTypeDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<Product> products() {
+        return this.productDAO.findByActive(Boolean.TRUE);
+    }
+
+    @Override
+    public Iterable<Status> status() {
+        return this.statusDAO.findAll();
+    }
+
+    @Override
+    public Iterable<Table> tables() {
+        return this.tableDAO.findByActive(Boolean.TRUE);
+    }
+    
+    @Override
+    public Iterable<User> users() {
+        return this.userDAO.findByActive(Boolean.TRUE);
     }
 }

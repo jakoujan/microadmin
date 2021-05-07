@@ -1,0 +1,53 @@
+.order-card {
+  margin: 10px;
+  padding: 0;
+}
+.action-marign {
+  margin-bottom: 115px;
+}
+.order-active {
+  margin: 15px 0 5px 20px;
+}
+
+.command-title {
+  display: flex;
+  margin: 20px 10px 0 10px;
+  .order-title {
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    margin: 10px 0 0 10px;
+  }
+}
+
+.general-form {
+  padding: 10px 20px;
+}
+
+.products {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  .item {
+    padding: 10px 20px 0 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    .data {
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      p.name {
+        font-size: 18px;
+      }
+    }
+    .action {
+      margin-top: 40px;
+    }
+  }
+}

@@ -7,6 +7,7 @@ package com.mcss.microadmin.data.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,11 +37,13 @@ public class Product implements Serializable {
     private boolean promotion;
     private BigDecimal minimumStock;
     private boolean active;
+    private ProductType type;
+    private ProductKit kit;
 
     public Product() {
     }
 
-    public Product(String barcode, Brand brand, Unit unit, String description, String longDescription, Section section, TaxType taxType, BigDecimal retailPrice, BigDecimal supplierPrice, BigDecimal promoPrice, boolean promotion, BigDecimal minimumStock, boolean active) {
+    public Product(String barcode, Brand brand, Unit unit, String description, String longDescription, Section section, TaxType taxType, BigDecimal retailPrice, BigDecimal supplierPrice, BigDecimal promoPrice, boolean promotion, BigDecimal minimumStock, boolean active, ProductType type, Flavor flavor) {
         this.barcode = barcode;
         this.brand = brand;
         this.unit = unit;
@@ -53,8 +57,21 @@ public class Product implements Serializable {
         this.promotion = promotion;
         this.minimumStock = minimumStock;
         this.active = active;
+        this.type = type;
     }
 
+    public Product(Integer id, String barcode, String description, BigDecimal retailPrice, ProductType type) {
+        this.id = id;
+        this.barcode = barcode;
+        this.description = description;
+        this.retailPrice = retailPrice;
+        this.type = type;
+    }
+
+    
+
+    
+    
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
@@ -185,6 +202,25 @@ public class Product implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @JoinColumn(name = "TYPE", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product", optional = true)
+    public ProductKit getKit() {
+        return kit;
+    }
+
+    public void setKit(ProductKit kit) {
+        this.kit = kit;
     }
 
 }

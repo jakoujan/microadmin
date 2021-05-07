@@ -26,6 +26,7 @@ public class BrandModelImpl implements BrandModel {
     public Response save(Brand brand) {
         Response response = Response.getInstance();
         this.brandDAO.save(brand);
+        this.brandDAO.findByActive(true);
         response.setMessage("La marca se ha guardado con exito");
         response.addField(Constants.ENTITY, brand);
         return response;

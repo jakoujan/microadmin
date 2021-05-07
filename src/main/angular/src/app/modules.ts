@@ -35,35 +35,44 @@ export const MODULES: Array<Module> = [
     id: 'operation',
     submodules: [
       {
-        name: 'Punto de venta',
-        id: 'pos',
-        uri: '/modules/pos',
+        name: 'Caja',
+        id: 'checkout',
+        uri: '/modules/checkout',
         icon: '',
         default: true,
         active: false
       },
       {
-        name: 'Corte de caja',
-        id: 'cash-balance',
-        uri: '/modules/cash-balance',
+        name: 'Comandas',
+        id: 'orders',
+        uri: '/modules/orders',
         icon: '',
-        default: true,
+        default: false,
         active: false
-      },
+      }
+      ,
       {
-        name: 'Inventario',
-        id: 'stock',
-        uri: '/modules/stock',
+        name: 'Elaboración',
+        id: 'elaboration',
+        uri: '/modules/elaboration',
         icon: '',
-        default: true,
+        default: false,
         active: false
-      },
+      }
+    ],
+    opened: false
+  },
+  {
+    title: 'Reportes',
+    icon: 'topic',
+    id: 'reports',
+    submodules: [
       {
-        name: 'Mermas',
-        id: 'shrinkage',
-        uri: '/modules/shrinkage',
+        name: 'Arqueo de caja',
+        id: 'cash-count',
+        uri: '/modules/cashcount',
         icon: '',
-        default: true,
+        default: false,
         active: false
       }
     ],
@@ -87,7 +96,15 @@ export const MODULES: Array<Module> = [
         id: 'workstations',
         uri: '/modules/workstations',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
+        active: false
+      },
+      {
+        name: 'Mesas',
+        id: 'tables',
+        uri: '/modules/tables',
+        icon: '',
+        default: false,
         active: false
       },
       {
@@ -95,7 +112,7 @@ export const MODULES: Array<Module> = [
         id: 'users',
         uri: '/modules/users',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -103,7 +120,7 @@ export const MODULES: Array<Module> = [
         id: 'customers',
         uri: '/modules/customers',
         icon: 'supervisor_account',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -111,7 +128,7 @@ export const MODULES: Array<Module> = [
         id: 'payment-methods',
         uri: '/modules/payment-methods',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -119,7 +136,7 @@ export const MODULES: Array<Module> = [
         id: 'brands',
         uri: '/modules/brands',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -127,7 +144,7 @@ export const MODULES: Array<Module> = [
         id: 'sections',
         uri: '/modules/sections',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -135,7 +152,15 @@ export const MODULES: Array<Module> = [
         id: 'suppliers',
         uri: '/modules/suppliers',
         icon: '',
-        default: true,
+        default: false,
+        active: false
+      },
+      {
+        name: 'Tipos de producto',
+        id: 'product-types',
+        uri: '/modules/product/types',
+        icon: '',
+        default: false,
         active: false
       },
       {
@@ -143,7 +168,7 @@ export const MODULES: Array<Module> = [
         id: 'products',
         uri: '/modules/products',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -151,7 +176,7 @@ export const MODULES: Array<Module> = [
         id: 'units',
         uri: '/modules/units',
         icon: '',
-        default: true,
+        default: false,
         active: false
       },
       {
@@ -159,7 +184,7 @@ export const MODULES: Array<Module> = [
         id: 'configuration',
         uri: '/modules/configuration',
         icon: '',
-        default: true,
+        default: false,
         active: false
       }
     ],

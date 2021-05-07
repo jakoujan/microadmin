@@ -60,7 +60,10 @@ export class SectionsComponent extends BaseComponent implements OnInit, OnDestro
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.sectionService.filter(this.filter).then(response => {
       this.dataSource = new SectionsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;

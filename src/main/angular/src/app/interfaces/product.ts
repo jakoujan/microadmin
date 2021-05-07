@@ -2,6 +2,8 @@ import { IBrand } from './brand';
 import { IUnit } from './unit';
 import { ISection } from './section';
 import { ITaxType } from './tax-type';
+import { IProductType } from './product-type';
+import { IProductKit } from "./product-kit";
 
 export interface IProduct {
     id: number;
@@ -18,4 +20,6 @@ export interface IProduct {
     promotion: boolean;
     minimumStock: number;
     active: boolean;
+    type: IProductType;
+    kit: IProductKit;
 }

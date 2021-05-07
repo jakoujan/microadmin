@@ -26,7 +26,7 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
   @ViewChild(MatTable) table: MatTable<IProductView>;
   dataSource: ProductsDataSource;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['description','actions', 'barcode', 'brand', 'minimumStock', 'supplierPrice', 'retailPrice', 'section', 'unit'];
+  displayedColumns = ['description', 'actions', 'barcode', 'brand', 'minimumStock', 'supplierPrice', 'retailPrice', 'section', 'unit'];
   filter: IProductViewFilter = {
     entity: {
       id: undefined,
@@ -67,7 +67,10 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
     this.setFilter();
   }
 
-  public setFilter() {
+  public setFilter(searchable?: boolean) {
+    if (searchable) {
+      this.filter.page = 0;
+    }
     this.productService.filter(this.filter).then(response => {
       this.dataSource = new ProductsDataSource(response.fields.data);
       this.dataSource.sort = this.sort;
@@ -115,7 +118,9 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
       promoPrice: undefined,
       promotion: undefined,
       minimumStock: undefined,
-      active: true
+      active: true,
+      type: undefined,
+      kit: undefined
     }
     this.showForm(entity, false);
   }
@@ -129,9 +134,9 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
           data: { entity: response.fields.entity }
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-          if (result) {
-            this.productService.save(result.entity).then(response => {
+        dialogRef.afterClosed().subscribe(product => {
+          if (product) {
+            this.productService.save(product).then(response => {
               this.setFilter();
             });
           }
@@ -144,9 +149,9 @@ export class ProductsComponent extends BaseComponent implements OnInit, OnDestro
         data: { entity: entity }
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.productService.save(result.entity).then(response => {
+      dialogRef.afterClosed().subscribe(product => {
+        if (product) {
+          this.productService.save(product).then(response => {
             this.setFilter();
           });
         }
