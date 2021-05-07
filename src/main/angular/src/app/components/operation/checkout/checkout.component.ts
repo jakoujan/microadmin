@@ -23,7 +23,8 @@ export class CheckoutComponent implements OnInit {
       table: undefined,
       responsible: undefined,
       totalAmount: undefined,
-      status: 3
+      status: 3,
+      orderStatusName: undefined
     },
     startDate: undefined,
     endDate: undefined,
@@ -41,7 +42,6 @@ export class CheckoutComponent implements OnInit {
       this.orders = response.fields.data;
     });
     this.subscription = this.rxStompService.watch(environment.websocket.topicPrefix).subscribe((message: Message) => {
-      // const response = JSON.parse(message.body);
       this.orderService.filter(this.filter).then(response => {
         this.orders = response.fields.data;
       });

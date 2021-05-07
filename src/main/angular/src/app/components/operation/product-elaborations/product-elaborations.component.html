@@ -1,0 +1,32 @@
+<mat-toolbar class="module-toolbar" role="heading">
+    <mat-toolbar-row class="toolbar">
+        <span>Productos en elaboración</span>
+        <span class="filler"></span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<mat-card class="order-card">
+    <mat-card-header>
+        <h3 class="order-active">Productos por preparar</h3>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="products">
+            <div class="item" *ngFor="let item of products">
+                <div class="data">
+                    <p class="name">{{item.description}}</p>
+                    <p>Cantidad: <b>{{item.quantity}}</b></p>
+                    <p>Mesa: <b>{{item.table}}</b></p>
+                    <p *ngIf="item.comment">Indicaciones de preparado:</p>
+                    <p *ngIf="item.comment"><b>{{item.comment}}</b></p>
+                </div>
+                <div class="action">
+                    <button mat-icon-button class="search-button" (click)="productReady(item)" aria-labelledby="Opciones">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

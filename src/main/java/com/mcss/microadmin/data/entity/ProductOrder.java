@@ -31,7 +31,7 @@ public class ProductOrder implements Serializable {
     private Product product;
     private BigDecimal quantity;
     private String comment;
-    private ProductOrderStatus status;
+    private Integer status;
 
     public ProductOrder() {
 
@@ -87,15 +87,12 @@ public class ProductOrder implements Serializable {
         this.comment = comment;
     }
     
-    @JoinColumn(name = "PRODUCT_ORDER_STATUS", nullable = false)
-    public ProductOrderStatus getStatus() {
+    @Column(name = "STATUS")
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(ProductOrderStatus status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
-    
-    
-
 }

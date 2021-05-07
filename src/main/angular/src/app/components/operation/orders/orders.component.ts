@@ -20,7 +20,8 @@ export class OrdersComponent implements OnInit {
       table: undefined,
       responsible: undefined,
       totalAmount: undefined,
-      status: 1
+      status: 1,
+      orderStatusName: undefined
     },
     startDate: undefined,
     endDate: undefined,

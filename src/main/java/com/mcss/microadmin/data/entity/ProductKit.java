@@ -8,12 +8,10 @@ package com.mcss.microadmin.data.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mcss.microadmin.data.converter.KitItemsConverter;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -25,26 +23,15 @@ public class ProductKit implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
     private Product product;
-    private Set<ItemKit> items;
+    private List<ItemKit> items;
 
     public ProductKit() {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @JsonIgnore
-    @JoinColumn(name = "product", nullable = false)
+    @JoinColumn(name = "product", nullable = false, referencedColumnName = "id")
     @OneToOne()
     public Product getProduct() {
         return product;
@@ -56,11 +43,11 @@ public class ProductKit implements Serializable {
 
     @Convert(converter = KitItemsConverter.class)
     @Column(name = "PRODUCTS", columnDefinition = "text")
-    public Set<ItemKit> getItems() {
+    public List<ItemKit> getItems() {
         return items;
     }
 
-    public void setItems(Set<ItemKit> items) {
+    public void setItems(List<ItemKit> items) {
         this.items = items;
     }
 

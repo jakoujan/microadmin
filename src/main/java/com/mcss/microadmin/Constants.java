@@ -40,4 +40,5 @@ public class Constants {
     public static String PORT = "port";
     public static String CHECKOUT_TOPIC = "/web/action";
     public static String AMOUNT = "totalAmount";
+    public static String PRODUCTS = "products";
 }

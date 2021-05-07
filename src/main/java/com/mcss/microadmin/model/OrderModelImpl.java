@@ -5,15 +5,20 @@
  */
 package com.mcss.microadmin.model;
 
+import com.mcss.microadmin.data.ProductStatus;
 import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.Constants;
 import com.mcss.microadmin.data.dao.OrderDAO;
 import com.mcss.microadmin.data.dao.ProductDAO;
+import com.mcss.microadmin.data.dao.ProductOrderDAO;
 import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.entity.ProductOrder;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
+import com.mcss.microadmin.data.view.ProductPreparation;
 import com.mcss.microadmin.service.TicketPrintService;
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +44,9 @@ public class OrderModelImpl implements OrderModel {
     ProductDAO productDAO;
 
     @Autowired
+    ProductOrderDAO productOrderDAO;
+
+    @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
     @Override
@@ -46,16 +54,24 @@ public class OrderModelImpl implements OrderModel {
     public Response save(Order order) {
         Response response = Response.getInstance();
         order.getProducts().forEach((ProductOrder product) -> {
+            if (Objects.equals(order.getStatus().getId(), ProductStatus.PREPARING)) {
+                product.setStatus(1);
+            }
+            if (Objects.equals(order.getStatus().getId(), ProductStatus.PREPARED)) {
+                product.setStatus(2);
+            }
             product.setOrder(order);
             product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
         });
         this.orderDAO.save(order);
+        this.updateCheckout();
         switch (order.getStatus().getId()) {
             case 3: {
-                this.updateCheckout();
                 try {
                     ticketPrint.printOrder(order);
                 } catch (IOException ex) {
+                    LOGGER.error("Error al imprimir ticket", ex);
+                } catch (NullPointerException ex) {
                     LOGGER.error("Error al imprimir ticket", ex);
                 }
             }
@@ -93,6 +109,26 @@ public class OrderModelImpl implements OrderModel {
         Response response = Response.getInstance();
         response.addField(Constants.ENTITY, this.orderDAO.findById(id).get());
         return response;
+    }
+
+    @Override
+    public Response productElaboration(Integer status) {
+        Response response = Response.getInstance();
+        Iterable<ProductPreparation> products = this.orderDAO.findProductsByStatus(status);
+        response.addField(Constants.PRODUCTS, products);
+        return response;
+
+    }
+
+    @Override
+    public Response productElaborationDone(Integer id) {
+        Optional<ProductOrder> opo = this.productOrderDAO.findById(id);
+        if (opo.isPresent()) {
+            ProductOrder po = opo.get();
+            po.setStatus(ProductStatus.PREPARED);
+            this.productOrderDAO.save(po);
+        }
+        return this.productElaboration(ProductStatus.PREPARING);
     }
 
     private void updateCheckout() {

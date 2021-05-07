@@ -40,7 +40,6 @@
                 <div mat-line>Nombre: {{order.responsible}} </div>
                 <div mat-line>Orden: {{order.id | leadingZeros: 5}}</div>
                 <div mat-line>Total: {{order.totalAmount | currency}} </div>
-                <div mat-line>Estado: {{order.status | orderStatus}} </div>
 
                 <button mat-icon-button class="search-button" aria-labelledby="Opciones"
                     (click)="$event.stopPropagation()" [matMenuTriggerFor]="orderMenu">

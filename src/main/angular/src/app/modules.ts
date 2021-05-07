@@ -50,6 +50,15 @@ export const MODULES: Array<Module> = [
         default: false,
         active: false
       }
+      ,
+      {
+        name: 'Elaboración',
+        id: 'elaboration',
+        uri: '/modules/elaboration',
+        icon: '',
+        default: false,
+        active: false
+      }
     ],
     opened: false
   },

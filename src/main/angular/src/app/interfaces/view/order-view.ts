@@ -4,4 +4,5 @@ export interface IOrderView {
     responsible: string
     totalAmount: number;
     status: number;
+    orderStatusName: string
 }

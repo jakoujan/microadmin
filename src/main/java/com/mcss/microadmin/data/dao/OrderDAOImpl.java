@@ -9,6 +9,7 @@ import com.mcss.microadmin.data.entity.Order;
 import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.data.view.OrderView;
+import com.mcss.microadmin.data.view.ProductPreparation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,8 +22,8 @@ import javax.persistence.criteria.Root;
 
 public class OrderDAOImpl implements ExtendedOrderDAO {
 
-   @PersistenceContext
-   private EntityManager manager;
+    @PersistenceContext
+    private EntityManager manager;
 
     @Override
     public List<OrderView> findByFilter(OrderViewFilter filter) {
@@ -30,18 +31,18 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
         CriteriaQuery<OrderView> criteria = builder.createQuery(OrderView.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<OrderView> root = criteria.from(OrderView.class);
-        if (filter.getEntity().getResponsible()!= null && !filter.getEntity().getResponsible().equals("")) {
+        if (filter.getEntity().getResponsible() != null && !filter.getEntity().getResponsible().equals("")) {
             predicates.add(builder.like(root.get("responsible"), "%" + filter.getEntity().getResponsible() + "%"));
         }
-        
-        if (filter.getEntity().getTable()!= null && !filter.getEntity().getTable().equals("")) {
+
+        if (filter.getEntity().getTable() != null && !filter.getEntity().getTable().equals("")) {
             predicates.add(builder.like(root.get("table"), "%" + filter.getEntity().getTable() + "%"));
         }
-        
-        if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
+
+        if (filter.getEntity().getStatus() != null && !filter.getEntity().getStatus().equals("")) {
             predicates.add(builder.equal(root.get("status"), filter.getEntity().getStatus()));
         }
-        
+
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<OrderView> where = criteria.where(builder.and(predicates.toArray(pa)));
         criteria.orderBy(builder.asc(root.get("responsible")));
@@ -60,19 +61,32 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
         if (filter.getEntity().getResponsible() != null && !filter.getEntity().getResponsible().equals("")) {
             predicates.add(builder.like(root.get("responsible"), "%" + filter.getEntity().getResponsible() + "%"));
         }
-          
-        if (filter.getEntity().getTable()!= null && !filter.getEntity().getTable().equals("")) {
+
+        if (filter.getEntity().getTable() != null && !filter.getEntity().getTable().equals("")) {
             predicates.add(builder.like(root.get("table"), "%" + filter.getEntity().getTable() + "%"));
         }
-        
-        if (filter.getEntity().getStatus()!= null && !filter.getEntity().getStatus().equals("")) {
+
+        if (filter.getEntity().getStatus() != null && !filter.getEntity().getStatus().equals("")) {
             predicates.add(builder.equal(root.get("status"), filter.getEntity().getStatus()));
         }
-        
+
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<Long> where = criteria.select(builder.count(root)).where(builder.and(predicates.toArray(pa)));
         return manager.createQuery(where).getSingleResult();
-        
+
     }
-    
+
+    @Override
+    public Iterable<ProductPreparation> findProductsByStatus(Integer status) {
+        CriteriaBuilder builder = this.manager.getCriteriaBuilder();
+        CriteriaQuery<ProductPreparation> criteria = builder.createQuery(ProductPreparation.class);
+        List<Predicate> predicates = new ArrayList<>();
+        Root<ProductPreparation> root = criteria.from(ProductPreparation.class);
+        predicates.add(builder.equal(root.get("status"), status));
+        Predicate[] pa = new Predicate[predicates.size()];
+        CriteriaQuery<ProductPreparation> where = criteria.where(builder.and(predicates.toArray(pa)));
+        TypedQuery<ProductPreparation> tq = manager.createQuery(where);
+        return tq.getResultList();
+    }
+
 }

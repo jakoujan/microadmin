@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { SALE_STATUS } from '../catalogs/catalogs';
 import { ISaleStatus } from '../interfaces/sale-status';
 
 @Pipe({
@@ -7,7 +8,11 @@ import { ISaleStatus } from '../interfaces/sale-status';
 export class OrderStatusPipe implements PipeTransform {
 
   transform(value: ISaleStatus): string {
-    return value.name;
+    SALE_STATUS.some(status => {
+      
+    });
+
+    return
   }
 
 }

@@ -48,13 +48,13 @@ public class TicketPrintService {
         io.github.escposjava.PrinterService ps = new io.github.escposjava.PrinterService(printer);
         
         //String productos = getProducts(order);
-        String direccion = "Av Madero Norte #25 Colonia Centro, CP:61940, Huetamo, Michoacan";
+        //String direccion = "Av Madero Norte #25 Colonia Centro, CP:61940, Huetamo, Michoacan";
         ps.init();
         ps.setTextAlignCenter();
         ps.printImage(ticketData.getLogoPath());
         ps.setTextSizeNormal();
         ps.printLn(store.getBussinesName());
-        ps.printLn(direccion);
+        ps.printLn(store.getAddress());
         ps.setTextTypeBold();
         ps.lineBreak(1);
         ps.printLn("CONSUMO");

@@ -43,4 +43,15 @@ public class OrderController {
     public Response delete(@RequestBody Order order) {
         return this.orderModel.delete(order);
     }
+    
+    
+    @GetMapping(value = "/elaboration/products")
+    public Response productElaboration(@RequestParam("status") Integer status) {
+        return this.orderModel.productElaboration(status);
+    }
+    
+    @GetMapping(value = "/elaboration/products/done")
+    public Response productElaborationDone(@RequestParam("id") Integer id) {
+        return this.orderModel.productElaborationDone(id);
+    }
 }

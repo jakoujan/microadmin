@@ -70,6 +70,7 @@ import { CheckoutFormComponent } from './operation/checkout-form/checkout-form.c
 import { CashCountComponent } from './reports/cash-count/cash-count.component';
 import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
 import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
+import { ProductElaborationsComponent } from './operation/product-elaborations/product-elaborations.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
     OrderFormComponent,
     ProductSelectionComponent,
     CheckoutFormComponent,
-    CashCountComponent
+    CashCountComponent,
+    ProductElaborationsComponent
   ],
   imports: [
     CommonModule,

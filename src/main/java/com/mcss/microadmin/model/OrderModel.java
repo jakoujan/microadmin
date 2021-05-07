@@ -7,7 +7,6 @@ package com.mcss.microadmin.model;
 
 import com.ispc.slibrary.dto.Response;
 import com.mcss.microadmin.data.entity.Order;
-import com.mcss.microadmin.data.filter.OrderFilter;
 import com.mcss.microadmin.data.filter.OrderViewFilter;
 
 /**
@@ -23,5 +22,9 @@ public interface OrderModel {
     public Response getOrders(OrderViewFilter filter);
     
     public Response getOrder(Integer id);
+
+    public Response productElaboration(Integer status);
+
+    public Response productElaborationDone(Integer status);
     
 }

@@ -10,9 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mcss.microadmin.data.entity.ItemKit;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.AttributeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +19,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author edgar
  */
-public class KitItemsConverter implements AttributeConverter<Set<ItemKit>, String> {
+public class KitItemsConverter implements AttributeConverter<List<ItemKit>, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(ModulesConverter.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public String convertToDatabaseColumn(Set<ItemKit> list) {
+    public String convertToDatabaseColumn(List<ItemKit> list) {
         String json = null;
         try {
             json = objectMapper.writeValueAsString(list);
@@ -39,10 +37,10 @@ public class KitItemsConverter implements AttributeConverter<Set<ItemKit>, Strin
     }
 
     @Override
-    public Set<ItemKit> convertToEntityAttribute(String json) {
-        Set<ItemKit> kits = null;
+    public List<ItemKit> convertToEntityAttribute(String json) {
+        List<ItemKit> kits = null;
         try {
-            kits = this.objectMapper.readValue(json, HashSet.class);
+            kits = this.objectMapper.readValue(json, ArrayList.class);
         } catch (final IOException e) {
             logger.error("JSON reading error", e);
         }

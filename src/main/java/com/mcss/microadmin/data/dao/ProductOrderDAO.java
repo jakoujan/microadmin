@@ -5,13 +5,13 @@
  */
 package com.mcss.microadmin.data.dao;
 
-import com.mcss.microadmin.data.entity.Order;
+import com.mcss.microadmin.data.entity.ProductOrder;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
- * @author oscardanielrangelmartinez
+ * @author edgar
  */
-public interface OrderDAO extends PagingAndSortingRepository<Order, Integer>, ExtendedOrderDAO {
-
+public interface ProductOrderDAO extends PagingAndSortingRepository<ProductOrder, Integer> {
+    
 }

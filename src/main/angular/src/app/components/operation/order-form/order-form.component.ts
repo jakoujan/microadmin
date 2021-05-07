@@ -87,6 +87,7 @@ export class OrderFormComponent implements OnInit {
         })
         if (!added) {
           this.order.products.push({
+            comment: undefined,
             id: undefined,
             order: undefined,
             product: product,
@@ -114,7 +115,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   public cancel() {
-    let dialogResult = this.confirmationDialogService.showConfirmationDialog("¿Seguro desea cancelar la comanda?", '350px', 'Aceptar');
+    let dialogResult = this.confirmationDialogService.showConfirmationDialog("¿Seguro desea cancelar la comanda?", '350px', 'Aceptar', "Cancelar");
     dialogResult.afterClosed().subscribe(result => {
       if (result) {
         this.order.status = {

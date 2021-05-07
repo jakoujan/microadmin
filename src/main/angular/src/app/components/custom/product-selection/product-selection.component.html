@@ -4,7 +4,7 @@
             <mat-selection-list #products [multiple]="false">
                 <mat-list-option matRipple *ngFor="let product of type.products" (click)="select(product)">
                     <div mat-line>{{ product.description }}</div>
-                    <div mat-line>{{product.retailPrice | currency}}</div>
+                    <div mat-line>{{ product.retailPrice | currency }}</div>
                     <mat-divider></mat-divider>
                 </mat-list-option>
             </mat-selection-list>

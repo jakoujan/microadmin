@@ -28,43 +28,26 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
   .item {
     padding: 10px 20px 0 20px;
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
     .data {
+      margin: 10px 0;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
-      .price,
-      .amount {
-        margin: 0 10px;
+      p.name {
+        font-size: 18px;
       }
     }
-  }
-}
-
-.summary {
-  margin: 10px 20px 20px 0;
-
-  p {
-    font-size: 25px;
-    text-align: right;
-  }
-}
-
-.command-buttons {
-  background: #fff;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid #ccc;
-  box-sizing: border-box;
-  padding: 10px;
-  button.command {
-    width: 100%;
-  }
-
-  button.close {
-    margin-top: 10px;
+    .action {
+      margin-top: 40px;
+    }
   }
 }

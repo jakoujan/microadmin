@@ -60,6 +60,18 @@ public class Product implements Serializable {
         this.type = type;
     }
 
+    public Product(Integer id, String barcode, String description, BigDecimal retailPrice, ProductType type) {
+        this.id = id;
+        this.barcode = barcode;
+        this.description = description;
+        this.retailPrice = retailPrice;
+        this.type = type;
+    }
+
+    
+
+    
+    
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)

@@ -1,0 +1,216 @@
+2021-05-03 19:36:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La Vista "PUBLIC.PRODUCTS_PREPARATION" es invalida: "Columna ""PO.COMMENT"" no encontrada
+Column ""PO.COMMENT"" not found [42122-200]"
+View "PUBLIC.PRODUCTS_PREPARATION" is invalid: "Columna ""PO.COMMENT"" no encontrada
+Column ""PO.COMMENT"" not found [42122-200]"; SQL statement:
+SELECT * FROM "PUBLIC".PRODUCTS_PREPARATION LIMIT 6000 [90109-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.table.TableView.getScanIndex(TableView.java:470)
+	at org.h2.table.TableFilter.getBestPlanItem(TableFilter.java:232)
+	at org.h2.table.Plan.calculateCost(Plan.java:120)
+	at org.h2.command.dml.Optimizer.testPlan(Optimizer.java:181)
+	at org.h2.command.dml.Optimizer.calculateBestPlan(Optimizer.java:82)
+	at org.h2.command.dml.Optimizer.optimize(Optimizer.java:240)
+	at org.h2.command.dml.Select.preparePlan(Select.java:1365)
+	at org.h2.command.dml.Select.prepare(Select.java:1227)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:829)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:61)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:124)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1418)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:45)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:278)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2033)
+Caused by: org.h2.message.DbException: Columna "PO.COMMENT" no encontrada
+Column "PO.COMMENT" not found [42122-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.command.dml.Select.prepare(Select.java:1206)
+	at org.h2.command.Parser.prepare(Parser.java:723)
+	at org.h2.engine.Session.prepare(Session.java:622)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:116)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:168)
+	at org.h2.table.TableView.recompile(TableView.java:150)
+	at org.h2.engine.Database.recompileInvalidViews(Database.java:910)
+	at org.h2.engine.Database.open(Database.java:767)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.netbeans.modules.db.explorer.DbDriverManager.getConnection(DbDriverManager.java:108)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.doConnect(DatabaseConnection.java:898)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.access$200(DatabaseConnection.java:78)
+	at org.netbeans.modules.db.explorer.DatabaseConnection$3.run(DatabaseConnection.java:963)
+	... 4 more
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "PO.COMMENT" no encontrada
+Column "PO.COMMENT" not found; SQL statement:
+CREATE FORCE VIEW "PUBLIC"."PRODUCTS_PREPARATION" AS
+
+
+SELECT PO.ID, PO.QUANTITY, P.DESCRIPTION, TC.NAME AS TABLE_NAME, PO.COMMENT, PO.STATUS FROM PRODUCT_ORDER PO INNER JOIN PRODUCT P ON P.ID = PO.PRODUCT INNER JOIN ORDER_COMAND OC ON OC.ID = PO.ORDER_COMAND
+INNER JOIN TABLE_CHAIR TC ON OC.TABLE_CHAIR = TC.ID [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 31 more
+2021-05-03 19:39:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La Vista "PUBLIC.PRODUCTS_PREPARATION" es invalida: "Columna ""PO.COMMENT"" no encontrada
+Column ""PO.COMMENT"" not found [42122-200]"
+View "PUBLIC.PRODUCTS_PREPARATION" is invalid: "Columna ""PO.COMMENT"" no encontrada
+Column ""PO.COMMENT"" not found [42122-200]"; SQL statement:
+SELECT * FROM "PUBLIC".PRODUCTS_PREPARATION LIMIT 6000 [90109-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.table.TableView.getScanIndex(TableView.java:470)
+	at org.h2.table.TableFilter.getBestPlanItem(TableFilter.java:232)
+	at org.h2.table.Plan.calculateCost(Plan.java:120)
+	at org.h2.command.dml.Optimizer.testPlan(Optimizer.java:181)
+	at org.h2.command.dml.Optimizer.calculateBestPlan(Optimizer.java:82)
+	at org.h2.command.dml.Optimizer.optimize(Optimizer.java:240)
+	at org.h2.command.dml.Select.preparePlan(Select.java:1365)
+	at org.h2.command.dml.Select.prepare(Select.java:1227)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:829)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:61)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:124)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1418)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:45)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:278)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2033)
+Caused by: org.h2.message.DbException: Columna "PO.COMMENT" no encontrada
+Column "PO.COMMENT" not found [42122-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.command.dml.Select.prepare(Select.java:1206)
+	at org.h2.command.Parser.prepare(Parser.java:723)
+	at org.h2.engine.Session.prepare(Session.java:622)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:116)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:168)
+	at org.h2.table.TableView.recompile(TableView.java:150)
+	at org.h2.engine.Database.recompileInvalidViews(Database.java:910)
+	at org.h2.engine.Database.open(Database.java:767)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.netbeans.modules.db.explorer.DbDriverManager.getConnection(DbDriverManager.java:108)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.doConnect(DatabaseConnection.java:898)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.access$200(DatabaseConnection.java:78)
+	at org.netbeans.modules.db.explorer.DatabaseConnection$3.run(DatabaseConnection.java:963)
+	... 4 more
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "PO.COMMENT" no encontrada
+Column "PO.COMMENT" not found; SQL statement:
+CREATE FORCE VIEW "PUBLIC"."PRODUCTS_PREPARATION" AS
+
+
+SELECT PO.ID, PO.QUANTITY, P.DESCRIPTION, TC.NAME AS TABLE_NAME, PO.COMMENT, PO.STATUS FROM PRODUCT_ORDER PO INNER JOIN PRODUCT P ON P.ID = PO.PRODUCT INNER JOIN ORDER_COMAND OC ON OC.ID = PO.ORDER_COMAND
+INNER JOIN TABLE_CHAIR TC ON OC.TABLE_CHAIR = TC.ID [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 31 more
+2021-05-03 19:39:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La Vista "PUBLIC.PRODUCTS_PREPARATION" es invalida: "Columna ""PO.STATUS"" no encontrada
+Column ""PO.STATUS"" not found [42122-200]"
+View "PUBLIC.PRODUCTS_PREPARATION" is invalid: "Columna ""PO.STATUS"" no encontrada
+Column ""PO.STATUS"" not found [42122-200]"; SQL statement:
+SELECT * FROM "PUBLIC".PRODUCTS_PREPARATION LIMIT 6000 [90109-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.table.TableView.getScanIndex(TableView.java:470)
+	at org.h2.table.TableFilter.getBestPlanItem(TableFilter.java:232)
+	at org.h2.table.Plan.calculateCost(Plan.java:120)
+	at org.h2.command.dml.Optimizer.testPlan(Optimizer.java:181)
+	at org.h2.command.dml.Optimizer.calculateBestPlan(Optimizer.java:82)
+	at org.h2.command.dml.Optimizer.optimize(Optimizer.java:240)
+	at org.h2.command.dml.Select.preparePlan(Select.java:1365)
+	at org.h2.command.dml.Select.prepare(Select.java:1227)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.executeSQLStatementForExtraction(SQLExecutionHelper.java:829)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper.access$500(SQLExecutionHelper.java:61)
+	at org.netbeans.modules.db.dataview.output.SQLExecutionHelper$1Loader.run(SQLExecutionHelper.java:124)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.openide.util.RequestProcessor$Task.run(RequestProcessor.java:1418)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:45)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:278)
+	at org.openide.util.RequestProcessor$Processor.run(RequestProcessor.java:2033)
+Caused by: org.h2.message.DbException: Columna "PO.STATUS" no encontrada
+Column "PO.STATUS" not found [42122-200]
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.command.dml.Select.prepare(Select.java:1206)
+	at org.h2.command.Parser.prepare(Parser.java:723)
+	at org.h2.engine.Session.prepare(Session.java:622)
+	at org.h2.table.TableView.compileViewQuery(TableView.java:116)
+	at org.h2.table.TableView.initColumnsAndTables(TableView.java:168)
+	at org.h2.table.TableView.recompile(TableView.java:150)
+	at org.h2.engine.Database.recompileInvalidViews(Database.java:910)
+	at org.h2.engine.Database.open(Database.java:767)
+	at org.h2.engine.Database.openDatabase(Database.java:307)
+	at org.h2.engine.Database.<init>(Database.java:301)
+	at org.h2.engine.Engine.openSession(Engine.java:74)
+	at org.h2.engine.Engine.openSession(Engine.java:192)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:171)
+	at org.h2.engine.Engine.createSession(Engine.java:166)
+	at org.h2.engine.Engine.createSession(Engine.java:29)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:340)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
+	at org.h2.Driver.connect(Driver.java:69)
+	at org.netbeans.modules.db.explorer.DbDriverManager.getConnection(DbDriverManager.java:108)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.doConnect(DatabaseConnection.java:898)
+	at org.netbeans.modules.db.explorer.DatabaseConnection.access$200(DatabaseConnection.java:78)
+	at org.netbeans.modules.db.explorer.DatabaseConnection$3.run(DatabaseConnection.java:963)
+	... 4 more
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "PO.STATUS" no encontrada
+Column "PO.STATUS" not found; SQL statement:
+CREATE FORCE VIEW "PUBLIC"."PRODUCTS_PREPARATION" AS
+
+
+SELECT PO.ID, PO.QUANTITY, P.DESCRIPTION, TC.NAME AS TABLE_NAME, PO.COMMENT, PO.STATUS FROM PRODUCT_ORDER PO INNER JOIN PRODUCT P ON P.ID = PO.PRODUCT INNER JOIN ORDER_COMAND OC ON OC.ID = PO.ORDER_COMAND
+INNER JOIN TABLE_CHAIR TC ON OC.TABLE_CHAIR = TC.ID [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 31 more
