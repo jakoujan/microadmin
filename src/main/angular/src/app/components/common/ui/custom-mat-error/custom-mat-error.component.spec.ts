@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CustomMatErrorComponent } from './custom-mat-error.component';
 
@@ -6,7 +6,7 @@ describe('CustomMatErrorComponent', () => {
   let component: CustomMatErrorComponent;
   let fixture: ComponentFixture<CustomMatErrorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CustomMatErrorComponent ]
     })
