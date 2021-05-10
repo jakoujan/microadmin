@@ -17,7 +17,6 @@ import com.mcss.microadmin.data.filter.OrderViewFilter;
 import com.mcss.microadmin.data.view.ProductPreparation;
 import com.mcss.microadmin.service.TicketPrintService;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -54,11 +53,8 @@ public class OrderModelImpl implements OrderModel {
     public Response save(Order order) {
         Response response = Response.getInstance();
         order.getProducts().forEach((ProductOrder product) -> {
-            if (Objects.equals(order.getStatus().getId(), ProductStatus.PREPARING)) {
-                product.setStatus(1);
-            }
-            if (Objects.equals(order.getStatus().getId(), ProductStatus.PREPARED)) {
-                product.setStatus(2);
+            if (product.getStatus() == null) {
+                product.setStatus(ProductStatus.PREPARING);
             }
             product.setOrder(order);
             product.setProduct(this.productDAO.findById(product.getProduct().getId()).get());
@@ -114,7 +110,7 @@ public class OrderModelImpl implements OrderModel {
     @Override
     public Response productElaboration(Integer status) {
         Response response = Response.getInstance();
-        Iterable<ProductPreparation> products = this.orderDAO.findProductsByStatus(status);
+        Iterable<ProductPreparation> products = this.orderDAO.findProductsByStatus(status, null);
         response.addField(Constants.PRODUCTS, products);
         return response;
 
@@ -133,6 +129,14 @@ public class OrderModelImpl implements OrderModel {
 
     private void updateCheckout() {
         this.messagingTemplate.convertAndSend(Constants.CHECKOUT_TOPIC, "order");
+    }
+
+    @Override
+    public Response productElaboration(Integer status, Integer section) {
+        Response response = Response.getInstance();
+        Iterable<ProductPreparation> products = this.orderDAO.findProductsByStatus(status, section);
+        response.addField(Constants.PRODUCTS, products);
+        return response;
     }
 
 }

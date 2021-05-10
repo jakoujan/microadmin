@@ -38,18 +38,16 @@ export class CheckoutComponent implements OnInit {
     private rxStompService: RxStompService) { }
 
   ngOnInit(): void {
+    this.subscription = this.rxStompService.watch(environment.websocket.topicPrefix).subscribe((message: Message) => {
+      this.load();
+    });
+    this.load();
+  }
+
+  load() {
     this.orderService.filter(this.filter).then(response => {
       this.orders = response.fields.data;
     });
-    this.subscription = this.rxStompService.watch(environment.websocket.topicPrefix).subscribe((message: Message) => {
-      this.orderService.filter(this.filter).then(response => {
-        this.orders = response.fields.data;
-      });
-    });
-  }
-
-  initialStock() {
-
   }
 
   toggleSearchBar() {
@@ -69,6 +67,7 @@ export class CheckoutComponent implements OnInit {
       const order: IOrder = response.fields.entity;
       this.sessionStorageService.store(constants.ORDER, order);
       this.router.navigate(['modules/checkout/order']);
+      this.subscription.unsubscribe();
     });
   }
 

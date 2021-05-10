@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { IOrderViewFilter } from 'src/app/filters/order-filter';
 import { IOrder } from 'src/app/interfaces/order';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { IOrderView } from 'src/app/interfaces/view/order-view';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, AfterViewInit {
   orders: Array<IOrderView> = [];
   filter: IOrderViewFilter = {
     entity: {
@@ -31,11 +31,15 @@ export class OrdersComponent implements OnInit {
   };
   constructor(private router: Router, private sessionStorageService: SessionStorageService,
     private orderService: OrderService) { }
-
-  ngOnInit(): void {
+    
+  ngAfterViewInit(): void {
     this.orderService.filter(this.filter).then(response => {
       this.orders = response.fields.data;
     });
+  }
+
+  ngOnInit(): void {
+
   }
 
   newOrder() {

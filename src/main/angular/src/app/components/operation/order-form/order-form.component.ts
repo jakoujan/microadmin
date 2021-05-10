@@ -40,7 +40,7 @@ export class OrderFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private catalogService: CatalogsService,
     private router: Router, private productSelectionService: ProductSelectionService,
-    private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService, 
+    private orderService: OrderService, private confirmationDialogService: ConfirmationDialogService,
     private rxStompService: RxStompService) { }
 
   ngOnInit(): void {
@@ -78,28 +78,38 @@ export class OrderFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const product: IProduct = result;
-
-        const added = this.order.products.some(p => {
-          if (p.product.id === product.id) {
-            p.quantity = p.quantity + 1;
-            return true;
-          }
-        })
-        if (!added) {
-          this.order.products.push({
-            comment: undefined,
-            id: undefined,
-            order: undefined,
-            product: product,
-            quantity: 1
-          });
-        }
+        this.ap(product);
       }
     });
   }
 
+  private ap(product: IProduct) {
+    const added = this.order.products.some(p => {
+      if (p.product.id === product.id && p.status == 1) {
+        p.quantity = p.quantity + 1;
+        return true;
+      }
+    })
+    if (!added) {
+      this.order.products.push({
+        comment: undefined,
+        id: undefined,
+        order: undefined,
+        product: product,
+        quantity: 1,
+        status: 1
+      });
+    }
+  }
+
   public add(product: IProductOrder) {
-    product.quantity = product.quantity + 1;
+    if (product.status == 1) {
+      product.quantity = product.quantity + 1;
+    } else {
+      this.ap(product.product);
+      this.confirmationDialogService.showConfirmationDialog("Producto se agrego a la comanda", '350px', 'Aceptar');
+    }
+
   }
 
   public removeProduct(product: IProductOrder) {

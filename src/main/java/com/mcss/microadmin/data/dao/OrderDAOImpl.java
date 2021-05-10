@@ -77,12 +77,15 @@ public class OrderDAOImpl implements ExtendedOrderDAO {
     }
 
     @Override
-    public Iterable<ProductPreparation> findProductsByStatus(Integer status) {
+    public Iterable<ProductPreparation> findProductsByStatus(Integer status, Integer section) {
         CriteriaBuilder builder = this.manager.getCriteriaBuilder();
         CriteriaQuery<ProductPreparation> criteria = builder.createQuery(ProductPreparation.class);
         List<Predicate> predicates = new ArrayList<>();
         Root<ProductPreparation> root = criteria.from(ProductPreparation.class);
         predicates.add(builder.equal(root.get("status"), status));
+        if(section != null) {
+            predicates.add(builder.equal(root.get("section"), section));
+        }
         Predicate[] pa = new Predicate[predicates.size()];
         CriteriaQuery<ProductPreparation> where = criteria.where(builder.and(predicates.toArray(pa)));
         TypedQuery<ProductPreparation> tq = manager.createQuery(where);

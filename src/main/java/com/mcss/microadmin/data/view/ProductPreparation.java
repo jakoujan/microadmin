@@ -22,6 +22,7 @@ public class ProductPreparation implements Serializable {
     private String table;
     private String comment;
     private Integer status;
+    private Integer section;
 
     public ProductPreparation() {
     }
@@ -88,5 +89,16 @@ public class ProductPreparation implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Column(name = "SECTION")
+    public Integer getSection() {
+        return section;
+    }
+
+    public void setSection(Integer section) {
+        this.section = section;
+    }
+    
+    
 
 }

@@ -10,8 +10,8 @@ export class ProductSelectionService {
 
   public select(): MatDialogRef<ProductSelectionComponent> {
     return this.dialog.open(ProductSelectionComponent, {
-      width: '400px',
-      minHeight: '250px',
+      width: '100%',
+      minHeight: '95%',
       disableClose: true,
       data: {
         

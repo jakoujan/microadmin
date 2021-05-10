@@ -20,6 +20,6 @@ public interface ExtendedOrderDAO {
 
     public Long count(OrderViewFilter filter);
 
-    public Iterable<ProductPreparation> findProductsByStatus(Integer status);
+    public Iterable<ProductPreparation> findProductsByStatus(Integer status, Integer section);
 
 }

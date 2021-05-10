@@ -7,4 +7,5 @@ export interface IProductOrder {
     product: IProduct;
     quantity: number;
     comment: string;
+    status: number;
 }

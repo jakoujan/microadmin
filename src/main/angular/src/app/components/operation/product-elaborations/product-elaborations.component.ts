@@ -6,6 +6,8 @@ import { RxStompService } from '@stomp/ng2-stompjs';
 import { environment } from 'src/environments/environment';
 import { Message } from '@stomp/stompjs';
 import { Subscription } from 'rxjs';
+import { CatalogsService } from 'src/app/services/catalogs.service';
+import { ISection } from 'src/app/interfaces/section';
 
 
 @Component({
@@ -17,16 +19,24 @@ export class ProductElaborationsComponent implements OnInit {
 
   products: Array<IProductPreparation> = [];
   subscription: Subscription;
+  params = [
+    {
+      name: 'status',
+      value: 1
+    }
+  ];
 
+  sections: Array<ISection> = [];
 
-  constructor(private orderService: OrderService, private snackBar: MatSnackBar, private rxStompService: RxStompService) { }
+  constructor(private orderService: OrderService, private snackBar: MatSnackBar, private rxStompService: RxStompService, private catalogService: CatalogsService) { }
 
   ngOnInit(): void {
-    this.orderService.productElaboration(1).then(response => {
+    this.catalogService.getSections().then(sections => this.sections = sections);
+    this.orderService.productElaboration(this.params).then(response => {
       this.products = response.fields.products;
     });
     this.subscription = this.rxStompService.watch(environment.websocket.topicPrefix).subscribe((message: Message) => {
-      this.orderService.productElaboration(1).then(response => {
+      this.orderService.productElaboration(this.params).then(response => {
         this.products = response.fields.products;
       });
     });
@@ -38,6 +48,19 @@ export class ProductElaborationsComponent implements OnInit {
       this.snackBar.open("Producto enviado", "Desechar", {
         duration: 3 * 1000,
       });
+    });
+  }
+
+  public setSection(section: ISection) {
+    this.params = [{
+      name: 'status',
+      value: 1
+    }, {
+      name: 'section',
+      value: section.id
+    }];
+    this.orderService.productElaboration(this.params).then(response => {
+      this.products = response.fields.products;
     });
   }
 }

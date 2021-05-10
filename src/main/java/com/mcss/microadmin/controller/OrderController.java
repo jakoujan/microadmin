@@ -23,7 +23,7 @@ public class OrderController {
 
     @Autowired
     OrderModel orderModel;
-    
+
     @PostMapping(value = "")
     public Response orders(@RequestBody OrderViewFilter filter) {
         return this.orderModel.getOrders(filter);
@@ -33,23 +33,22 @@ public class OrderController {
     public Response save(@RequestBody Order order) {
         return this.orderModel.save(order);
     }
-    
+
     @GetMapping(value = "/order")
     public Response order(@RequestParam("id") Integer id) {
         return this.orderModel.getOrder(id);
     }
-    
+
     @PostMapping(value = "/delete")
     public Response delete(@RequestBody Order order) {
         return this.orderModel.delete(order);
     }
-    
-    
+
     @GetMapping(value = "/elaboration/products")
-    public Response productElaboration(@RequestParam("status") Integer status) {
-        return this.orderModel.productElaboration(status);
+    public Response productElaboration(@RequestParam("status") Integer status, @RequestParam(name = "section", required = false) Integer section) {
+        return this.orderModel.productElaboration(status, section);
     }
-    
+
     @GetMapping(value = "/elaboration/products/done")
     public Response productElaborationDone(@RequestParam("id") Integer id) {
         return this.orderModel.productElaborationDone(id);

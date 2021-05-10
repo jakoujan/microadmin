@@ -49,13 +49,7 @@ export class OrderService extends Service {
     return this.preparePromiseGet(OrderService.ORDER, params);
   }
 
-  public productElaboration(status: number): Promise<IResponse> {
-    const params = [
-      {
-        name: 'status',
-        value: status
-      }
-    ];
+  public productElaboration(params: Array<any>): Promise<IResponse> {
     return this.preparePromiseGet(OrderService.PRODUCT_ELABORATION, params);
   }
 

@@ -26,5 +26,7 @@ public interface OrderModel {
     public Response productElaboration(Integer status);
 
     public Response productElaborationDone(Integer status);
+
+    public Response productElaboration(Integer status, Integer section);
     
 }
