@@ -78,6 +78,14 @@
             <type>jar</type>
         </dependency>
         <dependency>
+<<<<<<< HEAD
+            <groupId>com.mcss</groupId>
+            <artifactId>mcom</artifactId>
+            <version>1.1.0-RELEASE</version>
+        </dependency>
+        <dependency>
+=======
+>>>>>>> 37e7bef65f7e9cb1cccff7c9e8640944f05f865b
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>28.1-jre</version>
